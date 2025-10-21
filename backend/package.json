@@ -59,12 +59,14 @@
     "@types/bcrypt": "^6.0.0",
     "@types/cookie-parser": "^1.4.9",
     "@types/jsonwebtoken": "^9.0.10",
+    "@types/pdfkit": "^0.17.3",
     "bcrypt": "^6.0.0",
     "cookie-parser": "^1.4.7",
     "cors": "^2.8.5",
     "dotenv": "^17.2.3",
     "express": "^5.1.0",
     "jsonwebtoken": "^9.0.2",
+    "pdfkit": "^0.17.2",
     "prisma": "^6.17.1"
   }
 }

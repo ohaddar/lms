@@ -191,6 +191,24 @@ exports.Prisma.UserQuizResponseScalarFieldEnum = {
   updatedAt: 'updatedAt'
 };
 
+exports.Prisma.CertificateScalarFieldEnum = {
+  id: 'id',
+  userId: 'userId',
+  certificateNumber: 'certificateNumber',
+  issuedAt: 'issuedAt',
+  createdAt: 'createdAt',
+  updatedAt: 'updatedAt'
+};
+
+exports.Prisma.ModuleFeedbackScalarFieldEnum = {
+  id: 'id',
+  userId: 'userId',
+  moduleId: 'moduleId',
+  helpful: 'helpful',
+  createdAt: 'createdAt',
+  updatedAt: 'updatedAt'
+};
+
 exports.Prisma.SortOrder = {
   asc: 'asc',
   desc: 'desc'
@@ -218,7 +236,9 @@ exports.Prisma.ModelName = {
   Question: 'Question',
   Answer: 'Answer',
   UserQuizAttempt: 'UserQuizAttempt',
-  UserQuizResponse: 'UserQuizResponse'
+  UserQuizResponse: 'UserQuizResponse',
+  Certificate: 'Certificate',
+  ModuleFeedback: 'ModuleFeedback'
 };
 
 /**

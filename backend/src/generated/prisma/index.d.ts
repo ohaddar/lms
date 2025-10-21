@@ -48,6 +48,16 @@ export type UserQuizAttempt = $Result.DefaultSelection<Prisma.$UserQuizAttemptPa
  * 
  */
 export type UserQuizResponse = $Result.DefaultSelection<Prisma.$UserQuizResponsePayload>
+/**
+ * Model Certificate
+ * 
+ */
+export type Certificate = $Result.DefaultSelection<Prisma.$CertificatePayload>
+/**
+ * Model ModuleFeedback
+ * 
+ */
+export type ModuleFeedback = $Result.DefaultSelection<Prisma.$ModuleFeedbackPayload>
 
 /**
  * Enums
@@ -254,6 +264,26 @@ export class PrismaClient<
     * ```
     */
   get userQuizResponse(): Prisma.UserQuizResponseDelegate<ExtArgs, ClientOptions>;
+
+  /**
+   * `prisma.certificate`: Exposes CRUD operations for the **Certificate** model.
+    * Example usage:
+    * ```ts
+    * // Fetch zero or more Certificates
+    * const certificates = await prisma.certificate.findMany()
+    * ```
+    */
+  get certificate(): Prisma.CertificateDelegate<ExtArgs, ClientOptions>;
+
+  /**
+   * `prisma.moduleFeedback`: Exposes CRUD operations for the **ModuleFeedback** model.
+    * Example usage:
+    * ```ts
+    * // Fetch zero or more ModuleFeedbacks
+    * const moduleFeedbacks = await prisma.moduleFeedback.findMany()
+    * ```
+    */
+  get moduleFeedback(): Prisma.ModuleFeedbackDelegate<ExtArgs, ClientOptions>;
 }
 
 export namespace Prisma {
@@ -700,7 +730,9 @@ export namespace Prisma {
     Question: 'Question',
     Answer: 'Answer',
     UserQuizAttempt: 'UserQuizAttempt',
-    UserQuizResponse: 'UserQuizResponse'
+    UserQuizResponse: 'UserQuizResponse',
+    Certificate: 'Certificate',
+    ModuleFeedback: 'ModuleFeedback'
   };
 
   export type ModelName = (typeof ModelName)[keyof typeof ModelName]
@@ -719,7 +751,7 @@ export namespace Prisma {
       omit: GlobalOmitOptions
     }
     meta: {
-      modelProps: "user" | "module" | "userModuleProgress" | "question" | "answer" | "userQuizAttempt" | "userQuizResponse"
+      modelProps: "user" | "module" | "userModuleProgress" | "question" | "answer" | "userQuizAttempt" | "userQuizResponse" | "certificate" | "moduleFeedback"
       txIsolationLevel: Prisma.TransactionIsolationLevel
     }
     model: {
@@ -1241,6 +1273,154 @@ export namespace Prisma {
           }
         }
       }
+      Certificate: {
+        payload: Prisma.$CertificatePayload<ExtArgs>
+        fields: Prisma.CertificateFieldRefs
+        operations: {
+          findUnique: {
+            args: Prisma.CertificateFindUniqueArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$CertificatePayload> | null
+          }
+          findUniqueOrThrow: {
+            args: Prisma.CertificateFindUniqueOrThrowArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$CertificatePayload>
+          }
+          findFirst: {
+            args: Prisma.CertificateFindFirstArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$CertificatePayload> | null
+          }
+          findFirstOrThrow: {
+            args: Prisma.CertificateFindFirstOrThrowArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$CertificatePayload>
+          }
+          findMany: {
+            args: Prisma.CertificateFindManyArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$CertificatePayload>[]
+          }
+          create: {
+            args: Prisma.CertificateCreateArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$CertificatePayload>
+          }
+          createMany: {
+            args: Prisma.CertificateCreateManyArgs<ExtArgs>
+            result: BatchPayload
+          }
+          createManyAndReturn: {
+            args: Prisma.CertificateCreateManyAndReturnArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$CertificatePayload>[]
+          }
+          delete: {
+            args: Prisma.CertificateDeleteArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$CertificatePayload>
+          }
+          update: {
+            args: Prisma.CertificateUpdateArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$CertificatePayload>
+          }
+          deleteMany: {
+            args: Prisma.CertificateDeleteManyArgs<ExtArgs>
+            result: BatchPayload
+          }
+          updateMany: {
+            args: Prisma.CertificateUpdateManyArgs<ExtArgs>
+            result: BatchPayload
+          }
+          updateManyAndReturn: {
+            args: Prisma.CertificateUpdateManyAndReturnArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$CertificatePayload>[]
+          }
+          upsert: {
+            args: Prisma.CertificateUpsertArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$CertificatePayload>
+          }
+          aggregate: {
+            args: Prisma.CertificateAggregateArgs<ExtArgs>
+            result: $Utils.Optional<AggregateCertificate>
+          }
+          groupBy: {
+            args: Prisma.CertificateGroupByArgs<ExtArgs>
+            result: $Utils.Optional<CertificateGroupByOutputType>[]
+          }
+          count: {
+            args: Prisma.CertificateCountArgs<ExtArgs>
+            result: $Utils.Optional<CertificateCountAggregateOutputType> | number
+          }
+        }
+      }
+      ModuleFeedback: {
+        payload: Prisma.$ModuleFeedbackPayload<ExtArgs>
+        fields: Prisma.ModuleFeedbackFieldRefs
+        operations: {
+          findUnique: {
+            args: Prisma.ModuleFeedbackFindUniqueArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$ModuleFeedbackPayload> | null
+          }
+          findUniqueOrThrow: {
+            args: Prisma.ModuleFeedbackFindUniqueOrThrowArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$ModuleFeedbackPayload>
+          }
+          findFirst: {
+            args: Prisma.ModuleFeedbackFindFirstArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$ModuleFeedbackPayload> | null
+          }
+          findFirstOrThrow: {
+            args: Prisma.ModuleFeedbackFindFirstOrThrowArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$ModuleFeedbackPayload>
+          }
+          findMany: {
+            args: Prisma.ModuleFeedbackFindManyArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$ModuleFeedbackPayload>[]
+          }
+          create: {
+            args: Prisma.ModuleFeedbackCreateArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$ModuleFeedbackPayload>
+          }
+          createMany: {
+            args: Prisma.ModuleFeedbackCreateManyArgs<ExtArgs>
+            result: BatchPayload
+          }
+          createManyAndReturn: {
+            args: Prisma.ModuleFeedbackCreateManyAndReturnArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$ModuleFeedbackPayload>[]
+          }
+          delete: {
+            args: Prisma.ModuleFeedbackDeleteArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$ModuleFeedbackPayload>
+          }
+          update: {
+            args: Prisma.ModuleFeedbackUpdateArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$ModuleFeedbackPayload>
+          }
+          deleteMany: {
+            args: Prisma.ModuleFeedbackDeleteManyArgs<ExtArgs>
+            result: BatchPayload
+          }
+          updateMany: {
+            args: Prisma.ModuleFeedbackUpdateManyArgs<ExtArgs>
+            result: BatchPayload
+          }
+          updateManyAndReturn: {
+            args: Prisma.ModuleFeedbackUpdateManyAndReturnArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$ModuleFeedbackPayload>[]
+          }
+          upsert: {
+            args: Prisma.ModuleFeedbackUpsertArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$ModuleFeedbackPayload>
+          }
+          aggregate: {
+            args: Prisma.ModuleFeedbackAggregateArgs<ExtArgs>
+            result: $Utils.Optional<AggregateModuleFeedback>
+          }
+          groupBy: {
+            args: Prisma.ModuleFeedbackGroupByArgs<ExtArgs>
+            result: $Utils.Optional<ModuleFeedbackGroupByOutputType>[]
+          }
+          count: {
+            args: Prisma.ModuleFeedbackCountArgs<ExtArgs>
+            result: $Utils.Optional<ModuleFeedbackCountAggregateOutputType> | number
+          }
+        }
+      }
     }
   } & {
     other: {
@@ -1344,6 +1524,8 @@ export namespace Prisma {
     answer?: AnswerOmit
     userQuizAttempt?: UserQuizAttemptOmit
     userQuizResponse?: UserQuizResponseOmit
+    certificate?: CertificateOmit
+    moduleFeedback?: ModuleFeedbackOmit
   }
 
   /* Types for Logging */
@@ -1426,11 +1608,15 @@ export namespace Prisma {
   export type UserCountOutputType = {
     moduleProgress: number
     quizAttempts: number
+    certificates: number
+    moduleFeedback: number
   }
 
   export type UserCountOutputTypeSelect<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     moduleProgress?: boolean | UserCountOutputTypeCountModuleProgressArgs
     quizAttempts?: boolean | UserCountOutputTypeCountQuizAttemptsArgs
+    certificates?: boolean | UserCountOutputTypeCountCertificatesArgs
+    moduleFeedback?: boolean | UserCountOutputTypeCountModuleFeedbackArgs
   }
 
   // Custom InputTypes
@@ -1458,6 +1644,20 @@ export namespace Prisma {
     where?: UserQuizAttemptWhereInput
   }
 
+  /**
+   * UserCountOutputType without action
+   */
+  export type UserCountOutputTypeCountCertificatesArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    where?: CertificateWhereInput
+  }
+
+  /**
+   * UserCountOutputType without action
+   */
+  export type UserCountOutputTypeCountModuleFeedbackArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    where?: ModuleFeedbackWhereInput
+  }
+
 
   /**
    * Count Type ModuleCountOutputType
@@ -1466,11 +1666,13 @@ export namespace Prisma {
   export type ModuleCountOutputType = {
     userProgress: number
     questions: number
+    moduleFeedback: number
   }
 
   export type ModuleCountOutputTypeSelect<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     userProgress?: boolean | ModuleCountOutputTypeCountUserProgressArgs
     questions?: boolean | ModuleCountOutputTypeCountQuestionsArgs
+    moduleFeedback?: boolean | ModuleCountOutputTypeCountModuleFeedbackArgs
   }
 
   // Custom InputTypes
@@ -1496,6 +1698,13 @@ export namespace Prisma {
    */
   export type ModuleCountOutputTypeCountQuestionsArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     where?: QuestionWhereInput
+  }
+
+  /**
+   * ModuleCountOutputType without action
+   */
+  export type ModuleCountOutputTypeCountModuleFeedbackArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    where?: ModuleFeedbackWhereInput
   }
 
 
@@ -1786,6 +1995,8 @@ export namespace Prisma {
     updatedAt?: boolean
     moduleProgress?: boolean | User$moduleProgressArgs<ExtArgs>
     quizAttempts?: boolean | User$quizAttemptsArgs<ExtArgs>
+    certificates?: boolean | User$certificatesArgs<ExtArgs>
+    moduleFeedback?: boolean | User$moduleFeedbackArgs<ExtArgs>
     _count?: boolean | UserCountOutputTypeDefaultArgs<ExtArgs>
   }, ExtArgs["result"]["user"]>
 
@@ -1826,6 +2037,8 @@ export namespace Prisma {
   export type UserInclude<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     moduleProgress?: boolean | User$moduleProgressArgs<ExtArgs>
     quizAttempts?: boolean | User$quizAttemptsArgs<ExtArgs>
+    certificates?: boolean | User$certificatesArgs<ExtArgs>
+    moduleFeedback?: boolean | User$moduleFeedbackArgs<ExtArgs>
     _count?: boolean | UserCountOutputTypeDefaultArgs<ExtArgs>
   }
   export type UserIncludeCreateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {}
@@ -1836,6 +2049,8 @@ export namespace Prisma {
     objects: {
       moduleProgress: Prisma.$UserModuleProgressPayload<ExtArgs>[]
       quizAttempts: Prisma.$UserQuizAttemptPayload<ExtArgs>[]
+      certificates: Prisma.$CertificatePayload<ExtArgs>[]
+      moduleFeedback: Prisma.$ModuleFeedbackPayload<ExtArgs>[]
     }
     scalars: $Extensions.GetPayloadResult<{
       id: string
@@ -2242,6 +2457,8 @@ export namespace Prisma {
     readonly [Symbol.toStringTag]: "PrismaPromise"
     moduleProgress<T extends User$moduleProgressArgs<ExtArgs> = {}>(args?: Subset<T, User$moduleProgressArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$UserModuleProgressPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
     quizAttempts<T extends User$quizAttemptsArgs<ExtArgs> = {}>(args?: Subset<T, User$quizAttemptsArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$UserQuizAttemptPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
+    certificates<T extends User$certificatesArgs<ExtArgs> = {}>(args?: Subset<T, User$certificatesArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$CertificatePayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
+    moduleFeedback<T extends User$moduleFeedbackArgs<ExtArgs> = {}>(args?: Subset<T, User$moduleFeedbackArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$ModuleFeedbackPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
     /**
      * Attaches callbacks for the resolution and/or rejection of the Promise.
      * @param onfulfilled The callback to execute when the Promise is resolved.
@@ -2715,6 +2932,54 @@ export namespace Prisma {
   }
 
   /**
+   * User.certificates
+   */
+  export type User$certificatesArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the Certificate
+     */
+    select?: CertificateSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the Certificate
+     */
+    omit?: CertificateOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: CertificateInclude<ExtArgs> | null
+    where?: CertificateWhereInput
+    orderBy?: CertificateOrderByWithRelationInput | CertificateOrderByWithRelationInput[]
+    cursor?: CertificateWhereUniqueInput
+    take?: number
+    skip?: number
+    distinct?: CertificateScalarFieldEnum | CertificateScalarFieldEnum[]
+  }
+
+  /**
+   * User.moduleFeedback
+   */
+  export type User$moduleFeedbackArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the ModuleFeedback
+     */
+    select?: ModuleFeedbackSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the ModuleFeedback
+     */
+    omit?: ModuleFeedbackOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: ModuleFeedbackInclude<ExtArgs> | null
+    where?: ModuleFeedbackWhereInput
+    orderBy?: ModuleFeedbackOrderByWithRelationInput | ModuleFeedbackOrderByWithRelationInput[]
+    cursor?: ModuleFeedbackWhereUniqueInput
+    take?: number
+    skip?: number
+    distinct?: ModuleFeedbackScalarFieldEnum | ModuleFeedbackScalarFieldEnum[]
+  }
+
+  /**
    * User without action
    */
   export type UserDefaultArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
@@ -2941,6 +3206,7 @@ export namespace Prisma {
     updatedAt?: boolean
     userProgress?: boolean | Module$userProgressArgs<ExtArgs>
     questions?: boolean | Module$questionsArgs<ExtArgs>
+    moduleFeedback?: boolean | Module$moduleFeedbackArgs<ExtArgs>
     _count?: boolean | ModuleCountOutputTypeDefaultArgs<ExtArgs>
   }, ExtArgs["result"]["module"]>
 
@@ -2975,6 +3241,7 @@ export namespace Prisma {
   export type ModuleInclude<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     userProgress?: boolean | Module$userProgressArgs<ExtArgs>
     questions?: boolean | Module$questionsArgs<ExtArgs>
+    moduleFeedback?: boolean | Module$moduleFeedbackArgs<ExtArgs>
     _count?: boolean | ModuleCountOutputTypeDefaultArgs<ExtArgs>
   }
   export type ModuleIncludeCreateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {}
@@ -2985,6 +3252,7 @@ export namespace Prisma {
     objects: {
       userProgress: Prisma.$UserModuleProgressPayload<ExtArgs>[]
       questions: Prisma.$QuestionPayload<ExtArgs>[]
+      moduleFeedback: Prisma.$ModuleFeedbackPayload<ExtArgs>[]
     }
     scalars: $Extensions.GetPayloadResult<{
       id: string
@@ -3389,6 +3657,7 @@ export namespace Prisma {
     readonly [Symbol.toStringTag]: "PrismaPromise"
     userProgress<T extends Module$userProgressArgs<ExtArgs> = {}>(args?: Subset<T, Module$userProgressArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$UserModuleProgressPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
     questions<T extends Module$questionsArgs<ExtArgs> = {}>(args?: Subset<T, Module$questionsArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$QuestionPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
+    moduleFeedback<T extends Module$moduleFeedbackArgs<ExtArgs> = {}>(args?: Subset<T, Module$moduleFeedbackArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$ModuleFeedbackPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
     /**
      * Attaches callbacks for the resolution and/or rejection of the Promise.
      * @param onfulfilled The callback to execute when the Promise is resolved.
@@ -3857,6 +4126,30 @@ export namespace Prisma {
     take?: number
     skip?: number
     distinct?: QuestionScalarFieldEnum | QuestionScalarFieldEnum[]
+  }
+
+  /**
+   * Module.moduleFeedback
+   */
+  export type Module$moduleFeedbackArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the ModuleFeedback
+     */
+    select?: ModuleFeedbackSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the ModuleFeedback
+     */
+    omit?: ModuleFeedbackOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: ModuleFeedbackInclude<ExtArgs> | null
+    where?: ModuleFeedbackWhereInput
+    orderBy?: ModuleFeedbackOrderByWithRelationInput | ModuleFeedbackOrderByWithRelationInput[]
+    cursor?: ModuleFeedbackWhereUniqueInput
+    take?: number
+    skip?: number
+    distinct?: ModuleFeedbackScalarFieldEnum | ModuleFeedbackScalarFieldEnum[]
   }
 
   /**
@@ -9520,6 +9813,2156 @@ export namespace Prisma {
 
 
   /**
+   * Model Certificate
+   */
+
+  export type AggregateCertificate = {
+    _count: CertificateCountAggregateOutputType | null
+    _min: CertificateMinAggregateOutputType | null
+    _max: CertificateMaxAggregateOutputType | null
+  }
+
+  export type CertificateMinAggregateOutputType = {
+    id: string | null
+    userId: string | null
+    certificateNumber: string | null
+    issuedAt: Date | null
+    createdAt: Date | null
+    updatedAt: Date | null
+  }
+
+  export type CertificateMaxAggregateOutputType = {
+    id: string | null
+    userId: string | null
+    certificateNumber: string | null
+    issuedAt: Date | null
+    createdAt: Date | null
+    updatedAt: Date | null
+  }
+
+  export type CertificateCountAggregateOutputType = {
+    id: number
+    userId: number
+    certificateNumber: number
+    issuedAt: number
+    createdAt: number
+    updatedAt: number
+    _all: number
+  }
+
+
+  export type CertificateMinAggregateInputType = {
+    id?: true
+    userId?: true
+    certificateNumber?: true
+    issuedAt?: true
+    createdAt?: true
+    updatedAt?: true
+  }
+
+  export type CertificateMaxAggregateInputType = {
+    id?: true
+    userId?: true
+    certificateNumber?: true
+    issuedAt?: true
+    createdAt?: true
+    updatedAt?: true
+  }
+
+  export type CertificateCountAggregateInputType = {
+    id?: true
+    userId?: true
+    certificateNumber?: true
+    issuedAt?: true
+    createdAt?: true
+    updatedAt?: true
+    _all?: true
+  }
+
+  export type CertificateAggregateArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Filter which Certificate to aggregate.
+     */
+    where?: CertificateWhereInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
+     * 
+     * Determine the order of Certificates to fetch.
+     */
+    orderBy?: CertificateOrderByWithRelationInput | CertificateOrderByWithRelationInput[]
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     * 
+     * Sets the start position
+     */
+    cursor?: CertificateWhereUniqueInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Take `±n` Certificates from the position of the cursor.
+     */
+    take?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Skip the first `n` Certificates.
+     */
+    skip?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Count returned Certificates
+    **/
+    _count?: true | CertificateCountAggregateInputType
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Select which fields to find the minimum value
+    **/
+    _min?: CertificateMinAggregateInputType
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Select which fields to find the maximum value
+    **/
+    _max?: CertificateMaxAggregateInputType
+  }
+
+  export type GetCertificateAggregateType<T extends CertificateAggregateArgs> = {
+        [P in keyof T & keyof AggregateCertificate]: P extends '_count' | 'count'
+      ? T[P] extends true
+        ? number
+        : GetScalarType<T[P], AggregateCertificate[P]>
+      : GetScalarType<T[P], AggregateCertificate[P]>
+  }
+
+
+
+
+  export type CertificateGroupByArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    where?: CertificateWhereInput
+    orderBy?: CertificateOrderByWithAggregationInput | CertificateOrderByWithAggregationInput[]
+    by: CertificateScalarFieldEnum[] | CertificateScalarFieldEnum
+    having?: CertificateScalarWhereWithAggregatesInput
+    take?: number
+    skip?: number
+    _count?: CertificateCountAggregateInputType | true
+    _min?: CertificateMinAggregateInputType
+    _max?: CertificateMaxAggregateInputType
+  }
+
+  export type CertificateGroupByOutputType = {
+    id: string
+    userId: string
+    certificateNumber: string
+    issuedAt: Date
+    createdAt: Date
+    updatedAt: Date
+    _count: CertificateCountAggregateOutputType | null
+    _min: CertificateMinAggregateOutputType | null
+    _max: CertificateMaxAggregateOutputType | null
+  }
+
+  type GetCertificateGroupByPayload<T extends CertificateGroupByArgs> = Prisma.PrismaPromise<
+    Array<
+      PickEnumerable<CertificateGroupByOutputType, T['by']> &
+        {
+          [P in ((keyof T) & (keyof CertificateGroupByOutputType))]: P extends '_count'
+            ? T[P] extends boolean
+              ? number
+              : GetScalarType<T[P], CertificateGroupByOutputType[P]>
+            : GetScalarType<T[P], CertificateGroupByOutputType[P]>
+        }
+      >
+    >
+
+
+  export type CertificateSelect<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
+    id?: boolean
+    userId?: boolean
+    certificateNumber?: boolean
+    issuedAt?: boolean
+    createdAt?: boolean
+    updatedAt?: boolean
+    user?: boolean | UserDefaultArgs<ExtArgs>
+  }, ExtArgs["result"]["certificate"]>
+
+  export type CertificateSelectCreateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
+    id?: boolean
+    userId?: boolean
+    certificateNumber?: boolean
+    issuedAt?: boolean
+    createdAt?: boolean
+    updatedAt?: boolean
+    user?: boolean | UserDefaultArgs<ExtArgs>
+  }, ExtArgs["result"]["certificate"]>
+
+  export type CertificateSelectUpdateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
+    id?: boolean
+    userId?: boolean
+    certificateNumber?: boolean
+    issuedAt?: boolean
+    createdAt?: boolean
+    updatedAt?: boolean
+    user?: boolean | UserDefaultArgs<ExtArgs>
+  }, ExtArgs["result"]["certificate"]>
+
+  export type CertificateSelectScalar = {
+    id?: boolean
+    userId?: boolean
+    certificateNumber?: boolean
+    issuedAt?: boolean
+    createdAt?: boolean
+    updatedAt?: boolean
+  }
+
+  export type CertificateOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"id" | "userId" | "certificateNumber" | "issuedAt" | "createdAt" | "updatedAt", ExtArgs["result"]["certificate"]>
+  export type CertificateInclude<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    user?: boolean | UserDefaultArgs<ExtArgs>
+  }
+  export type CertificateIncludeCreateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    user?: boolean | UserDefaultArgs<ExtArgs>
+  }
+  export type CertificateIncludeUpdateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    user?: boolean | UserDefaultArgs<ExtArgs>
+  }
+
+  export type $CertificatePayload<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    name: "Certificate"
+    objects: {
+      user: Prisma.$UserPayload<ExtArgs>
+    }
+    scalars: $Extensions.GetPayloadResult<{
+      id: string
+      userId: string
+      certificateNumber: string
+      issuedAt: Date
+      createdAt: Date
+      updatedAt: Date
+    }, ExtArgs["result"]["certificate"]>
+    composites: {}
+  }
+
+  type CertificateGetPayload<S extends boolean | null | undefined | CertificateDefaultArgs> = $Result.GetResult<Prisma.$CertificatePayload, S>
+
+  type CertificateCountArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> =
+    Omit<CertificateFindManyArgs, 'select' | 'include' | 'distinct' | 'omit'> & {
+      select?: CertificateCountAggregateInputType | true
+    }
+
+  export interface CertificateDelegate<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs, GlobalOmitOptions = {}> {
+    [K: symbol]: { types: Prisma.TypeMap<ExtArgs>['model']['Certificate'], meta: { name: 'Certificate' } }
+    /**
+     * Find zero or one Certificate that matches the filter.
+     * @param {CertificateFindUniqueArgs} args - Arguments to find a Certificate
+     * @example
+     * // Get one Certificate
+     * const certificate = await prisma.certificate.findUnique({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     */
+    findUnique<T extends CertificateFindUniqueArgs>(args: SelectSubset<T, CertificateFindUniqueArgs<ExtArgs>>): Prisma__CertificateClient<$Result.GetResult<Prisma.$CertificatePayload<ExtArgs>, T, "findUnique", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Find one Certificate that matches the filter or throw an error with `error.code='P2025'`
+     * if no matches were found.
+     * @param {CertificateFindUniqueOrThrowArgs} args - Arguments to find a Certificate
+     * @example
+     * // Get one Certificate
+     * const certificate = await prisma.certificate.findUniqueOrThrow({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     */
+    findUniqueOrThrow<T extends CertificateFindUniqueOrThrowArgs>(args: SelectSubset<T, CertificateFindUniqueOrThrowArgs<ExtArgs>>): Prisma__CertificateClient<$Result.GetResult<Prisma.$CertificatePayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Find the first Certificate that matches the filter.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {CertificateFindFirstArgs} args - Arguments to find a Certificate
+     * @example
+     * // Get one Certificate
+     * const certificate = await prisma.certificate.findFirst({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     */
+    findFirst<T extends CertificateFindFirstArgs>(args?: SelectSubset<T, CertificateFindFirstArgs<ExtArgs>>): Prisma__CertificateClient<$Result.GetResult<Prisma.$CertificatePayload<ExtArgs>, T, "findFirst", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Find the first Certificate that matches the filter or
+     * throw `PrismaKnownClientError` with `P2025` code if no matches were found.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {CertificateFindFirstOrThrowArgs} args - Arguments to find a Certificate
+     * @example
+     * // Get one Certificate
+     * const certificate = await prisma.certificate.findFirstOrThrow({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     */
+    findFirstOrThrow<T extends CertificateFindFirstOrThrowArgs>(args?: SelectSubset<T, CertificateFindFirstOrThrowArgs<ExtArgs>>): Prisma__CertificateClient<$Result.GetResult<Prisma.$CertificatePayload<ExtArgs>, T, "findFirstOrThrow", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Find zero or more Certificates that matches the filter.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {CertificateFindManyArgs} args - Arguments to filter and select certain fields only.
+     * @example
+     * // Get all Certificates
+     * const certificates = await prisma.certificate.findMany()
+     * 
+     * // Get first 10 Certificates
+     * const certificates = await prisma.certificate.findMany({ take: 10 })
+     * 
+     * // Only select the `id`
+     * const certificateWithIdOnly = await prisma.certificate.findMany({ select: { id: true } })
+     * 
+     */
+    findMany<T extends CertificateFindManyArgs>(args?: SelectSubset<T, CertificateFindManyArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$CertificatePayload<ExtArgs>, T, "findMany", GlobalOmitOptions>>
+
+    /**
+     * Create a Certificate.
+     * @param {CertificateCreateArgs} args - Arguments to create a Certificate.
+     * @example
+     * // Create one Certificate
+     * const Certificate = await prisma.certificate.create({
+     *   data: {
+     *     // ... data to create a Certificate
+     *   }
+     * })
+     * 
+     */
+    create<T extends CertificateCreateArgs>(args: SelectSubset<T, CertificateCreateArgs<ExtArgs>>): Prisma__CertificateClient<$Result.GetResult<Prisma.$CertificatePayload<ExtArgs>, T, "create", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Create many Certificates.
+     * @param {CertificateCreateManyArgs} args - Arguments to create many Certificates.
+     * @example
+     * // Create many Certificates
+     * const certificate = await prisma.certificate.createMany({
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     *     
+     */
+    createMany<T extends CertificateCreateManyArgs>(args?: SelectSubset<T, CertificateCreateManyArgs<ExtArgs>>): Prisma.PrismaPromise<BatchPayload>
+
+    /**
+     * Create many Certificates and returns the data saved in the database.
+     * @param {CertificateCreateManyAndReturnArgs} args - Arguments to create many Certificates.
+     * @example
+     * // Create many Certificates
+     * const certificate = await prisma.certificate.createManyAndReturn({
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     * 
+     * // Create many Certificates and only return the `id`
+     * const certificateWithIdOnly = await prisma.certificate.createManyAndReturn({
+     *   select: { id: true },
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * 
+     */
+    createManyAndReturn<T extends CertificateCreateManyAndReturnArgs>(args?: SelectSubset<T, CertificateCreateManyAndReturnArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$CertificatePayload<ExtArgs>, T, "createManyAndReturn", GlobalOmitOptions>>
+
+    /**
+     * Delete a Certificate.
+     * @param {CertificateDeleteArgs} args - Arguments to delete one Certificate.
+     * @example
+     * // Delete one Certificate
+     * const Certificate = await prisma.certificate.delete({
+     *   where: {
+     *     // ... filter to delete one Certificate
+     *   }
+     * })
+     * 
+     */
+    delete<T extends CertificateDeleteArgs>(args: SelectSubset<T, CertificateDeleteArgs<ExtArgs>>): Prisma__CertificateClient<$Result.GetResult<Prisma.$CertificatePayload<ExtArgs>, T, "delete", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Update one Certificate.
+     * @param {CertificateUpdateArgs} args - Arguments to update one Certificate.
+     * @example
+     * // Update one Certificate
+     * const certificate = await prisma.certificate.update({
+     *   where: {
+     *     // ... provide filter here
+     *   },
+     *   data: {
+     *     // ... provide data here
+     *   }
+     * })
+     * 
+     */
+    update<T extends CertificateUpdateArgs>(args: SelectSubset<T, CertificateUpdateArgs<ExtArgs>>): Prisma__CertificateClient<$Result.GetResult<Prisma.$CertificatePayload<ExtArgs>, T, "update", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Delete zero or more Certificates.
+     * @param {CertificateDeleteManyArgs} args - Arguments to filter Certificates to delete.
+     * @example
+     * // Delete a few Certificates
+     * const { count } = await prisma.certificate.deleteMany({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     * 
+     */
+    deleteMany<T extends CertificateDeleteManyArgs>(args?: SelectSubset<T, CertificateDeleteManyArgs<ExtArgs>>): Prisma.PrismaPromise<BatchPayload>
+
+    /**
+     * Update zero or more Certificates.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {CertificateUpdateManyArgs} args - Arguments to update one or more rows.
+     * @example
+     * // Update many Certificates
+     * const certificate = await prisma.certificate.updateMany({
+     *   where: {
+     *     // ... provide filter here
+     *   },
+     *   data: {
+     *     // ... provide data here
+     *   }
+     * })
+     * 
+     */
+    updateMany<T extends CertificateUpdateManyArgs>(args: SelectSubset<T, CertificateUpdateManyArgs<ExtArgs>>): Prisma.PrismaPromise<BatchPayload>
+
+    /**
+     * Update zero or more Certificates and returns the data updated in the database.
+     * @param {CertificateUpdateManyAndReturnArgs} args - Arguments to update many Certificates.
+     * @example
+     * // Update many Certificates
+     * const certificate = await prisma.certificate.updateManyAndReturn({
+     *   where: {
+     *     // ... provide filter here
+     *   },
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     * 
+     * // Update zero or more Certificates and only return the `id`
+     * const certificateWithIdOnly = await prisma.certificate.updateManyAndReturn({
+     *   select: { id: true },
+     *   where: {
+     *     // ... provide filter here
+     *   },
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * 
+     */
+    updateManyAndReturn<T extends CertificateUpdateManyAndReturnArgs>(args: SelectSubset<T, CertificateUpdateManyAndReturnArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$CertificatePayload<ExtArgs>, T, "updateManyAndReturn", GlobalOmitOptions>>
+
+    /**
+     * Create or update one Certificate.
+     * @param {CertificateUpsertArgs} args - Arguments to update or create a Certificate.
+     * @example
+     * // Update or create a Certificate
+     * const certificate = await prisma.certificate.upsert({
+     *   create: {
+     *     // ... data to create a Certificate
+     *   },
+     *   update: {
+     *     // ... in case it already exists, update
+     *   },
+     *   where: {
+     *     // ... the filter for the Certificate we want to update
+     *   }
+     * })
+     */
+    upsert<T extends CertificateUpsertArgs>(args: SelectSubset<T, CertificateUpsertArgs<ExtArgs>>): Prisma__CertificateClient<$Result.GetResult<Prisma.$CertificatePayload<ExtArgs>, T, "upsert", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+
+    /**
+     * Count the number of Certificates.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {CertificateCountArgs} args - Arguments to filter Certificates to count.
+     * @example
+     * // Count the number of Certificates
+     * const count = await prisma.certificate.count({
+     *   where: {
+     *     // ... the filter for the Certificates we want to count
+     *   }
+     * })
+    **/
+    count<T extends CertificateCountArgs>(
+      args?: Subset<T, CertificateCountArgs>,
+    ): Prisma.PrismaPromise<
+      T extends $Utils.Record<'select', any>
+        ? T['select'] extends true
+          ? number
+          : GetScalarType<T['select'], CertificateCountAggregateOutputType>
+        : number
+    >
+
+    /**
+     * Allows you to perform aggregations operations on a Certificate.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {CertificateAggregateArgs} args - Select which aggregations you would like to apply and on what fields.
+     * @example
+     * // Ordered by age ascending
+     * // Where email contains prisma.io
+     * // Limited to the 10 users
+     * const aggregations = await prisma.user.aggregate({
+     *   _avg: {
+     *     age: true,
+     *   },
+     *   where: {
+     *     email: {
+     *       contains: "prisma.io",
+     *     },
+     *   },
+     *   orderBy: {
+     *     age: "asc",
+     *   },
+     *   take: 10,
+     * })
+    **/
+    aggregate<T extends CertificateAggregateArgs>(args: Subset<T, CertificateAggregateArgs>): Prisma.PrismaPromise<GetCertificateAggregateType<T>>
+
+    /**
+     * Group by Certificate.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {CertificateGroupByArgs} args - Group by arguments.
+     * @example
+     * // Group by city, order by createdAt, get count
+     * const result = await prisma.user.groupBy({
+     *   by: ['city', 'createdAt'],
+     *   orderBy: {
+     *     createdAt: true
+     *   },
+     *   _count: {
+     *     _all: true
+     *   },
+     * })
+     * 
+    **/
+    groupBy<
+      T extends CertificateGroupByArgs,
+      HasSelectOrTake extends Or<
+        Extends<'skip', Keys<T>>,
+        Extends<'take', Keys<T>>
+      >,
+      OrderByArg extends True extends HasSelectOrTake
+        ? { orderBy: CertificateGroupByArgs['orderBy'] }
+        : { orderBy?: CertificateGroupByArgs['orderBy'] },
+      OrderFields extends ExcludeUnderscoreKeys<Keys<MaybeTupleToUnion<T['orderBy']>>>,
+      ByFields extends MaybeTupleToUnion<T['by']>,
+      ByValid extends Has<ByFields, OrderFields>,
+      HavingFields extends GetHavingFields<T['having']>,
+      HavingValid extends Has<ByFields, HavingFields>,
+      ByEmpty extends T['by'] extends never[] ? True : False,
+      InputErrors extends ByEmpty extends True
+      ? `Error: "by" must not be empty.`
+      : HavingValid extends False
+      ? {
+          [P in HavingFields]: P extends ByFields
+            ? never
+            : P extends string
+            ? `Error: Field "${P}" used in "having" needs to be provided in "by".`
+            : [
+                Error,
+                'Field ',
+                P,
+                ` in "having" needs to be provided in "by"`,
+              ]
+        }[HavingFields]
+      : 'take' extends Keys<T>
+      ? 'orderBy' extends Keys<T>
+        ? ByValid extends True
+          ? {}
+          : {
+              [P in OrderFields]: P extends ByFields
+                ? never
+                : `Error: Field "${P}" in "orderBy" needs to be provided in "by"`
+            }[OrderFields]
+        : 'Error: If you provide "take", you also need to provide "orderBy"'
+      : 'skip' extends Keys<T>
+      ? 'orderBy' extends Keys<T>
+        ? ByValid extends True
+          ? {}
+          : {
+              [P in OrderFields]: P extends ByFields
+                ? never
+                : `Error: Field "${P}" in "orderBy" needs to be provided in "by"`
+            }[OrderFields]
+        : 'Error: If you provide "skip", you also need to provide "orderBy"'
+      : ByValid extends True
+      ? {}
+      : {
+          [P in OrderFields]: P extends ByFields
+            ? never
+            : `Error: Field "${P}" in "orderBy" needs to be provided in "by"`
+        }[OrderFields]
+    >(args: SubsetIntersection<T, CertificateGroupByArgs, OrderByArg> & InputErrors): {} extends InputErrors ? GetCertificateGroupByPayload<T> : Prisma.PrismaPromise<InputErrors>
+  /**
+   * Fields of the Certificate model
+   */
+  readonly fields: CertificateFieldRefs;
+  }
+
+  /**
+   * The delegate class that acts as a "Promise-like" for Certificate.
+   * Why is this prefixed with `Prisma__`?
+   * Because we want to prevent naming conflicts as mentioned in
+   * https://github.com/prisma/prisma-client-js/issues/707
+   */
+  export interface Prisma__CertificateClient<T, Null = never, ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs, GlobalOmitOptions = {}> extends Prisma.PrismaPromise<T> {
+    readonly [Symbol.toStringTag]: "PrismaPromise"
+    user<T extends UserDefaultArgs<ExtArgs> = {}>(args?: Subset<T, UserDefaultArgs<ExtArgs>>): Prisma__UserClient<$Result.GetResult<Prisma.$UserPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | Null, Null, ExtArgs, GlobalOmitOptions>
+    /**
+     * Attaches callbacks for the resolution and/or rejection of the Promise.
+     * @param onfulfilled The callback to execute when the Promise is resolved.
+     * @param onrejected The callback to execute when the Promise is rejected.
+     * @returns A Promise for the completion of which ever callback is executed.
+     */
+    then<TResult1 = T, TResult2 = never>(onfulfilled?: ((value: T) => TResult1 | PromiseLike<TResult1>) | undefined | null, onrejected?: ((reason: any) => TResult2 | PromiseLike<TResult2>) | undefined | null): $Utils.JsPromise<TResult1 | TResult2>
+    /**
+     * Attaches a callback for only the rejection of the Promise.
+     * @param onrejected The callback to execute when the Promise is rejected.
+     * @returns A Promise for the completion of the callback.
+     */
+    catch<TResult = never>(onrejected?: ((reason: any) => TResult | PromiseLike<TResult>) | undefined | null): $Utils.JsPromise<T | TResult>
+    /**
+     * Attaches a callback that is invoked when the Promise is settled (fulfilled or rejected). The
+     * resolved value cannot be modified from the callback.
+     * @param onfinally The callback to execute when the Promise is settled (fulfilled or rejected).
+     * @returns A Promise for the completion of the callback.
+     */
+    finally(onfinally?: (() => void) | undefined | null): $Utils.JsPromise<T>
+  }
+
+
+
+
+  /**
+   * Fields of the Certificate model
+   */
+  interface CertificateFieldRefs {
+    readonly id: FieldRef<"Certificate", 'String'>
+    readonly userId: FieldRef<"Certificate", 'String'>
+    readonly certificateNumber: FieldRef<"Certificate", 'String'>
+    readonly issuedAt: FieldRef<"Certificate", 'DateTime'>
+    readonly createdAt: FieldRef<"Certificate", 'DateTime'>
+    readonly updatedAt: FieldRef<"Certificate", 'DateTime'>
+  }
+    
+
+  // Custom InputTypes
+  /**
+   * Certificate findUnique
+   */
+  export type CertificateFindUniqueArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the Certificate
+     */
+    select?: CertificateSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the Certificate
+     */
+    omit?: CertificateOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: CertificateInclude<ExtArgs> | null
+    /**
+     * Filter, which Certificate to fetch.
+     */
+    where: CertificateWhereUniqueInput
+  }
+
+  /**
+   * Certificate findUniqueOrThrow
+   */
+  export type CertificateFindUniqueOrThrowArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the Certificate
+     */
+    select?: CertificateSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the Certificate
+     */
+    omit?: CertificateOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: CertificateInclude<ExtArgs> | null
+    /**
+     * Filter, which Certificate to fetch.
+     */
+    where: CertificateWhereUniqueInput
+  }
+
+  /**
+   * Certificate findFirst
+   */
+  export type CertificateFindFirstArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the Certificate
+     */
+    select?: CertificateSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the Certificate
+     */
+    omit?: CertificateOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: CertificateInclude<ExtArgs> | null
+    /**
+     * Filter, which Certificate to fetch.
+     */
+    where?: CertificateWhereInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
+     * 
+     * Determine the order of Certificates to fetch.
+     */
+    orderBy?: CertificateOrderByWithRelationInput | CertificateOrderByWithRelationInput[]
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     * 
+     * Sets the position for searching for Certificates.
+     */
+    cursor?: CertificateWhereUniqueInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Take `±n` Certificates from the position of the cursor.
+     */
+    take?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Skip the first `n` Certificates.
+     */
+    skip?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/distinct Distinct Docs}
+     * 
+     * Filter by unique combinations of Certificates.
+     */
+    distinct?: CertificateScalarFieldEnum | CertificateScalarFieldEnum[]
+  }
+
+  /**
+   * Certificate findFirstOrThrow
+   */
+  export type CertificateFindFirstOrThrowArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the Certificate
+     */
+    select?: CertificateSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the Certificate
+     */
+    omit?: CertificateOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: CertificateInclude<ExtArgs> | null
+    /**
+     * Filter, which Certificate to fetch.
+     */
+    where?: CertificateWhereInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
+     * 
+     * Determine the order of Certificates to fetch.
+     */
+    orderBy?: CertificateOrderByWithRelationInput | CertificateOrderByWithRelationInput[]
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     * 
+     * Sets the position for searching for Certificates.
+     */
+    cursor?: CertificateWhereUniqueInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Take `±n` Certificates from the position of the cursor.
+     */
+    take?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Skip the first `n` Certificates.
+     */
+    skip?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/distinct Distinct Docs}
+     * 
+     * Filter by unique combinations of Certificates.
+     */
+    distinct?: CertificateScalarFieldEnum | CertificateScalarFieldEnum[]
+  }
+
+  /**
+   * Certificate findMany
+   */
+  export type CertificateFindManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the Certificate
+     */
+    select?: CertificateSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the Certificate
+     */
+    omit?: CertificateOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: CertificateInclude<ExtArgs> | null
+    /**
+     * Filter, which Certificates to fetch.
+     */
+    where?: CertificateWhereInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
+     * 
+     * Determine the order of Certificates to fetch.
+     */
+    orderBy?: CertificateOrderByWithRelationInput | CertificateOrderByWithRelationInput[]
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     * 
+     * Sets the position for listing Certificates.
+     */
+    cursor?: CertificateWhereUniqueInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Take `±n` Certificates from the position of the cursor.
+     */
+    take?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Skip the first `n` Certificates.
+     */
+    skip?: number
+    distinct?: CertificateScalarFieldEnum | CertificateScalarFieldEnum[]
+  }
+
+  /**
+   * Certificate create
+   */
+  export type CertificateCreateArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the Certificate
+     */
+    select?: CertificateSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the Certificate
+     */
+    omit?: CertificateOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: CertificateInclude<ExtArgs> | null
+    /**
+     * The data needed to create a Certificate.
+     */
+    data: XOR<CertificateCreateInput, CertificateUncheckedCreateInput>
+  }
+
+  /**
+   * Certificate createMany
+   */
+  export type CertificateCreateManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * The data used to create many Certificates.
+     */
+    data: CertificateCreateManyInput | CertificateCreateManyInput[]
+    skipDuplicates?: boolean
+  }
+
+  /**
+   * Certificate createManyAndReturn
+   */
+  export type CertificateCreateManyAndReturnArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the Certificate
+     */
+    select?: CertificateSelectCreateManyAndReturn<ExtArgs> | null
+    /**
+     * Omit specific fields from the Certificate
+     */
+    omit?: CertificateOmit<ExtArgs> | null
+    /**
+     * The data used to create many Certificates.
+     */
+    data: CertificateCreateManyInput | CertificateCreateManyInput[]
+    skipDuplicates?: boolean
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: CertificateIncludeCreateManyAndReturn<ExtArgs> | null
+  }
+
+  /**
+   * Certificate update
+   */
+  export type CertificateUpdateArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the Certificate
+     */
+    select?: CertificateSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the Certificate
+     */
+    omit?: CertificateOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: CertificateInclude<ExtArgs> | null
+    /**
+     * The data needed to update a Certificate.
+     */
+    data: XOR<CertificateUpdateInput, CertificateUncheckedUpdateInput>
+    /**
+     * Choose, which Certificate to update.
+     */
+    where: CertificateWhereUniqueInput
+  }
+
+  /**
+   * Certificate updateMany
+   */
+  export type CertificateUpdateManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * The data used to update Certificates.
+     */
+    data: XOR<CertificateUpdateManyMutationInput, CertificateUncheckedUpdateManyInput>
+    /**
+     * Filter which Certificates to update
+     */
+    where?: CertificateWhereInput
+    /**
+     * Limit how many Certificates to update.
+     */
+    limit?: number
+  }
+
+  /**
+   * Certificate updateManyAndReturn
+   */
+  export type CertificateUpdateManyAndReturnArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the Certificate
+     */
+    select?: CertificateSelectUpdateManyAndReturn<ExtArgs> | null
+    /**
+     * Omit specific fields from the Certificate
+     */
+    omit?: CertificateOmit<ExtArgs> | null
+    /**
+     * The data used to update Certificates.
+     */
+    data: XOR<CertificateUpdateManyMutationInput, CertificateUncheckedUpdateManyInput>
+    /**
+     * Filter which Certificates to update
+     */
+    where?: CertificateWhereInput
+    /**
+     * Limit how many Certificates to update.
+     */
+    limit?: number
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: CertificateIncludeUpdateManyAndReturn<ExtArgs> | null
+  }
+
+  /**
+   * Certificate upsert
+   */
+  export type CertificateUpsertArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the Certificate
+     */
+    select?: CertificateSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the Certificate
+     */
+    omit?: CertificateOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: CertificateInclude<ExtArgs> | null
+    /**
+     * The filter to search for the Certificate to update in case it exists.
+     */
+    where: CertificateWhereUniqueInput
+    /**
+     * In case the Certificate found by the `where` argument doesn't exist, create a new Certificate with this data.
+     */
+    create: XOR<CertificateCreateInput, CertificateUncheckedCreateInput>
+    /**
+     * In case the Certificate was found with the provided `where` argument, update it with this data.
+     */
+    update: XOR<CertificateUpdateInput, CertificateUncheckedUpdateInput>
+  }
+
+  /**
+   * Certificate delete
+   */
+  export type CertificateDeleteArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the Certificate
+     */
+    select?: CertificateSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the Certificate
+     */
+    omit?: CertificateOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: CertificateInclude<ExtArgs> | null
+    /**
+     * Filter which Certificate to delete.
+     */
+    where: CertificateWhereUniqueInput
+  }
+
+  /**
+   * Certificate deleteMany
+   */
+  export type CertificateDeleteManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Filter which Certificates to delete
+     */
+    where?: CertificateWhereInput
+    /**
+     * Limit how many Certificates to delete.
+     */
+    limit?: number
+  }
+
+  /**
+   * Certificate without action
+   */
+  export type CertificateDefaultArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the Certificate
+     */
+    select?: CertificateSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the Certificate
+     */
+    omit?: CertificateOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: CertificateInclude<ExtArgs> | null
+  }
+
+
+  /**
+   * Model ModuleFeedback
+   */
+
+  export type AggregateModuleFeedback = {
+    _count: ModuleFeedbackCountAggregateOutputType | null
+    _min: ModuleFeedbackMinAggregateOutputType | null
+    _max: ModuleFeedbackMaxAggregateOutputType | null
+  }
+
+  export type ModuleFeedbackMinAggregateOutputType = {
+    id: string | null
+    userId: string | null
+    moduleId: string | null
+    helpful: boolean | null
+    createdAt: Date | null
+    updatedAt: Date | null
+  }
+
+  export type ModuleFeedbackMaxAggregateOutputType = {
+    id: string | null
+    userId: string | null
+    moduleId: string | null
+    helpful: boolean | null
+    createdAt: Date | null
+    updatedAt: Date | null
+  }
+
+  export type ModuleFeedbackCountAggregateOutputType = {
+    id: number
+    userId: number
+    moduleId: number
+    helpful: number
+    createdAt: number
+    updatedAt: number
+    _all: number
+  }
+
+
+  export type ModuleFeedbackMinAggregateInputType = {
+    id?: true
+    userId?: true
+    moduleId?: true
+    helpful?: true
+    createdAt?: true
+    updatedAt?: true
+  }
+
+  export type ModuleFeedbackMaxAggregateInputType = {
+    id?: true
+    userId?: true
+    moduleId?: true
+    helpful?: true
+    createdAt?: true
+    updatedAt?: true
+  }
+
+  export type ModuleFeedbackCountAggregateInputType = {
+    id?: true
+    userId?: true
+    moduleId?: true
+    helpful?: true
+    createdAt?: true
+    updatedAt?: true
+    _all?: true
+  }
+
+  export type ModuleFeedbackAggregateArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Filter which ModuleFeedback to aggregate.
+     */
+    where?: ModuleFeedbackWhereInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
+     * 
+     * Determine the order of ModuleFeedbacks to fetch.
+     */
+    orderBy?: ModuleFeedbackOrderByWithRelationInput | ModuleFeedbackOrderByWithRelationInput[]
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     * 
+     * Sets the start position
+     */
+    cursor?: ModuleFeedbackWhereUniqueInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Take `±n` ModuleFeedbacks from the position of the cursor.
+     */
+    take?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Skip the first `n` ModuleFeedbacks.
+     */
+    skip?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Count returned ModuleFeedbacks
+    **/
+    _count?: true | ModuleFeedbackCountAggregateInputType
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Select which fields to find the minimum value
+    **/
+    _min?: ModuleFeedbackMinAggregateInputType
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Select which fields to find the maximum value
+    **/
+    _max?: ModuleFeedbackMaxAggregateInputType
+  }
+
+  export type GetModuleFeedbackAggregateType<T extends ModuleFeedbackAggregateArgs> = {
+        [P in keyof T & keyof AggregateModuleFeedback]: P extends '_count' | 'count'
+      ? T[P] extends true
+        ? number
+        : GetScalarType<T[P], AggregateModuleFeedback[P]>
+      : GetScalarType<T[P], AggregateModuleFeedback[P]>
+  }
+
+
+
+
+  export type ModuleFeedbackGroupByArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    where?: ModuleFeedbackWhereInput
+    orderBy?: ModuleFeedbackOrderByWithAggregationInput | ModuleFeedbackOrderByWithAggregationInput[]
+    by: ModuleFeedbackScalarFieldEnum[] | ModuleFeedbackScalarFieldEnum
+    having?: ModuleFeedbackScalarWhereWithAggregatesInput
+    take?: number
+    skip?: number
+    _count?: ModuleFeedbackCountAggregateInputType | true
+    _min?: ModuleFeedbackMinAggregateInputType
+    _max?: ModuleFeedbackMaxAggregateInputType
+  }
+
+  export type ModuleFeedbackGroupByOutputType = {
+    id: string
+    userId: string
+    moduleId: string
+    helpful: boolean
+    createdAt: Date
+    updatedAt: Date
+    _count: ModuleFeedbackCountAggregateOutputType | null
+    _min: ModuleFeedbackMinAggregateOutputType | null
+    _max: ModuleFeedbackMaxAggregateOutputType | null
+  }
+
+  type GetModuleFeedbackGroupByPayload<T extends ModuleFeedbackGroupByArgs> = Prisma.PrismaPromise<
+    Array<
+      PickEnumerable<ModuleFeedbackGroupByOutputType, T['by']> &
+        {
+          [P in ((keyof T) & (keyof ModuleFeedbackGroupByOutputType))]: P extends '_count'
+            ? T[P] extends boolean
+              ? number
+              : GetScalarType<T[P], ModuleFeedbackGroupByOutputType[P]>
+            : GetScalarType<T[P], ModuleFeedbackGroupByOutputType[P]>
+        }
+      >
+    >
+
+
+  export type ModuleFeedbackSelect<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
+    id?: boolean
+    userId?: boolean
+    moduleId?: boolean
+    helpful?: boolean
+    createdAt?: boolean
+    updatedAt?: boolean
+    user?: boolean | UserDefaultArgs<ExtArgs>
+    module?: boolean | ModuleDefaultArgs<ExtArgs>
+  }, ExtArgs["result"]["moduleFeedback"]>
+
+  export type ModuleFeedbackSelectCreateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
+    id?: boolean
+    userId?: boolean
+    moduleId?: boolean
+    helpful?: boolean
+    createdAt?: boolean
+    updatedAt?: boolean
+    user?: boolean | UserDefaultArgs<ExtArgs>
+    module?: boolean | ModuleDefaultArgs<ExtArgs>
+  }, ExtArgs["result"]["moduleFeedback"]>
+
+  export type ModuleFeedbackSelectUpdateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
+    id?: boolean
+    userId?: boolean
+    moduleId?: boolean
+    helpful?: boolean
+    createdAt?: boolean
+    updatedAt?: boolean
+    user?: boolean | UserDefaultArgs<ExtArgs>
+    module?: boolean | ModuleDefaultArgs<ExtArgs>
+  }, ExtArgs["result"]["moduleFeedback"]>
+
+  export type ModuleFeedbackSelectScalar = {
+    id?: boolean
+    userId?: boolean
+    moduleId?: boolean
+    helpful?: boolean
+    createdAt?: boolean
+    updatedAt?: boolean
+  }
+
+  export type ModuleFeedbackOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"id" | "userId" | "moduleId" | "helpful" | "createdAt" | "updatedAt", ExtArgs["result"]["moduleFeedback"]>
+  export type ModuleFeedbackInclude<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    user?: boolean | UserDefaultArgs<ExtArgs>
+    module?: boolean | ModuleDefaultArgs<ExtArgs>
+  }
+  export type ModuleFeedbackIncludeCreateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    user?: boolean | UserDefaultArgs<ExtArgs>
+    module?: boolean | ModuleDefaultArgs<ExtArgs>
+  }
+  export type ModuleFeedbackIncludeUpdateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    user?: boolean | UserDefaultArgs<ExtArgs>
+    module?: boolean | ModuleDefaultArgs<ExtArgs>
+  }
+
+  export type $ModuleFeedbackPayload<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    name: "ModuleFeedback"
+    objects: {
+      user: Prisma.$UserPayload<ExtArgs>
+      module: Prisma.$ModulePayload<ExtArgs>
+    }
+    scalars: $Extensions.GetPayloadResult<{
+      id: string
+      userId: string
+      moduleId: string
+      helpful: boolean
+      createdAt: Date
+      updatedAt: Date
+    }, ExtArgs["result"]["moduleFeedback"]>
+    composites: {}
+  }
+
+  type ModuleFeedbackGetPayload<S extends boolean | null | undefined | ModuleFeedbackDefaultArgs> = $Result.GetResult<Prisma.$ModuleFeedbackPayload, S>
+
+  type ModuleFeedbackCountArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> =
+    Omit<ModuleFeedbackFindManyArgs, 'select' | 'include' | 'distinct' | 'omit'> & {
+      select?: ModuleFeedbackCountAggregateInputType | true
+    }
+
+  export interface ModuleFeedbackDelegate<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs, GlobalOmitOptions = {}> {
+    [K: symbol]: { types: Prisma.TypeMap<ExtArgs>['model']['ModuleFeedback'], meta: { name: 'ModuleFeedback' } }
+    /**
+     * Find zero or one ModuleFeedback that matches the filter.
+     * @param {ModuleFeedbackFindUniqueArgs} args - Arguments to find a ModuleFeedback
+     * @example
+     * // Get one ModuleFeedback
+     * const moduleFeedback = await prisma.moduleFeedback.findUnique({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     */
+    findUnique<T extends ModuleFeedbackFindUniqueArgs>(args: SelectSubset<T, ModuleFeedbackFindUniqueArgs<ExtArgs>>): Prisma__ModuleFeedbackClient<$Result.GetResult<Prisma.$ModuleFeedbackPayload<ExtArgs>, T, "findUnique", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Find one ModuleFeedback that matches the filter or throw an error with `error.code='P2025'`
+     * if no matches were found.
+     * @param {ModuleFeedbackFindUniqueOrThrowArgs} args - Arguments to find a ModuleFeedback
+     * @example
+     * // Get one ModuleFeedback
+     * const moduleFeedback = await prisma.moduleFeedback.findUniqueOrThrow({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     */
+    findUniqueOrThrow<T extends ModuleFeedbackFindUniqueOrThrowArgs>(args: SelectSubset<T, ModuleFeedbackFindUniqueOrThrowArgs<ExtArgs>>): Prisma__ModuleFeedbackClient<$Result.GetResult<Prisma.$ModuleFeedbackPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Find the first ModuleFeedback that matches the filter.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {ModuleFeedbackFindFirstArgs} args - Arguments to find a ModuleFeedback
+     * @example
+     * // Get one ModuleFeedback
+     * const moduleFeedback = await prisma.moduleFeedback.findFirst({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     */
+    findFirst<T extends ModuleFeedbackFindFirstArgs>(args?: SelectSubset<T, ModuleFeedbackFindFirstArgs<ExtArgs>>): Prisma__ModuleFeedbackClient<$Result.GetResult<Prisma.$ModuleFeedbackPayload<ExtArgs>, T, "findFirst", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Find the first ModuleFeedback that matches the filter or
+     * throw `PrismaKnownClientError` with `P2025` code if no matches were found.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {ModuleFeedbackFindFirstOrThrowArgs} args - Arguments to find a ModuleFeedback
+     * @example
+     * // Get one ModuleFeedback
+     * const moduleFeedback = await prisma.moduleFeedback.findFirstOrThrow({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     */
+    findFirstOrThrow<T extends ModuleFeedbackFindFirstOrThrowArgs>(args?: SelectSubset<T, ModuleFeedbackFindFirstOrThrowArgs<ExtArgs>>): Prisma__ModuleFeedbackClient<$Result.GetResult<Prisma.$ModuleFeedbackPayload<ExtArgs>, T, "findFirstOrThrow", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Find zero or more ModuleFeedbacks that matches the filter.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {ModuleFeedbackFindManyArgs} args - Arguments to filter and select certain fields only.
+     * @example
+     * // Get all ModuleFeedbacks
+     * const moduleFeedbacks = await prisma.moduleFeedback.findMany()
+     * 
+     * // Get first 10 ModuleFeedbacks
+     * const moduleFeedbacks = await prisma.moduleFeedback.findMany({ take: 10 })
+     * 
+     * // Only select the `id`
+     * const moduleFeedbackWithIdOnly = await prisma.moduleFeedback.findMany({ select: { id: true } })
+     * 
+     */
+    findMany<T extends ModuleFeedbackFindManyArgs>(args?: SelectSubset<T, ModuleFeedbackFindManyArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$ModuleFeedbackPayload<ExtArgs>, T, "findMany", GlobalOmitOptions>>
+
+    /**
+     * Create a ModuleFeedback.
+     * @param {ModuleFeedbackCreateArgs} args - Arguments to create a ModuleFeedback.
+     * @example
+     * // Create one ModuleFeedback
+     * const ModuleFeedback = await prisma.moduleFeedback.create({
+     *   data: {
+     *     // ... data to create a ModuleFeedback
+     *   }
+     * })
+     * 
+     */
+    create<T extends ModuleFeedbackCreateArgs>(args: SelectSubset<T, ModuleFeedbackCreateArgs<ExtArgs>>): Prisma__ModuleFeedbackClient<$Result.GetResult<Prisma.$ModuleFeedbackPayload<ExtArgs>, T, "create", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Create many ModuleFeedbacks.
+     * @param {ModuleFeedbackCreateManyArgs} args - Arguments to create many ModuleFeedbacks.
+     * @example
+     * // Create many ModuleFeedbacks
+     * const moduleFeedback = await prisma.moduleFeedback.createMany({
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     *     
+     */
+    createMany<T extends ModuleFeedbackCreateManyArgs>(args?: SelectSubset<T, ModuleFeedbackCreateManyArgs<ExtArgs>>): Prisma.PrismaPromise<BatchPayload>
+
+    /**
+     * Create many ModuleFeedbacks and returns the data saved in the database.
+     * @param {ModuleFeedbackCreateManyAndReturnArgs} args - Arguments to create many ModuleFeedbacks.
+     * @example
+     * // Create many ModuleFeedbacks
+     * const moduleFeedback = await prisma.moduleFeedback.createManyAndReturn({
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     * 
+     * // Create many ModuleFeedbacks and only return the `id`
+     * const moduleFeedbackWithIdOnly = await prisma.moduleFeedback.createManyAndReturn({
+     *   select: { id: true },
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * 
+     */
+    createManyAndReturn<T extends ModuleFeedbackCreateManyAndReturnArgs>(args?: SelectSubset<T, ModuleFeedbackCreateManyAndReturnArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$ModuleFeedbackPayload<ExtArgs>, T, "createManyAndReturn", GlobalOmitOptions>>
+
+    /**
+     * Delete a ModuleFeedback.
+     * @param {ModuleFeedbackDeleteArgs} args - Arguments to delete one ModuleFeedback.
+     * @example
+     * // Delete one ModuleFeedback
+     * const ModuleFeedback = await prisma.moduleFeedback.delete({
+     *   where: {
+     *     // ... filter to delete one ModuleFeedback
+     *   }
+     * })
+     * 
+     */
+    delete<T extends ModuleFeedbackDeleteArgs>(args: SelectSubset<T, ModuleFeedbackDeleteArgs<ExtArgs>>): Prisma__ModuleFeedbackClient<$Result.GetResult<Prisma.$ModuleFeedbackPayload<ExtArgs>, T, "delete", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Update one ModuleFeedback.
+     * @param {ModuleFeedbackUpdateArgs} args - Arguments to update one ModuleFeedback.
+     * @example
+     * // Update one ModuleFeedback
+     * const moduleFeedback = await prisma.moduleFeedback.update({
+     *   where: {
+     *     // ... provide filter here
+     *   },
+     *   data: {
+     *     // ... provide data here
+     *   }
+     * })
+     * 
+     */
+    update<T extends ModuleFeedbackUpdateArgs>(args: SelectSubset<T, ModuleFeedbackUpdateArgs<ExtArgs>>): Prisma__ModuleFeedbackClient<$Result.GetResult<Prisma.$ModuleFeedbackPayload<ExtArgs>, T, "update", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Delete zero or more ModuleFeedbacks.
+     * @param {ModuleFeedbackDeleteManyArgs} args - Arguments to filter ModuleFeedbacks to delete.
+     * @example
+     * // Delete a few ModuleFeedbacks
+     * const { count } = await prisma.moduleFeedback.deleteMany({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     * 
+     */
+    deleteMany<T extends ModuleFeedbackDeleteManyArgs>(args?: SelectSubset<T, ModuleFeedbackDeleteManyArgs<ExtArgs>>): Prisma.PrismaPromise<BatchPayload>
+
+    /**
+     * Update zero or more ModuleFeedbacks.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {ModuleFeedbackUpdateManyArgs} args - Arguments to update one or more rows.
+     * @example
+     * // Update many ModuleFeedbacks
+     * const moduleFeedback = await prisma.moduleFeedback.updateMany({
+     *   where: {
+     *     // ... provide filter here
+     *   },
+     *   data: {
+     *     // ... provide data here
+     *   }
+     * })
+     * 
+     */
+    updateMany<T extends ModuleFeedbackUpdateManyArgs>(args: SelectSubset<T, ModuleFeedbackUpdateManyArgs<ExtArgs>>): Prisma.PrismaPromise<BatchPayload>
+
+    /**
+     * Update zero or more ModuleFeedbacks and returns the data updated in the database.
+     * @param {ModuleFeedbackUpdateManyAndReturnArgs} args - Arguments to update many ModuleFeedbacks.
+     * @example
+     * // Update many ModuleFeedbacks
+     * const moduleFeedback = await prisma.moduleFeedback.updateManyAndReturn({
+     *   where: {
+     *     // ... provide filter here
+     *   },
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     * 
+     * // Update zero or more ModuleFeedbacks and only return the `id`
+     * const moduleFeedbackWithIdOnly = await prisma.moduleFeedback.updateManyAndReturn({
+     *   select: { id: true },
+     *   where: {
+     *     // ... provide filter here
+     *   },
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * 
+     */
+    updateManyAndReturn<T extends ModuleFeedbackUpdateManyAndReturnArgs>(args: SelectSubset<T, ModuleFeedbackUpdateManyAndReturnArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$ModuleFeedbackPayload<ExtArgs>, T, "updateManyAndReturn", GlobalOmitOptions>>
+
+    /**
+     * Create or update one ModuleFeedback.
+     * @param {ModuleFeedbackUpsertArgs} args - Arguments to update or create a ModuleFeedback.
+     * @example
+     * // Update or create a ModuleFeedback
+     * const moduleFeedback = await prisma.moduleFeedback.upsert({
+     *   create: {
+     *     // ... data to create a ModuleFeedback
+     *   },
+     *   update: {
+     *     // ... in case it already exists, update
+     *   },
+     *   where: {
+     *     // ... the filter for the ModuleFeedback we want to update
+     *   }
+     * })
+     */
+    upsert<T extends ModuleFeedbackUpsertArgs>(args: SelectSubset<T, ModuleFeedbackUpsertArgs<ExtArgs>>): Prisma__ModuleFeedbackClient<$Result.GetResult<Prisma.$ModuleFeedbackPayload<ExtArgs>, T, "upsert", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+
+    /**
+     * Count the number of ModuleFeedbacks.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {ModuleFeedbackCountArgs} args - Arguments to filter ModuleFeedbacks to count.
+     * @example
+     * // Count the number of ModuleFeedbacks
+     * const count = await prisma.moduleFeedback.count({
+     *   where: {
+     *     // ... the filter for the ModuleFeedbacks we want to count
+     *   }
+     * })
+    **/
+    count<T extends ModuleFeedbackCountArgs>(
+      args?: Subset<T, ModuleFeedbackCountArgs>,
+    ): Prisma.PrismaPromise<
+      T extends $Utils.Record<'select', any>
+        ? T['select'] extends true
+          ? number
+          : GetScalarType<T['select'], ModuleFeedbackCountAggregateOutputType>
+        : number
+    >
+
+    /**
+     * Allows you to perform aggregations operations on a ModuleFeedback.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {ModuleFeedbackAggregateArgs} args - Select which aggregations you would like to apply and on what fields.
+     * @example
+     * // Ordered by age ascending
+     * // Where email contains prisma.io
+     * // Limited to the 10 users
+     * const aggregations = await prisma.user.aggregate({
+     *   _avg: {
+     *     age: true,
+     *   },
+     *   where: {
+     *     email: {
+     *       contains: "prisma.io",
+     *     },
+     *   },
+     *   orderBy: {
+     *     age: "asc",
+     *   },
+     *   take: 10,
+     * })
+    **/
+    aggregate<T extends ModuleFeedbackAggregateArgs>(args: Subset<T, ModuleFeedbackAggregateArgs>): Prisma.PrismaPromise<GetModuleFeedbackAggregateType<T>>
+
+    /**
+     * Group by ModuleFeedback.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {ModuleFeedbackGroupByArgs} args - Group by arguments.
+     * @example
+     * // Group by city, order by createdAt, get count
+     * const result = await prisma.user.groupBy({
+     *   by: ['city', 'createdAt'],
+     *   orderBy: {
+     *     createdAt: true
+     *   },
+     *   _count: {
+     *     _all: true
+     *   },
+     * })
+     * 
+    **/
+    groupBy<
+      T extends ModuleFeedbackGroupByArgs,
+      HasSelectOrTake extends Or<
+        Extends<'skip', Keys<T>>,
+        Extends<'take', Keys<T>>
+      >,
+      OrderByArg extends True extends HasSelectOrTake
+        ? { orderBy: ModuleFeedbackGroupByArgs['orderBy'] }
+        : { orderBy?: ModuleFeedbackGroupByArgs['orderBy'] },
+      OrderFields extends ExcludeUnderscoreKeys<Keys<MaybeTupleToUnion<T['orderBy']>>>,
+      ByFields extends MaybeTupleToUnion<T['by']>,
+      ByValid extends Has<ByFields, OrderFields>,
+      HavingFields extends GetHavingFields<T['having']>,
+      HavingValid extends Has<ByFields, HavingFields>,
+      ByEmpty extends T['by'] extends never[] ? True : False,
+      InputErrors extends ByEmpty extends True
+      ? `Error: "by" must not be empty.`
+      : HavingValid extends False
+      ? {
+          [P in HavingFields]: P extends ByFields
+            ? never
+            : P extends string
+            ? `Error: Field "${P}" used in "having" needs to be provided in "by".`
+            : [
+                Error,
+                'Field ',
+                P,
+                ` in "having" needs to be provided in "by"`,
+              ]
+        }[HavingFields]
+      : 'take' extends Keys<T>
+      ? 'orderBy' extends Keys<T>
+        ? ByValid extends True
+          ? {}
+          : {
+              [P in OrderFields]: P extends ByFields
+                ? never
+                : `Error: Field "${P}" in "orderBy" needs to be provided in "by"`
+            }[OrderFields]
+        : 'Error: If you provide "take", you also need to provide "orderBy"'
+      : 'skip' extends Keys<T>
+      ? 'orderBy' extends Keys<T>
+        ? ByValid extends True
+          ? {}
+          : {
+              [P in OrderFields]: P extends ByFields
+                ? never
+                : `Error: Field "${P}" in "orderBy" needs to be provided in "by"`
+            }[OrderFields]
+        : 'Error: If you provide "skip", you also need to provide "orderBy"'
+      : ByValid extends True
+      ? {}
+      : {
+          [P in OrderFields]: P extends ByFields
+            ? never
+            : `Error: Field "${P}" in "orderBy" needs to be provided in "by"`
+        }[OrderFields]
+    >(args: SubsetIntersection<T, ModuleFeedbackGroupByArgs, OrderByArg> & InputErrors): {} extends InputErrors ? GetModuleFeedbackGroupByPayload<T> : Prisma.PrismaPromise<InputErrors>
+  /**
+   * Fields of the ModuleFeedback model
+   */
+  readonly fields: ModuleFeedbackFieldRefs;
+  }
+
+  /**
+   * The delegate class that acts as a "Promise-like" for ModuleFeedback.
+   * Why is this prefixed with `Prisma__`?
+   * Because we want to prevent naming conflicts as mentioned in
+   * https://github.com/prisma/prisma-client-js/issues/707
+   */
+  export interface Prisma__ModuleFeedbackClient<T, Null = never, ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs, GlobalOmitOptions = {}> extends Prisma.PrismaPromise<T> {
+    readonly [Symbol.toStringTag]: "PrismaPromise"
+    user<T extends UserDefaultArgs<ExtArgs> = {}>(args?: Subset<T, UserDefaultArgs<ExtArgs>>): Prisma__UserClient<$Result.GetResult<Prisma.$UserPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | Null, Null, ExtArgs, GlobalOmitOptions>
+    module<T extends ModuleDefaultArgs<ExtArgs> = {}>(args?: Subset<T, ModuleDefaultArgs<ExtArgs>>): Prisma__ModuleClient<$Result.GetResult<Prisma.$ModulePayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | Null, Null, ExtArgs, GlobalOmitOptions>
+    /**
+     * Attaches callbacks for the resolution and/or rejection of the Promise.
+     * @param onfulfilled The callback to execute when the Promise is resolved.
+     * @param onrejected The callback to execute when the Promise is rejected.
+     * @returns A Promise for the completion of which ever callback is executed.
+     */
+    then<TResult1 = T, TResult2 = never>(onfulfilled?: ((value: T) => TResult1 | PromiseLike<TResult1>) | undefined | null, onrejected?: ((reason: any) => TResult2 | PromiseLike<TResult2>) | undefined | null): $Utils.JsPromise<TResult1 | TResult2>
+    /**
+     * Attaches a callback for only the rejection of the Promise.
+     * @param onrejected The callback to execute when the Promise is rejected.
+     * @returns A Promise for the completion of the callback.
+     */
+    catch<TResult = never>(onrejected?: ((reason: any) => TResult | PromiseLike<TResult>) | undefined | null): $Utils.JsPromise<T | TResult>
+    /**
+     * Attaches a callback that is invoked when the Promise is settled (fulfilled or rejected). The
+     * resolved value cannot be modified from the callback.
+     * @param onfinally The callback to execute when the Promise is settled (fulfilled or rejected).
+     * @returns A Promise for the completion of the callback.
+     */
+    finally(onfinally?: (() => void) | undefined | null): $Utils.JsPromise<T>
+  }
+
+
+
+
+  /**
+   * Fields of the ModuleFeedback model
+   */
+  interface ModuleFeedbackFieldRefs {
+    readonly id: FieldRef<"ModuleFeedback", 'String'>
+    readonly userId: FieldRef<"ModuleFeedback", 'String'>
+    readonly moduleId: FieldRef<"ModuleFeedback", 'String'>
+    readonly helpful: FieldRef<"ModuleFeedback", 'Boolean'>
+    readonly createdAt: FieldRef<"ModuleFeedback", 'DateTime'>
+    readonly updatedAt: FieldRef<"ModuleFeedback", 'DateTime'>
+  }
+    
+
+  // Custom InputTypes
+  /**
+   * ModuleFeedback findUnique
+   */
+  export type ModuleFeedbackFindUniqueArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the ModuleFeedback
+     */
+    select?: ModuleFeedbackSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the ModuleFeedback
+     */
+    omit?: ModuleFeedbackOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: ModuleFeedbackInclude<ExtArgs> | null
+    /**
+     * Filter, which ModuleFeedback to fetch.
+     */
+    where: ModuleFeedbackWhereUniqueInput
+  }
+
+  /**
+   * ModuleFeedback findUniqueOrThrow
+   */
+  export type ModuleFeedbackFindUniqueOrThrowArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the ModuleFeedback
+     */
+    select?: ModuleFeedbackSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the ModuleFeedback
+     */
+    omit?: ModuleFeedbackOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: ModuleFeedbackInclude<ExtArgs> | null
+    /**
+     * Filter, which ModuleFeedback to fetch.
+     */
+    where: ModuleFeedbackWhereUniqueInput
+  }
+
+  /**
+   * ModuleFeedback findFirst
+   */
+  export type ModuleFeedbackFindFirstArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the ModuleFeedback
+     */
+    select?: ModuleFeedbackSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the ModuleFeedback
+     */
+    omit?: ModuleFeedbackOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: ModuleFeedbackInclude<ExtArgs> | null
+    /**
+     * Filter, which ModuleFeedback to fetch.
+     */
+    where?: ModuleFeedbackWhereInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
+     * 
+     * Determine the order of ModuleFeedbacks to fetch.
+     */
+    orderBy?: ModuleFeedbackOrderByWithRelationInput | ModuleFeedbackOrderByWithRelationInput[]
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     * 
+     * Sets the position for searching for ModuleFeedbacks.
+     */
+    cursor?: ModuleFeedbackWhereUniqueInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Take `±n` ModuleFeedbacks from the position of the cursor.
+     */
+    take?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Skip the first `n` ModuleFeedbacks.
+     */
+    skip?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/distinct Distinct Docs}
+     * 
+     * Filter by unique combinations of ModuleFeedbacks.
+     */
+    distinct?: ModuleFeedbackScalarFieldEnum | ModuleFeedbackScalarFieldEnum[]
+  }
+
+  /**
+   * ModuleFeedback findFirstOrThrow
+   */
+  export type ModuleFeedbackFindFirstOrThrowArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the ModuleFeedback
+     */
+    select?: ModuleFeedbackSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the ModuleFeedback
+     */
+    omit?: ModuleFeedbackOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: ModuleFeedbackInclude<ExtArgs> | null
+    /**
+     * Filter, which ModuleFeedback to fetch.
+     */
+    where?: ModuleFeedbackWhereInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
+     * 
+     * Determine the order of ModuleFeedbacks to fetch.
+     */
+    orderBy?: ModuleFeedbackOrderByWithRelationInput | ModuleFeedbackOrderByWithRelationInput[]
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     * 
+     * Sets the position for searching for ModuleFeedbacks.
+     */
+    cursor?: ModuleFeedbackWhereUniqueInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Take `±n` ModuleFeedbacks from the position of the cursor.
+     */
+    take?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Skip the first `n` ModuleFeedbacks.
+     */
+    skip?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/distinct Distinct Docs}
+     * 
+     * Filter by unique combinations of ModuleFeedbacks.
+     */
+    distinct?: ModuleFeedbackScalarFieldEnum | ModuleFeedbackScalarFieldEnum[]
+  }
+
+  /**
+   * ModuleFeedback findMany
+   */
+  export type ModuleFeedbackFindManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the ModuleFeedback
+     */
+    select?: ModuleFeedbackSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the ModuleFeedback
+     */
+    omit?: ModuleFeedbackOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: ModuleFeedbackInclude<ExtArgs> | null
+    /**
+     * Filter, which ModuleFeedbacks to fetch.
+     */
+    where?: ModuleFeedbackWhereInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
+     * 
+     * Determine the order of ModuleFeedbacks to fetch.
+     */
+    orderBy?: ModuleFeedbackOrderByWithRelationInput | ModuleFeedbackOrderByWithRelationInput[]
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     * 
+     * Sets the position for listing ModuleFeedbacks.
+     */
+    cursor?: ModuleFeedbackWhereUniqueInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Take `±n` ModuleFeedbacks from the position of the cursor.
+     */
+    take?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Skip the first `n` ModuleFeedbacks.
+     */
+    skip?: number
+    distinct?: ModuleFeedbackScalarFieldEnum | ModuleFeedbackScalarFieldEnum[]
+  }
+
+  /**
+   * ModuleFeedback create
+   */
+  export type ModuleFeedbackCreateArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the ModuleFeedback
+     */
+    select?: ModuleFeedbackSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the ModuleFeedback
+     */
+    omit?: ModuleFeedbackOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: ModuleFeedbackInclude<ExtArgs> | null
+    /**
+     * The data needed to create a ModuleFeedback.
+     */
+    data: XOR<ModuleFeedbackCreateInput, ModuleFeedbackUncheckedCreateInput>
+  }
+
+  /**
+   * ModuleFeedback createMany
+   */
+  export type ModuleFeedbackCreateManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * The data used to create many ModuleFeedbacks.
+     */
+    data: ModuleFeedbackCreateManyInput | ModuleFeedbackCreateManyInput[]
+    skipDuplicates?: boolean
+  }
+
+  /**
+   * ModuleFeedback createManyAndReturn
+   */
+  export type ModuleFeedbackCreateManyAndReturnArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the ModuleFeedback
+     */
+    select?: ModuleFeedbackSelectCreateManyAndReturn<ExtArgs> | null
+    /**
+     * Omit specific fields from the ModuleFeedback
+     */
+    omit?: ModuleFeedbackOmit<ExtArgs> | null
+    /**
+     * The data used to create many ModuleFeedbacks.
+     */
+    data: ModuleFeedbackCreateManyInput | ModuleFeedbackCreateManyInput[]
+    skipDuplicates?: boolean
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: ModuleFeedbackIncludeCreateManyAndReturn<ExtArgs> | null
+  }
+
+  /**
+   * ModuleFeedback update
+   */
+  export type ModuleFeedbackUpdateArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the ModuleFeedback
+     */
+    select?: ModuleFeedbackSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the ModuleFeedback
+     */
+    omit?: ModuleFeedbackOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: ModuleFeedbackInclude<ExtArgs> | null
+    /**
+     * The data needed to update a ModuleFeedback.
+     */
+    data: XOR<ModuleFeedbackUpdateInput, ModuleFeedbackUncheckedUpdateInput>
+    /**
+     * Choose, which ModuleFeedback to update.
+     */
+    where: ModuleFeedbackWhereUniqueInput
+  }
+
+  /**
+   * ModuleFeedback updateMany
+   */
+  export type ModuleFeedbackUpdateManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * The data used to update ModuleFeedbacks.
+     */
+    data: XOR<ModuleFeedbackUpdateManyMutationInput, ModuleFeedbackUncheckedUpdateManyInput>
+    /**
+     * Filter which ModuleFeedbacks to update
+     */
+    where?: ModuleFeedbackWhereInput
+    /**
+     * Limit how many ModuleFeedbacks to update.
+     */
+    limit?: number
+  }
+
+  /**
+   * ModuleFeedback updateManyAndReturn
+   */
+  export type ModuleFeedbackUpdateManyAndReturnArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the ModuleFeedback
+     */
+    select?: ModuleFeedbackSelectUpdateManyAndReturn<ExtArgs> | null
+    /**
+     * Omit specific fields from the ModuleFeedback
+     */
+    omit?: ModuleFeedbackOmit<ExtArgs> | null
+    /**
+     * The data used to update ModuleFeedbacks.
+     */
+    data: XOR<ModuleFeedbackUpdateManyMutationInput, ModuleFeedbackUncheckedUpdateManyInput>
+    /**
+     * Filter which ModuleFeedbacks to update
+     */
+    where?: ModuleFeedbackWhereInput
+    /**
+     * Limit how many ModuleFeedbacks to update.
+     */
+    limit?: number
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: ModuleFeedbackIncludeUpdateManyAndReturn<ExtArgs> | null
+  }
+
+  /**
+   * ModuleFeedback upsert
+   */
+  export type ModuleFeedbackUpsertArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the ModuleFeedback
+     */
+    select?: ModuleFeedbackSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the ModuleFeedback
+     */
+    omit?: ModuleFeedbackOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: ModuleFeedbackInclude<ExtArgs> | null
+    /**
+     * The filter to search for the ModuleFeedback to update in case it exists.
+     */
+    where: ModuleFeedbackWhereUniqueInput
+    /**
+     * In case the ModuleFeedback found by the `where` argument doesn't exist, create a new ModuleFeedback with this data.
+     */
+    create: XOR<ModuleFeedbackCreateInput, ModuleFeedbackUncheckedCreateInput>
+    /**
+     * In case the ModuleFeedback was found with the provided `where` argument, update it with this data.
+     */
+    update: XOR<ModuleFeedbackUpdateInput, ModuleFeedbackUncheckedUpdateInput>
+  }
+
+  /**
+   * ModuleFeedback delete
+   */
+  export type ModuleFeedbackDeleteArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the ModuleFeedback
+     */
+    select?: ModuleFeedbackSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the ModuleFeedback
+     */
+    omit?: ModuleFeedbackOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: ModuleFeedbackInclude<ExtArgs> | null
+    /**
+     * Filter which ModuleFeedback to delete.
+     */
+    where: ModuleFeedbackWhereUniqueInput
+  }
+
+  /**
+   * ModuleFeedback deleteMany
+   */
+  export type ModuleFeedbackDeleteManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Filter which ModuleFeedbacks to delete
+     */
+    where?: ModuleFeedbackWhereInput
+    /**
+     * Limit how many ModuleFeedbacks to delete.
+     */
+    limit?: number
+  }
+
+  /**
+   * ModuleFeedback without action
+   */
+  export type ModuleFeedbackDefaultArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the ModuleFeedback
+     */
+    select?: ModuleFeedbackSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the ModuleFeedback
+     */
+    omit?: ModuleFeedbackOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: ModuleFeedbackInclude<ExtArgs> | null
+  }
+
+
+  /**
    * Enums
    */
 
@@ -9623,6 +12066,30 @@ export namespace Prisma {
   };
 
   export type UserQuizResponseScalarFieldEnum = (typeof UserQuizResponseScalarFieldEnum)[keyof typeof UserQuizResponseScalarFieldEnum]
+
+
+  export const CertificateScalarFieldEnum: {
+    id: 'id',
+    userId: 'userId',
+    certificateNumber: 'certificateNumber',
+    issuedAt: 'issuedAt',
+    createdAt: 'createdAt',
+    updatedAt: 'updatedAt'
+  };
+
+  export type CertificateScalarFieldEnum = (typeof CertificateScalarFieldEnum)[keyof typeof CertificateScalarFieldEnum]
+
+
+  export const ModuleFeedbackScalarFieldEnum: {
+    id: 'id',
+    userId: 'userId',
+    moduleId: 'moduleId',
+    helpful: 'helpful',
+    createdAt: 'createdAt',
+    updatedAt: 'updatedAt'
+  };
+
+  export type ModuleFeedbackScalarFieldEnum = (typeof ModuleFeedbackScalarFieldEnum)[keyof typeof ModuleFeedbackScalarFieldEnum]
 
 
   export const SortOrder: {
@@ -9748,6 +12215,8 @@ export namespace Prisma {
     updatedAt?: DateTimeFilter<"User"> | Date | string
     moduleProgress?: UserModuleProgressListRelationFilter
     quizAttempts?: UserQuizAttemptListRelationFilter
+    certificates?: CertificateListRelationFilter
+    moduleFeedback?: ModuleFeedbackListRelationFilter
   }
 
   export type UserOrderByWithRelationInput = {
@@ -9761,6 +12230,8 @@ export namespace Prisma {
     updatedAt?: SortOrder
     moduleProgress?: UserModuleProgressOrderByRelationAggregateInput
     quizAttempts?: UserQuizAttemptOrderByRelationAggregateInput
+    certificates?: CertificateOrderByRelationAggregateInput
+    moduleFeedback?: ModuleFeedbackOrderByRelationAggregateInput
   }
 
   export type UserWhereUniqueInput = Prisma.AtLeast<{
@@ -9777,6 +12248,8 @@ export namespace Prisma {
     updatedAt?: DateTimeFilter<"User"> | Date | string
     moduleProgress?: UserModuleProgressListRelationFilter
     quizAttempts?: UserQuizAttemptListRelationFilter
+    certificates?: CertificateListRelationFilter
+    moduleFeedback?: ModuleFeedbackListRelationFilter
   }, "id" | "email">
 
   export type UserOrderByWithAggregationInput = {
@@ -9819,6 +12292,7 @@ export namespace Prisma {
     updatedAt?: DateTimeFilter<"Module"> | Date | string
     userProgress?: UserModuleProgressListRelationFilter
     questions?: QuestionListRelationFilter
+    moduleFeedback?: ModuleFeedbackListRelationFilter
   }
 
   export type ModuleOrderByWithRelationInput = {
@@ -9830,6 +12304,7 @@ export namespace Prisma {
     updatedAt?: SortOrder
     userProgress?: UserModuleProgressOrderByRelationAggregateInput
     questions?: QuestionOrderByRelationAggregateInput
+    moduleFeedback?: ModuleFeedbackOrderByRelationAggregateInput
   }
 
   export type ModuleWhereUniqueInput = Prisma.AtLeast<{
@@ -9844,6 +12319,7 @@ export namespace Prisma {
     updatedAt?: DateTimeFilter<"Module"> | Date | string
     userProgress?: UserModuleProgressListRelationFilter
     questions?: QuestionListRelationFilter
+    moduleFeedback?: ModuleFeedbackListRelationFilter
   }, "id" | "order">
 
   export type ModuleOrderByWithAggregationInput = {
@@ -10226,6 +12702,130 @@ export namespace Prisma {
     updatedAt?: DateTimeWithAggregatesFilter<"UserQuizResponse"> | Date | string
   }
 
+  export type CertificateWhereInput = {
+    AND?: CertificateWhereInput | CertificateWhereInput[]
+    OR?: CertificateWhereInput[]
+    NOT?: CertificateWhereInput | CertificateWhereInput[]
+    id?: StringFilter<"Certificate"> | string
+    userId?: StringFilter<"Certificate"> | string
+    certificateNumber?: StringFilter<"Certificate"> | string
+    issuedAt?: DateTimeFilter<"Certificate"> | Date | string
+    createdAt?: DateTimeFilter<"Certificate"> | Date | string
+    updatedAt?: DateTimeFilter<"Certificate"> | Date | string
+    user?: XOR<UserScalarRelationFilter, UserWhereInput>
+  }
+
+  export type CertificateOrderByWithRelationInput = {
+    id?: SortOrder
+    userId?: SortOrder
+    certificateNumber?: SortOrder
+    issuedAt?: SortOrder
+    createdAt?: SortOrder
+    updatedAt?: SortOrder
+    user?: UserOrderByWithRelationInput
+  }
+
+  export type CertificateWhereUniqueInput = Prisma.AtLeast<{
+    id?: string
+    certificateNumber?: string
+    AND?: CertificateWhereInput | CertificateWhereInput[]
+    OR?: CertificateWhereInput[]
+    NOT?: CertificateWhereInput | CertificateWhereInput[]
+    userId?: StringFilter<"Certificate"> | string
+    issuedAt?: DateTimeFilter<"Certificate"> | Date | string
+    createdAt?: DateTimeFilter<"Certificate"> | Date | string
+    updatedAt?: DateTimeFilter<"Certificate"> | Date | string
+    user?: XOR<UserScalarRelationFilter, UserWhereInput>
+  }, "id" | "certificateNumber">
+
+  export type CertificateOrderByWithAggregationInput = {
+    id?: SortOrder
+    userId?: SortOrder
+    certificateNumber?: SortOrder
+    issuedAt?: SortOrder
+    createdAt?: SortOrder
+    updatedAt?: SortOrder
+    _count?: CertificateCountOrderByAggregateInput
+    _max?: CertificateMaxOrderByAggregateInput
+    _min?: CertificateMinOrderByAggregateInput
+  }
+
+  export type CertificateScalarWhereWithAggregatesInput = {
+    AND?: CertificateScalarWhereWithAggregatesInput | CertificateScalarWhereWithAggregatesInput[]
+    OR?: CertificateScalarWhereWithAggregatesInput[]
+    NOT?: CertificateScalarWhereWithAggregatesInput | CertificateScalarWhereWithAggregatesInput[]
+    id?: StringWithAggregatesFilter<"Certificate"> | string
+    userId?: StringWithAggregatesFilter<"Certificate"> | string
+    certificateNumber?: StringWithAggregatesFilter<"Certificate"> | string
+    issuedAt?: DateTimeWithAggregatesFilter<"Certificate"> | Date | string
+    createdAt?: DateTimeWithAggregatesFilter<"Certificate"> | Date | string
+    updatedAt?: DateTimeWithAggregatesFilter<"Certificate"> | Date | string
+  }
+
+  export type ModuleFeedbackWhereInput = {
+    AND?: ModuleFeedbackWhereInput | ModuleFeedbackWhereInput[]
+    OR?: ModuleFeedbackWhereInput[]
+    NOT?: ModuleFeedbackWhereInput | ModuleFeedbackWhereInput[]
+    id?: StringFilter<"ModuleFeedback"> | string
+    userId?: StringFilter<"ModuleFeedback"> | string
+    moduleId?: StringFilter<"ModuleFeedback"> | string
+    helpful?: BoolFilter<"ModuleFeedback"> | boolean
+    createdAt?: DateTimeFilter<"ModuleFeedback"> | Date | string
+    updatedAt?: DateTimeFilter<"ModuleFeedback"> | Date | string
+    user?: XOR<UserScalarRelationFilter, UserWhereInput>
+    module?: XOR<ModuleScalarRelationFilter, ModuleWhereInput>
+  }
+
+  export type ModuleFeedbackOrderByWithRelationInput = {
+    id?: SortOrder
+    userId?: SortOrder
+    moduleId?: SortOrder
+    helpful?: SortOrder
+    createdAt?: SortOrder
+    updatedAt?: SortOrder
+    user?: UserOrderByWithRelationInput
+    module?: ModuleOrderByWithRelationInput
+  }
+
+  export type ModuleFeedbackWhereUniqueInput = Prisma.AtLeast<{
+    id?: string
+    userId_moduleId?: ModuleFeedbackUserIdModuleIdCompoundUniqueInput
+    AND?: ModuleFeedbackWhereInput | ModuleFeedbackWhereInput[]
+    OR?: ModuleFeedbackWhereInput[]
+    NOT?: ModuleFeedbackWhereInput | ModuleFeedbackWhereInput[]
+    userId?: StringFilter<"ModuleFeedback"> | string
+    moduleId?: StringFilter<"ModuleFeedback"> | string
+    helpful?: BoolFilter<"ModuleFeedback"> | boolean
+    createdAt?: DateTimeFilter<"ModuleFeedback"> | Date | string
+    updatedAt?: DateTimeFilter<"ModuleFeedback"> | Date | string
+    user?: XOR<UserScalarRelationFilter, UserWhereInput>
+    module?: XOR<ModuleScalarRelationFilter, ModuleWhereInput>
+  }, "id" | "userId_moduleId">
+
+  export type ModuleFeedbackOrderByWithAggregationInput = {
+    id?: SortOrder
+    userId?: SortOrder
+    moduleId?: SortOrder
+    helpful?: SortOrder
+    createdAt?: SortOrder
+    updatedAt?: SortOrder
+    _count?: ModuleFeedbackCountOrderByAggregateInput
+    _max?: ModuleFeedbackMaxOrderByAggregateInput
+    _min?: ModuleFeedbackMinOrderByAggregateInput
+  }
+
+  export type ModuleFeedbackScalarWhereWithAggregatesInput = {
+    AND?: ModuleFeedbackScalarWhereWithAggregatesInput | ModuleFeedbackScalarWhereWithAggregatesInput[]
+    OR?: ModuleFeedbackScalarWhereWithAggregatesInput[]
+    NOT?: ModuleFeedbackScalarWhereWithAggregatesInput | ModuleFeedbackScalarWhereWithAggregatesInput[]
+    id?: StringWithAggregatesFilter<"ModuleFeedback"> | string
+    userId?: StringWithAggregatesFilter<"ModuleFeedback"> | string
+    moduleId?: StringWithAggregatesFilter<"ModuleFeedback"> | string
+    helpful?: BoolWithAggregatesFilter<"ModuleFeedback"> | boolean
+    createdAt?: DateTimeWithAggregatesFilter<"ModuleFeedback"> | Date | string
+    updatedAt?: DateTimeWithAggregatesFilter<"ModuleFeedback"> | Date | string
+  }
+
   export type UserCreateInput = {
     id?: string
     email: string
@@ -10237,6 +12837,8 @@ export namespace Prisma {
     updatedAt?: Date | string
     moduleProgress?: UserModuleProgressCreateNestedManyWithoutUserInput
     quizAttempts?: UserQuizAttemptCreateNestedManyWithoutUserInput
+    certificates?: CertificateCreateNestedManyWithoutUserInput
+    moduleFeedback?: ModuleFeedbackCreateNestedManyWithoutUserInput
   }
 
   export type UserUncheckedCreateInput = {
@@ -10250,6 +12852,8 @@ export namespace Prisma {
     updatedAt?: Date | string
     moduleProgress?: UserModuleProgressUncheckedCreateNestedManyWithoutUserInput
     quizAttempts?: UserQuizAttemptUncheckedCreateNestedManyWithoutUserInput
+    certificates?: CertificateUncheckedCreateNestedManyWithoutUserInput
+    moduleFeedback?: ModuleFeedbackUncheckedCreateNestedManyWithoutUserInput
   }
 
   export type UserUpdateInput = {
@@ -10263,6 +12867,8 @@ export namespace Prisma {
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
     moduleProgress?: UserModuleProgressUpdateManyWithoutUserNestedInput
     quizAttempts?: UserQuizAttemptUpdateManyWithoutUserNestedInput
+    certificates?: CertificateUpdateManyWithoutUserNestedInput
+    moduleFeedback?: ModuleFeedbackUpdateManyWithoutUserNestedInput
   }
 
   export type UserUncheckedUpdateInput = {
@@ -10276,6 +12882,8 @@ export namespace Prisma {
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
     moduleProgress?: UserModuleProgressUncheckedUpdateManyWithoutUserNestedInput
     quizAttempts?: UserQuizAttemptUncheckedUpdateManyWithoutUserNestedInput
+    certificates?: CertificateUncheckedUpdateManyWithoutUserNestedInput
+    moduleFeedback?: ModuleFeedbackUncheckedUpdateManyWithoutUserNestedInput
   }
 
   export type UserCreateManyInput = {
@@ -10320,6 +12928,7 @@ export namespace Prisma {
     updatedAt?: Date | string
     userProgress?: UserModuleProgressCreateNestedManyWithoutModuleInput
     questions?: QuestionCreateNestedManyWithoutModuleInput
+    moduleFeedback?: ModuleFeedbackCreateNestedManyWithoutModuleInput
   }
 
   export type ModuleUncheckedCreateInput = {
@@ -10331,6 +12940,7 @@ export namespace Prisma {
     updatedAt?: Date | string
     userProgress?: UserModuleProgressUncheckedCreateNestedManyWithoutModuleInput
     questions?: QuestionUncheckedCreateNestedManyWithoutModuleInput
+    moduleFeedback?: ModuleFeedbackUncheckedCreateNestedManyWithoutModuleInput
   }
 
   export type ModuleUpdateInput = {
@@ -10342,6 +12952,7 @@ export namespace Prisma {
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
     userProgress?: UserModuleProgressUpdateManyWithoutModuleNestedInput
     questions?: QuestionUpdateManyWithoutModuleNestedInput
+    moduleFeedback?: ModuleFeedbackUpdateManyWithoutModuleNestedInput
   }
 
   export type ModuleUncheckedUpdateInput = {
@@ -10353,6 +12964,7 @@ export namespace Prisma {
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
     userProgress?: UserModuleProgressUncheckedUpdateManyWithoutModuleNestedInput
     questions?: QuestionUncheckedUpdateManyWithoutModuleNestedInput
+    moduleFeedback?: ModuleFeedbackUncheckedUpdateManyWithoutModuleNestedInput
   }
 
   export type ModuleCreateManyInput = {
@@ -10744,6 +13356,129 @@ export namespace Prisma {
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
   }
 
+  export type CertificateCreateInput = {
+    id?: string
+    certificateNumber: string
+    issuedAt?: Date | string
+    createdAt?: Date | string
+    updatedAt?: Date | string
+    user: UserCreateNestedOneWithoutCertificatesInput
+  }
+
+  export type CertificateUncheckedCreateInput = {
+    id?: string
+    userId: string
+    certificateNumber: string
+    issuedAt?: Date | string
+    createdAt?: Date | string
+    updatedAt?: Date | string
+  }
+
+  export type CertificateUpdateInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    certificateNumber?: StringFieldUpdateOperationsInput | string
+    issuedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    user?: UserUpdateOneRequiredWithoutCertificatesNestedInput
+  }
+
+  export type CertificateUncheckedUpdateInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    userId?: StringFieldUpdateOperationsInput | string
+    certificateNumber?: StringFieldUpdateOperationsInput | string
+    issuedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+  }
+
+  export type CertificateCreateManyInput = {
+    id?: string
+    userId: string
+    certificateNumber: string
+    issuedAt?: Date | string
+    createdAt?: Date | string
+    updatedAt?: Date | string
+  }
+
+  export type CertificateUpdateManyMutationInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    certificateNumber?: StringFieldUpdateOperationsInput | string
+    issuedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+  }
+
+  export type CertificateUncheckedUpdateManyInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    userId?: StringFieldUpdateOperationsInput | string
+    certificateNumber?: StringFieldUpdateOperationsInput | string
+    issuedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+  }
+
+  export type ModuleFeedbackCreateInput = {
+    id?: string
+    helpful: boolean
+    createdAt?: Date | string
+    updatedAt?: Date | string
+    user: UserCreateNestedOneWithoutModuleFeedbackInput
+    module: ModuleCreateNestedOneWithoutModuleFeedbackInput
+  }
+
+  export type ModuleFeedbackUncheckedCreateInput = {
+    id?: string
+    userId: string
+    moduleId: string
+    helpful: boolean
+    createdAt?: Date | string
+    updatedAt?: Date | string
+  }
+
+  export type ModuleFeedbackUpdateInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    helpful?: BoolFieldUpdateOperationsInput | boolean
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    user?: UserUpdateOneRequiredWithoutModuleFeedbackNestedInput
+    module?: ModuleUpdateOneRequiredWithoutModuleFeedbackNestedInput
+  }
+
+  export type ModuleFeedbackUncheckedUpdateInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    userId?: StringFieldUpdateOperationsInput | string
+    moduleId?: StringFieldUpdateOperationsInput | string
+    helpful?: BoolFieldUpdateOperationsInput | boolean
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+  }
+
+  export type ModuleFeedbackCreateManyInput = {
+    id?: string
+    userId: string
+    moduleId: string
+    helpful: boolean
+    createdAt?: Date | string
+    updatedAt?: Date | string
+  }
+
+  export type ModuleFeedbackUpdateManyMutationInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    helpful?: BoolFieldUpdateOperationsInput | boolean
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+  }
+
+  export type ModuleFeedbackUncheckedUpdateManyInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    userId?: StringFieldUpdateOperationsInput | string
+    moduleId?: StringFieldUpdateOperationsInput | string
+    helpful?: BoolFieldUpdateOperationsInput | boolean
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+  }
+
   export type StringFilter<$PrismaModel = never> = {
     equals?: string | StringFieldRefInput<$PrismaModel>
     in?: string[] | ListStringFieldRefInput<$PrismaModel>
@@ -10787,11 +13522,31 @@ export namespace Prisma {
     none?: UserQuizAttemptWhereInput
   }
 
+  export type CertificateListRelationFilter = {
+    every?: CertificateWhereInput
+    some?: CertificateWhereInput
+    none?: CertificateWhereInput
+  }
+
+  export type ModuleFeedbackListRelationFilter = {
+    every?: ModuleFeedbackWhereInput
+    some?: ModuleFeedbackWhereInput
+    none?: ModuleFeedbackWhereInput
+  }
+
   export type UserModuleProgressOrderByRelationAggregateInput = {
     _count?: SortOrder
   }
 
   export type UserQuizAttemptOrderByRelationAggregateInput = {
+    _count?: SortOrder
+  }
+
+  export type CertificateOrderByRelationAggregateInput = {
+    _count?: SortOrder
+  }
+
+  export type ModuleFeedbackOrderByRelationAggregateInput = {
     _count?: SortOrder
   }
 
@@ -11224,6 +13979,65 @@ export namespace Prisma {
     updatedAt?: SortOrder
   }
 
+  export type CertificateCountOrderByAggregateInput = {
+    id?: SortOrder
+    userId?: SortOrder
+    certificateNumber?: SortOrder
+    issuedAt?: SortOrder
+    createdAt?: SortOrder
+    updatedAt?: SortOrder
+  }
+
+  export type CertificateMaxOrderByAggregateInput = {
+    id?: SortOrder
+    userId?: SortOrder
+    certificateNumber?: SortOrder
+    issuedAt?: SortOrder
+    createdAt?: SortOrder
+    updatedAt?: SortOrder
+  }
+
+  export type CertificateMinOrderByAggregateInput = {
+    id?: SortOrder
+    userId?: SortOrder
+    certificateNumber?: SortOrder
+    issuedAt?: SortOrder
+    createdAt?: SortOrder
+    updatedAt?: SortOrder
+  }
+
+  export type ModuleFeedbackUserIdModuleIdCompoundUniqueInput = {
+    userId: string
+    moduleId: string
+  }
+
+  export type ModuleFeedbackCountOrderByAggregateInput = {
+    id?: SortOrder
+    userId?: SortOrder
+    moduleId?: SortOrder
+    helpful?: SortOrder
+    createdAt?: SortOrder
+    updatedAt?: SortOrder
+  }
+
+  export type ModuleFeedbackMaxOrderByAggregateInput = {
+    id?: SortOrder
+    userId?: SortOrder
+    moduleId?: SortOrder
+    helpful?: SortOrder
+    createdAt?: SortOrder
+    updatedAt?: SortOrder
+  }
+
+  export type ModuleFeedbackMinOrderByAggregateInput = {
+    id?: SortOrder
+    userId?: SortOrder
+    moduleId?: SortOrder
+    helpful?: SortOrder
+    createdAt?: SortOrder
+    updatedAt?: SortOrder
+  }
+
   export type UserModuleProgressCreateNestedManyWithoutUserInput = {
     create?: XOR<UserModuleProgressCreateWithoutUserInput, UserModuleProgressUncheckedCreateWithoutUserInput> | UserModuleProgressCreateWithoutUserInput[] | UserModuleProgressUncheckedCreateWithoutUserInput[]
     connectOrCreate?: UserModuleProgressCreateOrConnectWithoutUserInput | UserModuleProgressCreateOrConnectWithoutUserInput[]
@@ -11238,6 +14052,20 @@ export namespace Prisma {
     connect?: UserQuizAttemptWhereUniqueInput | UserQuizAttemptWhereUniqueInput[]
   }
 
+  export type CertificateCreateNestedManyWithoutUserInput = {
+    create?: XOR<CertificateCreateWithoutUserInput, CertificateUncheckedCreateWithoutUserInput> | CertificateCreateWithoutUserInput[] | CertificateUncheckedCreateWithoutUserInput[]
+    connectOrCreate?: CertificateCreateOrConnectWithoutUserInput | CertificateCreateOrConnectWithoutUserInput[]
+    createMany?: CertificateCreateManyUserInputEnvelope
+    connect?: CertificateWhereUniqueInput | CertificateWhereUniqueInput[]
+  }
+
+  export type ModuleFeedbackCreateNestedManyWithoutUserInput = {
+    create?: XOR<ModuleFeedbackCreateWithoutUserInput, ModuleFeedbackUncheckedCreateWithoutUserInput> | ModuleFeedbackCreateWithoutUserInput[] | ModuleFeedbackUncheckedCreateWithoutUserInput[]
+    connectOrCreate?: ModuleFeedbackCreateOrConnectWithoutUserInput | ModuleFeedbackCreateOrConnectWithoutUserInput[]
+    createMany?: ModuleFeedbackCreateManyUserInputEnvelope
+    connect?: ModuleFeedbackWhereUniqueInput | ModuleFeedbackWhereUniqueInput[]
+  }
+
   export type UserModuleProgressUncheckedCreateNestedManyWithoutUserInput = {
     create?: XOR<UserModuleProgressCreateWithoutUserInput, UserModuleProgressUncheckedCreateWithoutUserInput> | UserModuleProgressCreateWithoutUserInput[] | UserModuleProgressUncheckedCreateWithoutUserInput[]
     connectOrCreate?: UserModuleProgressCreateOrConnectWithoutUserInput | UserModuleProgressCreateOrConnectWithoutUserInput[]
@@ -11250,6 +14078,20 @@ export namespace Prisma {
     connectOrCreate?: UserQuizAttemptCreateOrConnectWithoutUserInput | UserQuizAttemptCreateOrConnectWithoutUserInput[]
     createMany?: UserQuizAttemptCreateManyUserInputEnvelope
     connect?: UserQuizAttemptWhereUniqueInput | UserQuizAttemptWhereUniqueInput[]
+  }
+
+  export type CertificateUncheckedCreateNestedManyWithoutUserInput = {
+    create?: XOR<CertificateCreateWithoutUserInput, CertificateUncheckedCreateWithoutUserInput> | CertificateCreateWithoutUserInput[] | CertificateUncheckedCreateWithoutUserInput[]
+    connectOrCreate?: CertificateCreateOrConnectWithoutUserInput | CertificateCreateOrConnectWithoutUserInput[]
+    createMany?: CertificateCreateManyUserInputEnvelope
+    connect?: CertificateWhereUniqueInput | CertificateWhereUniqueInput[]
+  }
+
+  export type ModuleFeedbackUncheckedCreateNestedManyWithoutUserInput = {
+    create?: XOR<ModuleFeedbackCreateWithoutUserInput, ModuleFeedbackUncheckedCreateWithoutUserInput> | ModuleFeedbackCreateWithoutUserInput[] | ModuleFeedbackUncheckedCreateWithoutUserInput[]
+    connectOrCreate?: ModuleFeedbackCreateOrConnectWithoutUserInput | ModuleFeedbackCreateOrConnectWithoutUserInput[]
+    createMany?: ModuleFeedbackCreateManyUserInputEnvelope
+    connect?: ModuleFeedbackWhereUniqueInput | ModuleFeedbackWhereUniqueInput[]
   }
 
   export type StringFieldUpdateOperationsInput = {
@@ -11292,6 +14134,34 @@ export namespace Prisma {
     deleteMany?: UserQuizAttemptScalarWhereInput | UserQuizAttemptScalarWhereInput[]
   }
 
+  export type CertificateUpdateManyWithoutUserNestedInput = {
+    create?: XOR<CertificateCreateWithoutUserInput, CertificateUncheckedCreateWithoutUserInput> | CertificateCreateWithoutUserInput[] | CertificateUncheckedCreateWithoutUserInput[]
+    connectOrCreate?: CertificateCreateOrConnectWithoutUserInput | CertificateCreateOrConnectWithoutUserInput[]
+    upsert?: CertificateUpsertWithWhereUniqueWithoutUserInput | CertificateUpsertWithWhereUniqueWithoutUserInput[]
+    createMany?: CertificateCreateManyUserInputEnvelope
+    set?: CertificateWhereUniqueInput | CertificateWhereUniqueInput[]
+    disconnect?: CertificateWhereUniqueInput | CertificateWhereUniqueInput[]
+    delete?: CertificateWhereUniqueInput | CertificateWhereUniqueInput[]
+    connect?: CertificateWhereUniqueInput | CertificateWhereUniqueInput[]
+    update?: CertificateUpdateWithWhereUniqueWithoutUserInput | CertificateUpdateWithWhereUniqueWithoutUserInput[]
+    updateMany?: CertificateUpdateManyWithWhereWithoutUserInput | CertificateUpdateManyWithWhereWithoutUserInput[]
+    deleteMany?: CertificateScalarWhereInput | CertificateScalarWhereInput[]
+  }
+
+  export type ModuleFeedbackUpdateManyWithoutUserNestedInput = {
+    create?: XOR<ModuleFeedbackCreateWithoutUserInput, ModuleFeedbackUncheckedCreateWithoutUserInput> | ModuleFeedbackCreateWithoutUserInput[] | ModuleFeedbackUncheckedCreateWithoutUserInput[]
+    connectOrCreate?: ModuleFeedbackCreateOrConnectWithoutUserInput | ModuleFeedbackCreateOrConnectWithoutUserInput[]
+    upsert?: ModuleFeedbackUpsertWithWhereUniqueWithoutUserInput | ModuleFeedbackUpsertWithWhereUniqueWithoutUserInput[]
+    createMany?: ModuleFeedbackCreateManyUserInputEnvelope
+    set?: ModuleFeedbackWhereUniqueInput | ModuleFeedbackWhereUniqueInput[]
+    disconnect?: ModuleFeedbackWhereUniqueInput | ModuleFeedbackWhereUniqueInput[]
+    delete?: ModuleFeedbackWhereUniqueInput | ModuleFeedbackWhereUniqueInput[]
+    connect?: ModuleFeedbackWhereUniqueInput | ModuleFeedbackWhereUniqueInput[]
+    update?: ModuleFeedbackUpdateWithWhereUniqueWithoutUserInput | ModuleFeedbackUpdateWithWhereUniqueWithoutUserInput[]
+    updateMany?: ModuleFeedbackUpdateManyWithWhereWithoutUserInput | ModuleFeedbackUpdateManyWithWhereWithoutUserInput[]
+    deleteMany?: ModuleFeedbackScalarWhereInput | ModuleFeedbackScalarWhereInput[]
+  }
+
   export type UserModuleProgressUncheckedUpdateManyWithoutUserNestedInput = {
     create?: XOR<UserModuleProgressCreateWithoutUserInput, UserModuleProgressUncheckedCreateWithoutUserInput> | UserModuleProgressCreateWithoutUserInput[] | UserModuleProgressUncheckedCreateWithoutUserInput[]
     connectOrCreate?: UserModuleProgressCreateOrConnectWithoutUserInput | UserModuleProgressCreateOrConnectWithoutUserInput[]
@@ -11320,6 +14190,34 @@ export namespace Prisma {
     deleteMany?: UserQuizAttemptScalarWhereInput | UserQuizAttemptScalarWhereInput[]
   }
 
+  export type CertificateUncheckedUpdateManyWithoutUserNestedInput = {
+    create?: XOR<CertificateCreateWithoutUserInput, CertificateUncheckedCreateWithoutUserInput> | CertificateCreateWithoutUserInput[] | CertificateUncheckedCreateWithoutUserInput[]
+    connectOrCreate?: CertificateCreateOrConnectWithoutUserInput | CertificateCreateOrConnectWithoutUserInput[]
+    upsert?: CertificateUpsertWithWhereUniqueWithoutUserInput | CertificateUpsertWithWhereUniqueWithoutUserInput[]
+    createMany?: CertificateCreateManyUserInputEnvelope
+    set?: CertificateWhereUniqueInput | CertificateWhereUniqueInput[]
+    disconnect?: CertificateWhereUniqueInput | CertificateWhereUniqueInput[]
+    delete?: CertificateWhereUniqueInput | CertificateWhereUniqueInput[]
+    connect?: CertificateWhereUniqueInput | CertificateWhereUniqueInput[]
+    update?: CertificateUpdateWithWhereUniqueWithoutUserInput | CertificateUpdateWithWhereUniqueWithoutUserInput[]
+    updateMany?: CertificateUpdateManyWithWhereWithoutUserInput | CertificateUpdateManyWithWhereWithoutUserInput[]
+    deleteMany?: CertificateScalarWhereInput | CertificateScalarWhereInput[]
+  }
+
+  export type ModuleFeedbackUncheckedUpdateManyWithoutUserNestedInput = {
+    create?: XOR<ModuleFeedbackCreateWithoutUserInput, ModuleFeedbackUncheckedCreateWithoutUserInput> | ModuleFeedbackCreateWithoutUserInput[] | ModuleFeedbackUncheckedCreateWithoutUserInput[]
+    connectOrCreate?: ModuleFeedbackCreateOrConnectWithoutUserInput | ModuleFeedbackCreateOrConnectWithoutUserInput[]
+    upsert?: ModuleFeedbackUpsertWithWhereUniqueWithoutUserInput | ModuleFeedbackUpsertWithWhereUniqueWithoutUserInput[]
+    createMany?: ModuleFeedbackCreateManyUserInputEnvelope
+    set?: ModuleFeedbackWhereUniqueInput | ModuleFeedbackWhereUniqueInput[]
+    disconnect?: ModuleFeedbackWhereUniqueInput | ModuleFeedbackWhereUniqueInput[]
+    delete?: ModuleFeedbackWhereUniqueInput | ModuleFeedbackWhereUniqueInput[]
+    connect?: ModuleFeedbackWhereUniqueInput | ModuleFeedbackWhereUniqueInput[]
+    update?: ModuleFeedbackUpdateWithWhereUniqueWithoutUserInput | ModuleFeedbackUpdateWithWhereUniqueWithoutUserInput[]
+    updateMany?: ModuleFeedbackUpdateManyWithWhereWithoutUserInput | ModuleFeedbackUpdateManyWithWhereWithoutUserInput[]
+    deleteMany?: ModuleFeedbackScalarWhereInput | ModuleFeedbackScalarWhereInput[]
+  }
+
   export type UserModuleProgressCreateNestedManyWithoutModuleInput = {
     create?: XOR<UserModuleProgressCreateWithoutModuleInput, UserModuleProgressUncheckedCreateWithoutModuleInput> | UserModuleProgressCreateWithoutModuleInput[] | UserModuleProgressUncheckedCreateWithoutModuleInput[]
     connectOrCreate?: UserModuleProgressCreateOrConnectWithoutModuleInput | UserModuleProgressCreateOrConnectWithoutModuleInput[]
@@ -11334,6 +14232,13 @@ export namespace Prisma {
     connect?: QuestionWhereUniqueInput | QuestionWhereUniqueInput[]
   }
 
+  export type ModuleFeedbackCreateNestedManyWithoutModuleInput = {
+    create?: XOR<ModuleFeedbackCreateWithoutModuleInput, ModuleFeedbackUncheckedCreateWithoutModuleInput> | ModuleFeedbackCreateWithoutModuleInput[] | ModuleFeedbackUncheckedCreateWithoutModuleInput[]
+    connectOrCreate?: ModuleFeedbackCreateOrConnectWithoutModuleInput | ModuleFeedbackCreateOrConnectWithoutModuleInput[]
+    createMany?: ModuleFeedbackCreateManyModuleInputEnvelope
+    connect?: ModuleFeedbackWhereUniqueInput | ModuleFeedbackWhereUniqueInput[]
+  }
+
   export type UserModuleProgressUncheckedCreateNestedManyWithoutModuleInput = {
     create?: XOR<UserModuleProgressCreateWithoutModuleInput, UserModuleProgressUncheckedCreateWithoutModuleInput> | UserModuleProgressCreateWithoutModuleInput[] | UserModuleProgressUncheckedCreateWithoutModuleInput[]
     connectOrCreate?: UserModuleProgressCreateOrConnectWithoutModuleInput | UserModuleProgressCreateOrConnectWithoutModuleInput[]
@@ -11346,6 +14251,13 @@ export namespace Prisma {
     connectOrCreate?: QuestionCreateOrConnectWithoutModuleInput | QuestionCreateOrConnectWithoutModuleInput[]
     createMany?: QuestionCreateManyModuleInputEnvelope
     connect?: QuestionWhereUniqueInput | QuestionWhereUniqueInput[]
+  }
+
+  export type ModuleFeedbackUncheckedCreateNestedManyWithoutModuleInput = {
+    create?: XOR<ModuleFeedbackCreateWithoutModuleInput, ModuleFeedbackUncheckedCreateWithoutModuleInput> | ModuleFeedbackCreateWithoutModuleInput[] | ModuleFeedbackUncheckedCreateWithoutModuleInput[]
+    connectOrCreate?: ModuleFeedbackCreateOrConnectWithoutModuleInput | ModuleFeedbackCreateOrConnectWithoutModuleInput[]
+    createMany?: ModuleFeedbackCreateManyModuleInputEnvelope
+    connect?: ModuleFeedbackWhereUniqueInput | ModuleFeedbackWhereUniqueInput[]
   }
 
   export type IntFieldUpdateOperationsInput = {
@@ -11384,6 +14296,20 @@ export namespace Prisma {
     deleteMany?: QuestionScalarWhereInput | QuestionScalarWhereInput[]
   }
 
+  export type ModuleFeedbackUpdateManyWithoutModuleNestedInput = {
+    create?: XOR<ModuleFeedbackCreateWithoutModuleInput, ModuleFeedbackUncheckedCreateWithoutModuleInput> | ModuleFeedbackCreateWithoutModuleInput[] | ModuleFeedbackUncheckedCreateWithoutModuleInput[]
+    connectOrCreate?: ModuleFeedbackCreateOrConnectWithoutModuleInput | ModuleFeedbackCreateOrConnectWithoutModuleInput[]
+    upsert?: ModuleFeedbackUpsertWithWhereUniqueWithoutModuleInput | ModuleFeedbackUpsertWithWhereUniqueWithoutModuleInput[]
+    createMany?: ModuleFeedbackCreateManyModuleInputEnvelope
+    set?: ModuleFeedbackWhereUniqueInput | ModuleFeedbackWhereUniqueInput[]
+    disconnect?: ModuleFeedbackWhereUniqueInput | ModuleFeedbackWhereUniqueInput[]
+    delete?: ModuleFeedbackWhereUniqueInput | ModuleFeedbackWhereUniqueInput[]
+    connect?: ModuleFeedbackWhereUniqueInput | ModuleFeedbackWhereUniqueInput[]
+    update?: ModuleFeedbackUpdateWithWhereUniqueWithoutModuleInput | ModuleFeedbackUpdateWithWhereUniqueWithoutModuleInput[]
+    updateMany?: ModuleFeedbackUpdateManyWithWhereWithoutModuleInput | ModuleFeedbackUpdateManyWithWhereWithoutModuleInput[]
+    deleteMany?: ModuleFeedbackScalarWhereInput | ModuleFeedbackScalarWhereInput[]
+  }
+
   export type UserModuleProgressUncheckedUpdateManyWithoutModuleNestedInput = {
     create?: XOR<UserModuleProgressCreateWithoutModuleInput, UserModuleProgressUncheckedCreateWithoutModuleInput> | UserModuleProgressCreateWithoutModuleInput[] | UserModuleProgressUncheckedCreateWithoutModuleInput[]
     connectOrCreate?: UserModuleProgressCreateOrConnectWithoutModuleInput | UserModuleProgressCreateOrConnectWithoutModuleInput[]
@@ -11410,6 +14336,20 @@ export namespace Prisma {
     update?: QuestionUpdateWithWhereUniqueWithoutModuleInput | QuestionUpdateWithWhereUniqueWithoutModuleInput[]
     updateMany?: QuestionUpdateManyWithWhereWithoutModuleInput | QuestionUpdateManyWithWhereWithoutModuleInput[]
     deleteMany?: QuestionScalarWhereInput | QuestionScalarWhereInput[]
+  }
+
+  export type ModuleFeedbackUncheckedUpdateManyWithoutModuleNestedInput = {
+    create?: XOR<ModuleFeedbackCreateWithoutModuleInput, ModuleFeedbackUncheckedCreateWithoutModuleInput> | ModuleFeedbackCreateWithoutModuleInput[] | ModuleFeedbackUncheckedCreateWithoutModuleInput[]
+    connectOrCreate?: ModuleFeedbackCreateOrConnectWithoutModuleInput | ModuleFeedbackCreateOrConnectWithoutModuleInput[]
+    upsert?: ModuleFeedbackUpsertWithWhereUniqueWithoutModuleInput | ModuleFeedbackUpsertWithWhereUniqueWithoutModuleInput[]
+    createMany?: ModuleFeedbackCreateManyModuleInputEnvelope
+    set?: ModuleFeedbackWhereUniqueInput | ModuleFeedbackWhereUniqueInput[]
+    disconnect?: ModuleFeedbackWhereUniqueInput | ModuleFeedbackWhereUniqueInput[]
+    delete?: ModuleFeedbackWhereUniqueInput | ModuleFeedbackWhereUniqueInput[]
+    connect?: ModuleFeedbackWhereUniqueInput | ModuleFeedbackWhereUniqueInput[]
+    update?: ModuleFeedbackUpdateWithWhereUniqueWithoutModuleInput | ModuleFeedbackUpdateWithWhereUniqueWithoutModuleInput[]
+    updateMany?: ModuleFeedbackUpdateManyWithWhereWithoutModuleInput | ModuleFeedbackUpdateManyWithWhereWithoutModuleInput[]
+    deleteMany?: ModuleFeedbackScalarWhereInput | ModuleFeedbackScalarWhereInput[]
   }
 
   export type UserCreateNestedOneWithoutModuleProgressInput = {
@@ -11644,6 +14584,48 @@ export namespace Prisma {
     update?: XOR<XOR<AnswerUpdateToOneWithWhereWithoutUserQuizResponsesInput, AnswerUpdateWithoutUserQuizResponsesInput>, AnswerUncheckedUpdateWithoutUserQuizResponsesInput>
   }
 
+  export type UserCreateNestedOneWithoutCertificatesInput = {
+    create?: XOR<UserCreateWithoutCertificatesInput, UserUncheckedCreateWithoutCertificatesInput>
+    connectOrCreate?: UserCreateOrConnectWithoutCertificatesInput
+    connect?: UserWhereUniqueInput
+  }
+
+  export type UserUpdateOneRequiredWithoutCertificatesNestedInput = {
+    create?: XOR<UserCreateWithoutCertificatesInput, UserUncheckedCreateWithoutCertificatesInput>
+    connectOrCreate?: UserCreateOrConnectWithoutCertificatesInput
+    upsert?: UserUpsertWithoutCertificatesInput
+    connect?: UserWhereUniqueInput
+    update?: XOR<XOR<UserUpdateToOneWithWhereWithoutCertificatesInput, UserUpdateWithoutCertificatesInput>, UserUncheckedUpdateWithoutCertificatesInput>
+  }
+
+  export type UserCreateNestedOneWithoutModuleFeedbackInput = {
+    create?: XOR<UserCreateWithoutModuleFeedbackInput, UserUncheckedCreateWithoutModuleFeedbackInput>
+    connectOrCreate?: UserCreateOrConnectWithoutModuleFeedbackInput
+    connect?: UserWhereUniqueInput
+  }
+
+  export type ModuleCreateNestedOneWithoutModuleFeedbackInput = {
+    create?: XOR<ModuleCreateWithoutModuleFeedbackInput, ModuleUncheckedCreateWithoutModuleFeedbackInput>
+    connectOrCreate?: ModuleCreateOrConnectWithoutModuleFeedbackInput
+    connect?: ModuleWhereUniqueInput
+  }
+
+  export type UserUpdateOneRequiredWithoutModuleFeedbackNestedInput = {
+    create?: XOR<UserCreateWithoutModuleFeedbackInput, UserUncheckedCreateWithoutModuleFeedbackInput>
+    connectOrCreate?: UserCreateOrConnectWithoutModuleFeedbackInput
+    upsert?: UserUpsertWithoutModuleFeedbackInput
+    connect?: UserWhereUniqueInput
+    update?: XOR<XOR<UserUpdateToOneWithWhereWithoutModuleFeedbackInput, UserUpdateWithoutModuleFeedbackInput>, UserUncheckedUpdateWithoutModuleFeedbackInput>
+  }
+
+  export type ModuleUpdateOneRequiredWithoutModuleFeedbackNestedInput = {
+    create?: XOR<ModuleCreateWithoutModuleFeedbackInput, ModuleUncheckedCreateWithoutModuleFeedbackInput>
+    connectOrCreate?: ModuleCreateOrConnectWithoutModuleFeedbackInput
+    upsert?: ModuleUpsertWithoutModuleFeedbackInput
+    connect?: ModuleWhereUniqueInput
+    update?: XOR<XOR<ModuleUpdateToOneWithWhereWithoutModuleFeedbackInput, ModuleUpdateWithoutModuleFeedbackInput>, ModuleUncheckedUpdateWithoutModuleFeedbackInput>
+  }
+
   export type NestedStringFilter<$PrismaModel = never> = {
     equals?: string | StringFieldRefInput<$PrismaModel>
     in?: string[] | ListStringFieldRefInput<$PrismaModel>
@@ -11870,6 +14852,58 @@ export namespace Prisma {
     skipDuplicates?: boolean
   }
 
+  export type CertificateCreateWithoutUserInput = {
+    id?: string
+    certificateNumber: string
+    issuedAt?: Date | string
+    createdAt?: Date | string
+    updatedAt?: Date | string
+  }
+
+  export type CertificateUncheckedCreateWithoutUserInput = {
+    id?: string
+    certificateNumber: string
+    issuedAt?: Date | string
+    createdAt?: Date | string
+    updatedAt?: Date | string
+  }
+
+  export type CertificateCreateOrConnectWithoutUserInput = {
+    where: CertificateWhereUniqueInput
+    create: XOR<CertificateCreateWithoutUserInput, CertificateUncheckedCreateWithoutUserInput>
+  }
+
+  export type CertificateCreateManyUserInputEnvelope = {
+    data: CertificateCreateManyUserInput | CertificateCreateManyUserInput[]
+    skipDuplicates?: boolean
+  }
+
+  export type ModuleFeedbackCreateWithoutUserInput = {
+    id?: string
+    helpful: boolean
+    createdAt?: Date | string
+    updatedAt?: Date | string
+    module: ModuleCreateNestedOneWithoutModuleFeedbackInput
+  }
+
+  export type ModuleFeedbackUncheckedCreateWithoutUserInput = {
+    id?: string
+    moduleId: string
+    helpful: boolean
+    createdAt?: Date | string
+    updatedAt?: Date | string
+  }
+
+  export type ModuleFeedbackCreateOrConnectWithoutUserInput = {
+    where: ModuleFeedbackWhereUniqueInput
+    create: XOR<ModuleFeedbackCreateWithoutUserInput, ModuleFeedbackUncheckedCreateWithoutUserInput>
+  }
+
+  export type ModuleFeedbackCreateManyUserInputEnvelope = {
+    data: ModuleFeedbackCreateManyUserInput | ModuleFeedbackCreateManyUserInput[]
+    skipDuplicates?: boolean
+  }
+
   export type UserModuleProgressUpsertWithWhereUniqueWithoutUserInput = {
     where: UserModuleProgressWhereUniqueInput
     update: XOR<UserModuleProgressUpdateWithoutUserInput, UserModuleProgressUncheckedUpdateWithoutUserInput>
@@ -11930,6 +14964,62 @@ export namespace Prisma {
     attemptedAt?: DateTimeFilter<"UserQuizAttempt"> | Date | string
     createdAt?: DateTimeFilter<"UserQuizAttempt"> | Date | string
     updatedAt?: DateTimeFilter<"UserQuizAttempt"> | Date | string
+  }
+
+  export type CertificateUpsertWithWhereUniqueWithoutUserInput = {
+    where: CertificateWhereUniqueInput
+    update: XOR<CertificateUpdateWithoutUserInput, CertificateUncheckedUpdateWithoutUserInput>
+    create: XOR<CertificateCreateWithoutUserInput, CertificateUncheckedCreateWithoutUserInput>
+  }
+
+  export type CertificateUpdateWithWhereUniqueWithoutUserInput = {
+    where: CertificateWhereUniqueInput
+    data: XOR<CertificateUpdateWithoutUserInput, CertificateUncheckedUpdateWithoutUserInput>
+  }
+
+  export type CertificateUpdateManyWithWhereWithoutUserInput = {
+    where: CertificateScalarWhereInput
+    data: XOR<CertificateUpdateManyMutationInput, CertificateUncheckedUpdateManyWithoutUserInput>
+  }
+
+  export type CertificateScalarWhereInput = {
+    AND?: CertificateScalarWhereInput | CertificateScalarWhereInput[]
+    OR?: CertificateScalarWhereInput[]
+    NOT?: CertificateScalarWhereInput | CertificateScalarWhereInput[]
+    id?: StringFilter<"Certificate"> | string
+    userId?: StringFilter<"Certificate"> | string
+    certificateNumber?: StringFilter<"Certificate"> | string
+    issuedAt?: DateTimeFilter<"Certificate"> | Date | string
+    createdAt?: DateTimeFilter<"Certificate"> | Date | string
+    updatedAt?: DateTimeFilter<"Certificate"> | Date | string
+  }
+
+  export type ModuleFeedbackUpsertWithWhereUniqueWithoutUserInput = {
+    where: ModuleFeedbackWhereUniqueInput
+    update: XOR<ModuleFeedbackUpdateWithoutUserInput, ModuleFeedbackUncheckedUpdateWithoutUserInput>
+    create: XOR<ModuleFeedbackCreateWithoutUserInput, ModuleFeedbackUncheckedCreateWithoutUserInput>
+  }
+
+  export type ModuleFeedbackUpdateWithWhereUniqueWithoutUserInput = {
+    where: ModuleFeedbackWhereUniqueInput
+    data: XOR<ModuleFeedbackUpdateWithoutUserInput, ModuleFeedbackUncheckedUpdateWithoutUserInput>
+  }
+
+  export type ModuleFeedbackUpdateManyWithWhereWithoutUserInput = {
+    where: ModuleFeedbackScalarWhereInput
+    data: XOR<ModuleFeedbackUpdateManyMutationInput, ModuleFeedbackUncheckedUpdateManyWithoutUserInput>
+  }
+
+  export type ModuleFeedbackScalarWhereInput = {
+    AND?: ModuleFeedbackScalarWhereInput | ModuleFeedbackScalarWhereInput[]
+    OR?: ModuleFeedbackScalarWhereInput[]
+    NOT?: ModuleFeedbackScalarWhereInput | ModuleFeedbackScalarWhereInput[]
+    id?: StringFilter<"ModuleFeedback"> | string
+    userId?: StringFilter<"ModuleFeedback"> | string
+    moduleId?: StringFilter<"ModuleFeedback"> | string
+    helpful?: BoolFilter<"ModuleFeedback"> | boolean
+    createdAt?: DateTimeFilter<"ModuleFeedback"> | Date | string
+    updatedAt?: DateTimeFilter<"ModuleFeedback"> | Date | string
   }
 
   export type UserModuleProgressCreateWithoutModuleInput = {
@@ -11994,6 +15084,32 @@ export namespace Prisma {
     skipDuplicates?: boolean
   }
 
+  export type ModuleFeedbackCreateWithoutModuleInput = {
+    id?: string
+    helpful: boolean
+    createdAt?: Date | string
+    updatedAt?: Date | string
+    user: UserCreateNestedOneWithoutModuleFeedbackInput
+  }
+
+  export type ModuleFeedbackUncheckedCreateWithoutModuleInput = {
+    id?: string
+    userId: string
+    helpful: boolean
+    createdAt?: Date | string
+    updatedAt?: Date | string
+  }
+
+  export type ModuleFeedbackCreateOrConnectWithoutModuleInput = {
+    where: ModuleFeedbackWhereUniqueInput
+    create: XOR<ModuleFeedbackCreateWithoutModuleInput, ModuleFeedbackUncheckedCreateWithoutModuleInput>
+  }
+
+  export type ModuleFeedbackCreateManyModuleInputEnvelope = {
+    data: ModuleFeedbackCreateManyModuleInput | ModuleFeedbackCreateManyModuleInput[]
+    skipDuplicates?: boolean
+  }
+
   export type UserModuleProgressUpsertWithWhereUniqueWithoutModuleInput = {
     where: UserModuleProgressWhereUniqueInput
     update: XOR<UserModuleProgressUpdateWithoutModuleInput, UserModuleProgressUncheckedUpdateWithoutModuleInput>
@@ -12038,6 +15154,22 @@ export namespace Prisma {
     updatedAt?: DateTimeFilter<"Question"> | Date | string
   }
 
+  export type ModuleFeedbackUpsertWithWhereUniqueWithoutModuleInput = {
+    where: ModuleFeedbackWhereUniqueInput
+    update: XOR<ModuleFeedbackUpdateWithoutModuleInput, ModuleFeedbackUncheckedUpdateWithoutModuleInput>
+    create: XOR<ModuleFeedbackCreateWithoutModuleInput, ModuleFeedbackUncheckedCreateWithoutModuleInput>
+  }
+
+  export type ModuleFeedbackUpdateWithWhereUniqueWithoutModuleInput = {
+    where: ModuleFeedbackWhereUniqueInput
+    data: XOR<ModuleFeedbackUpdateWithoutModuleInput, ModuleFeedbackUncheckedUpdateWithoutModuleInput>
+  }
+
+  export type ModuleFeedbackUpdateManyWithWhereWithoutModuleInput = {
+    where: ModuleFeedbackScalarWhereInput
+    data: XOR<ModuleFeedbackUpdateManyMutationInput, ModuleFeedbackUncheckedUpdateManyWithoutModuleInput>
+  }
+
   export type UserCreateWithoutModuleProgressInput = {
     id?: string
     email: string
@@ -12048,6 +15180,8 @@ export namespace Prisma {
     createdAt?: Date | string
     updatedAt?: Date | string
     quizAttempts?: UserQuizAttemptCreateNestedManyWithoutUserInput
+    certificates?: CertificateCreateNestedManyWithoutUserInput
+    moduleFeedback?: ModuleFeedbackCreateNestedManyWithoutUserInput
   }
 
   export type UserUncheckedCreateWithoutModuleProgressInput = {
@@ -12060,6 +15194,8 @@ export namespace Prisma {
     createdAt?: Date | string
     updatedAt?: Date | string
     quizAttempts?: UserQuizAttemptUncheckedCreateNestedManyWithoutUserInput
+    certificates?: CertificateUncheckedCreateNestedManyWithoutUserInput
+    moduleFeedback?: ModuleFeedbackUncheckedCreateNestedManyWithoutUserInput
   }
 
   export type UserCreateOrConnectWithoutModuleProgressInput = {
@@ -12075,6 +15211,7 @@ export namespace Prisma {
     createdAt?: Date | string
     updatedAt?: Date | string
     questions?: QuestionCreateNestedManyWithoutModuleInput
+    moduleFeedback?: ModuleFeedbackCreateNestedManyWithoutModuleInput
   }
 
   export type ModuleUncheckedCreateWithoutUserProgressInput = {
@@ -12085,6 +15222,7 @@ export namespace Prisma {
     createdAt?: Date | string
     updatedAt?: Date | string
     questions?: QuestionUncheckedCreateNestedManyWithoutModuleInput
+    moduleFeedback?: ModuleFeedbackUncheckedCreateNestedManyWithoutModuleInput
   }
 
   export type ModuleCreateOrConnectWithoutUserProgressInput = {
@@ -12113,6 +15251,8 @@ export namespace Prisma {
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
     quizAttempts?: UserQuizAttemptUpdateManyWithoutUserNestedInput
+    certificates?: CertificateUpdateManyWithoutUserNestedInput
+    moduleFeedback?: ModuleFeedbackUpdateManyWithoutUserNestedInput
   }
 
   export type UserUncheckedUpdateWithoutModuleProgressInput = {
@@ -12125,6 +15265,8 @@ export namespace Prisma {
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
     quizAttempts?: UserQuizAttemptUncheckedUpdateManyWithoutUserNestedInput
+    certificates?: CertificateUncheckedUpdateManyWithoutUserNestedInput
+    moduleFeedback?: ModuleFeedbackUncheckedUpdateManyWithoutUserNestedInput
   }
 
   export type ModuleUpsertWithoutUserProgressInput = {
@@ -12146,6 +15288,7 @@ export namespace Prisma {
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
     questions?: QuestionUpdateManyWithoutModuleNestedInput
+    moduleFeedback?: ModuleFeedbackUpdateManyWithoutModuleNestedInput
   }
 
   export type ModuleUncheckedUpdateWithoutUserProgressInput = {
@@ -12156,6 +15299,7 @@ export namespace Prisma {
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
     questions?: QuestionUncheckedUpdateManyWithoutModuleNestedInput
+    moduleFeedback?: ModuleFeedbackUncheckedUpdateManyWithoutModuleNestedInput
   }
 
   export type ModuleCreateWithoutQuestionsInput = {
@@ -12166,6 +15310,7 @@ export namespace Prisma {
     createdAt?: Date | string
     updatedAt?: Date | string
     userProgress?: UserModuleProgressCreateNestedManyWithoutModuleInput
+    moduleFeedback?: ModuleFeedbackCreateNestedManyWithoutModuleInput
   }
 
   export type ModuleUncheckedCreateWithoutQuestionsInput = {
@@ -12176,6 +15321,7 @@ export namespace Prisma {
     createdAt?: Date | string
     updatedAt?: Date | string
     userProgress?: UserModuleProgressUncheckedCreateNestedManyWithoutModuleInput
+    moduleFeedback?: ModuleFeedbackUncheckedCreateNestedManyWithoutModuleInput
   }
 
   export type ModuleCreateOrConnectWithoutQuestionsInput = {
@@ -12232,6 +15378,7 @@ export namespace Prisma {
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
     userProgress?: UserModuleProgressUpdateManyWithoutModuleNestedInput
+    moduleFeedback?: ModuleFeedbackUpdateManyWithoutModuleNestedInput
   }
 
   export type ModuleUncheckedUpdateWithoutQuestionsInput = {
@@ -12242,6 +15389,7 @@ export namespace Prisma {
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
     userProgress?: UserModuleProgressUncheckedUpdateManyWithoutModuleNestedInput
+    moduleFeedback?: ModuleFeedbackUncheckedUpdateManyWithoutModuleNestedInput
   }
 
   export type AnswerUpsertWithWhereUniqueWithoutQuestionInput = {
@@ -12386,6 +15534,8 @@ export namespace Prisma {
     createdAt?: Date | string
     updatedAt?: Date | string
     moduleProgress?: UserModuleProgressCreateNestedManyWithoutUserInput
+    certificates?: CertificateCreateNestedManyWithoutUserInput
+    moduleFeedback?: ModuleFeedbackCreateNestedManyWithoutUserInput
   }
 
   export type UserUncheckedCreateWithoutQuizAttemptsInput = {
@@ -12398,6 +15548,8 @@ export namespace Prisma {
     createdAt?: Date | string
     updatedAt?: Date | string
     moduleProgress?: UserModuleProgressUncheckedCreateNestedManyWithoutUserInput
+    certificates?: CertificateUncheckedCreateNestedManyWithoutUserInput
+    moduleFeedback?: ModuleFeedbackUncheckedCreateNestedManyWithoutUserInput
   }
 
   export type UserCreateOrConnectWithoutQuizAttemptsInput = {
@@ -12450,6 +15602,8 @@ export namespace Prisma {
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
     moduleProgress?: UserModuleProgressUpdateManyWithoutUserNestedInput
+    certificates?: CertificateUpdateManyWithoutUserNestedInput
+    moduleFeedback?: ModuleFeedbackUpdateManyWithoutUserNestedInput
   }
 
   export type UserUncheckedUpdateWithoutQuizAttemptsInput = {
@@ -12462,6 +15616,8 @@ export namespace Prisma {
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
     moduleProgress?: UserModuleProgressUncheckedUpdateManyWithoutUserNestedInput
+    certificates?: CertificateUncheckedUpdateManyWithoutUserNestedInput
+    moduleFeedback?: ModuleFeedbackUncheckedUpdateManyWithoutUserNestedInput
   }
 
   export type UserQuizResponseUpsertWithWhereUniqueWithoutAttemptInput = {
@@ -12596,6 +15752,210 @@ export namespace Prisma {
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
   }
 
+  export type UserCreateWithoutCertificatesInput = {
+    id?: string
+    email: string
+    password: string
+    firstName: string
+    lastName: string
+    isActive?: boolean
+    createdAt?: Date | string
+    updatedAt?: Date | string
+    moduleProgress?: UserModuleProgressCreateNestedManyWithoutUserInput
+    quizAttempts?: UserQuizAttemptCreateNestedManyWithoutUserInput
+    moduleFeedback?: ModuleFeedbackCreateNestedManyWithoutUserInput
+  }
+
+  export type UserUncheckedCreateWithoutCertificatesInput = {
+    id?: string
+    email: string
+    password: string
+    firstName: string
+    lastName: string
+    isActive?: boolean
+    createdAt?: Date | string
+    updatedAt?: Date | string
+    moduleProgress?: UserModuleProgressUncheckedCreateNestedManyWithoutUserInput
+    quizAttempts?: UserQuizAttemptUncheckedCreateNestedManyWithoutUserInput
+    moduleFeedback?: ModuleFeedbackUncheckedCreateNestedManyWithoutUserInput
+  }
+
+  export type UserCreateOrConnectWithoutCertificatesInput = {
+    where: UserWhereUniqueInput
+    create: XOR<UserCreateWithoutCertificatesInput, UserUncheckedCreateWithoutCertificatesInput>
+  }
+
+  export type UserUpsertWithoutCertificatesInput = {
+    update: XOR<UserUpdateWithoutCertificatesInput, UserUncheckedUpdateWithoutCertificatesInput>
+    create: XOR<UserCreateWithoutCertificatesInput, UserUncheckedCreateWithoutCertificatesInput>
+    where?: UserWhereInput
+  }
+
+  export type UserUpdateToOneWithWhereWithoutCertificatesInput = {
+    where?: UserWhereInput
+    data: XOR<UserUpdateWithoutCertificatesInput, UserUncheckedUpdateWithoutCertificatesInput>
+  }
+
+  export type UserUpdateWithoutCertificatesInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    email?: StringFieldUpdateOperationsInput | string
+    password?: StringFieldUpdateOperationsInput | string
+    firstName?: StringFieldUpdateOperationsInput | string
+    lastName?: StringFieldUpdateOperationsInput | string
+    isActive?: BoolFieldUpdateOperationsInput | boolean
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    moduleProgress?: UserModuleProgressUpdateManyWithoutUserNestedInput
+    quizAttempts?: UserQuizAttemptUpdateManyWithoutUserNestedInput
+    moduleFeedback?: ModuleFeedbackUpdateManyWithoutUserNestedInput
+  }
+
+  export type UserUncheckedUpdateWithoutCertificatesInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    email?: StringFieldUpdateOperationsInput | string
+    password?: StringFieldUpdateOperationsInput | string
+    firstName?: StringFieldUpdateOperationsInput | string
+    lastName?: StringFieldUpdateOperationsInput | string
+    isActive?: BoolFieldUpdateOperationsInput | boolean
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    moduleProgress?: UserModuleProgressUncheckedUpdateManyWithoutUserNestedInput
+    quizAttempts?: UserQuizAttemptUncheckedUpdateManyWithoutUserNestedInput
+    moduleFeedback?: ModuleFeedbackUncheckedUpdateManyWithoutUserNestedInput
+  }
+
+  export type UserCreateWithoutModuleFeedbackInput = {
+    id?: string
+    email: string
+    password: string
+    firstName: string
+    lastName: string
+    isActive?: boolean
+    createdAt?: Date | string
+    updatedAt?: Date | string
+    moduleProgress?: UserModuleProgressCreateNestedManyWithoutUserInput
+    quizAttempts?: UserQuizAttemptCreateNestedManyWithoutUserInput
+    certificates?: CertificateCreateNestedManyWithoutUserInput
+  }
+
+  export type UserUncheckedCreateWithoutModuleFeedbackInput = {
+    id?: string
+    email: string
+    password: string
+    firstName: string
+    lastName: string
+    isActive?: boolean
+    createdAt?: Date | string
+    updatedAt?: Date | string
+    moduleProgress?: UserModuleProgressUncheckedCreateNestedManyWithoutUserInput
+    quizAttempts?: UserQuizAttemptUncheckedCreateNestedManyWithoutUserInput
+    certificates?: CertificateUncheckedCreateNestedManyWithoutUserInput
+  }
+
+  export type UserCreateOrConnectWithoutModuleFeedbackInput = {
+    where: UserWhereUniqueInput
+    create: XOR<UserCreateWithoutModuleFeedbackInput, UserUncheckedCreateWithoutModuleFeedbackInput>
+  }
+
+  export type ModuleCreateWithoutModuleFeedbackInput = {
+    id?: string
+    title: string
+    videoUrl: string
+    order: number
+    createdAt?: Date | string
+    updatedAt?: Date | string
+    userProgress?: UserModuleProgressCreateNestedManyWithoutModuleInput
+    questions?: QuestionCreateNestedManyWithoutModuleInput
+  }
+
+  export type ModuleUncheckedCreateWithoutModuleFeedbackInput = {
+    id?: string
+    title: string
+    videoUrl: string
+    order: number
+    createdAt?: Date | string
+    updatedAt?: Date | string
+    userProgress?: UserModuleProgressUncheckedCreateNestedManyWithoutModuleInput
+    questions?: QuestionUncheckedCreateNestedManyWithoutModuleInput
+  }
+
+  export type ModuleCreateOrConnectWithoutModuleFeedbackInput = {
+    where: ModuleWhereUniqueInput
+    create: XOR<ModuleCreateWithoutModuleFeedbackInput, ModuleUncheckedCreateWithoutModuleFeedbackInput>
+  }
+
+  export type UserUpsertWithoutModuleFeedbackInput = {
+    update: XOR<UserUpdateWithoutModuleFeedbackInput, UserUncheckedUpdateWithoutModuleFeedbackInput>
+    create: XOR<UserCreateWithoutModuleFeedbackInput, UserUncheckedCreateWithoutModuleFeedbackInput>
+    where?: UserWhereInput
+  }
+
+  export type UserUpdateToOneWithWhereWithoutModuleFeedbackInput = {
+    where?: UserWhereInput
+    data: XOR<UserUpdateWithoutModuleFeedbackInput, UserUncheckedUpdateWithoutModuleFeedbackInput>
+  }
+
+  export type UserUpdateWithoutModuleFeedbackInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    email?: StringFieldUpdateOperationsInput | string
+    password?: StringFieldUpdateOperationsInput | string
+    firstName?: StringFieldUpdateOperationsInput | string
+    lastName?: StringFieldUpdateOperationsInput | string
+    isActive?: BoolFieldUpdateOperationsInput | boolean
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    moduleProgress?: UserModuleProgressUpdateManyWithoutUserNestedInput
+    quizAttempts?: UserQuizAttemptUpdateManyWithoutUserNestedInput
+    certificates?: CertificateUpdateManyWithoutUserNestedInput
+  }
+
+  export type UserUncheckedUpdateWithoutModuleFeedbackInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    email?: StringFieldUpdateOperationsInput | string
+    password?: StringFieldUpdateOperationsInput | string
+    firstName?: StringFieldUpdateOperationsInput | string
+    lastName?: StringFieldUpdateOperationsInput | string
+    isActive?: BoolFieldUpdateOperationsInput | boolean
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    moduleProgress?: UserModuleProgressUncheckedUpdateManyWithoutUserNestedInput
+    quizAttempts?: UserQuizAttemptUncheckedUpdateManyWithoutUserNestedInput
+    certificates?: CertificateUncheckedUpdateManyWithoutUserNestedInput
+  }
+
+  export type ModuleUpsertWithoutModuleFeedbackInput = {
+    update: XOR<ModuleUpdateWithoutModuleFeedbackInput, ModuleUncheckedUpdateWithoutModuleFeedbackInput>
+    create: XOR<ModuleCreateWithoutModuleFeedbackInput, ModuleUncheckedCreateWithoutModuleFeedbackInput>
+    where?: ModuleWhereInput
+  }
+
+  export type ModuleUpdateToOneWithWhereWithoutModuleFeedbackInput = {
+    where?: ModuleWhereInput
+    data: XOR<ModuleUpdateWithoutModuleFeedbackInput, ModuleUncheckedUpdateWithoutModuleFeedbackInput>
+  }
+
+  export type ModuleUpdateWithoutModuleFeedbackInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    title?: StringFieldUpdateOperationsInput | string
+    videoUrl?: StringFieldUpdateOperationsInput | string
+    order?: IntFieldUpdateOperationsInput | number
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    userProgress?: UserModuleProgressUpdateManyWithoutModuleNestedInput
+    questions?: QuestionUpdateManyWithoutModuleNestedInput
+  }
+
+  export type ModuleUncheckedUpdateWithoutModuleFeedbackInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    title?: StringFieldUpdateOperationsInput | string
+    videoUrl?: StringFieldUpdateOperationsInput | string
+    order?: IntFieldUpdateOperationsInput | number
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    userProgress?: UserModuleProgressUncheckedUpdateManyWithoutModuleNestedInput
+    questions?: QuestionUncheckedUpdateManyWithoutModuleNestedInput
+  }
+
   export type UserModuleProgressCreateManyUserInput = {
     id?: string
     moduleId: string
@@ -12614,6 +15974,22 @@ export namespace Prisma {
     score: number
     passed: boolean
     attemptedAt?: Date | string
+    createdAt?: Date | string
+    updatedAt?: Date | string
+  }
+
+  export type CertificateCreateManyUserInput = {
+    id?: string
+    certificateNumber: string
+    issuedAt?: Date | string
+    createdAt?: Date | string
+    updatedAt?: Date | string
+  }
+
+  export type ModuleFeedbackCreateManyUserInput = {
+    id?: string
+    moduleId: string
+    helpful: boolean
     createdAt?: Date | string
     updatedAt?: Date | string
   }
@@ -12686,6 +16062,54 @@ export namespace Prisma {
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
   }
 
+  export type CertificateUpdateWithoutUserInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    certificateNumber?: StringFieldUpdateOperationsInput | string
+    issuedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+  }
+
+  export type CertificateUncheckedUpdateWithoutUserInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    certificateNumber?: StringFieldUpdateOperationsInput | string
+    issuedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+  }
+
+  export type CertificateUncheckedUpdateManyWithoutUserInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    certificateNumber?: StringFieldUpdateOperationsInput | string
+    issuedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+  }
+
+  export type ModuleFeedbackUpdateWithoutUserInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    helpful?: BoolFieldUpdateOperationsInput | boolean
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    module?: ModuleUpdateOneRequiredWithoutModuleFeedbackNestedInput
+  }
+
+  export type ModuleFeedbackUncheckedUpdateWithoutUserInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    moduleId?: StringFieldUpdateOperationsInput | string
+    helpful?: BoolFieldUpdateOperationsInput | boolean
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+  }
+
+  export type ModuleFeedbackUncheckedUpdateManyWithoutUserInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    moduleId?: StringFieldUpdateOperationsInput | string
+    helpful?: BoolFieldUpdateOperationsInput | boolean
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+  }
+
   export type UserModuleProgressCreateManyModuleInput = {
     id?: string
     userId: string
@@ -12702,6 +16126,14 @@ export namespace Prisma {
     id?: string
     questionText: string
     order: number
+    createdAt?: Date | string
+    updatedAt?: Date | string
+  }
+
+  export type ModuleFeedbackCreateManyModuleInput = {
+    id?: string
+    userId: string
+    helpful: boolean
     createdAt?: Date | string
     updatedAt?: Date | string
   }
@@ -12764,6 +16196,30 @@ export namespace Prisma {
     id?: StringFieldUpdateOperationsInput | string
     questionText?: StringFieldUpdateOperationsInput | string
     order?: IntFieldUpdateOperationsInput | number
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+  }
+
+  export type ModuleFeedbackUpdateWithoutModuleInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    helpful?: BoolFieldUpdateOperationsInput | boolean
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    user?: UserUpdateOneRequiredWithoutModuleFeedbackNestedInput
+  }
+
+  export type ModuleFeedbackUncheckedUpdateWithoutModuleInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    userId?: StringFieldUpdateOperationsInput | string
+    helpful?: BoolFieldUpdateOperationsInput | boolean
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+  }
+
+  export type ModuleFeedbackUncheckedUpdateManyWithoutModuleInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    userId?: StringFieldUpdateOperationsInput | string
+    helpful?: BoolFieldUpdateOperationsInput | boolean
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
   }

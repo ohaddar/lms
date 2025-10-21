@@ -12,6 +12,11 @@ import {
   submitQuiz,
   getQuizAttempts,
 } from '../controllers/quizController'
+import {
+  submitModuleFeedback,
+  getModuleFeedback,
+  getMyModuleFeedback,
+} from '../controllers/feedbackController'
 import { authenticate, checkModuleAccess } from '../middleware'
 
 const router = Router()
@@ -46,5 +51,10 @@ router.get(
   checkModuleAccess,
   getQuizAttempts
 )
+
+// Feedback routes
+router.post('/:moduleId/feedback', authenticate, submitModuleFeedback)
+router.get('/:moduleId/feedback', getModuleFeedback)
+router.get('/my/modules/:moduleId/feedback', authenticate, getMyModuleFeedback)
 
 export default router
