@@ -33,7 +33,7 @@ export const Layout: React.FC<LayoutProps> = ({
   const maxWidthClass = maxWidth === 'full' ? 'max-w-full' : `max-w-${maxWidth}`
 
   return (
-    <div className="min-h-screen bg-gradient-to-br from-gray-50 via-blue-50/30 to-primary-50/20">
+    <div className="min-h-screen bg-linear-to-br from-gray-50 via-blue-50/30 to-primary-50/20">
       <Header showNav={showNav} />
       {showProgress && isAuthenticated && (
         <div className={`${maxWidthClass} mx-auto px-4 sm:px-6 lg:px-8 pt-4`}>

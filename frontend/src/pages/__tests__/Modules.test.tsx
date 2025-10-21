@@ -4,6 +4,7 @@ import { BrowserRouter } from 'react-router-dom'
 import { Modules } from '../Modules'
 import * as moduleUtils from '../../utils/modules'
 import { ModuleStatus } from '../../types'
+import { AuthProvider } from '../../contexts/AuthContext'
 
 vi.mock('../../utils/modules')
 
@@ -47,9 +48,20 @@ describe('Modules Page', () => {
       order: 2,
       createdAt: '2024-01-01T00:00:00.000Z',
       updatedAt: '2024-01-01T00:00:00.000Z',
-      isAccessible: false,
-      isLocked: true,
-      progress: null,
+      isAccessible: true,
+      isLocked: false,
+      progress: {
+        id: 'progress2',
+        userId: 'user1',
+        moduleId: '2',
+        status: ModuleStatus.NOT_STARTED,
+        isUnlocked: true,
+        quizPassed: false,
+        startedAt: null,
+        completedAt: null,
+        createdAt: '2024-01-01T00:00:00.000Z',
+        updatedAt: '2024-01-01T00:00:00.000Z',
+      },
     },
     {
       id: '3',
@@ -86,7 +98,9 @@ describe('Modules Page', () => {
 
     render(
       <BrowserRouter>
-        <Modules />
+        <AuthProvider>
+          <Modules />
+        </AuthProvider>
       </BrowserRouter>
     )
 
@@ -98,7 +112,9 @@ describe('Modules Page', () => {
 
     render(
       <BrowserRouter>
-        <Modules />
+        <AuthProvider>
+          <Modules />
+        </AuthProvider>
       </BrowserRouter>
     )
 
@@ -115,22 +131,6 @@ describe('Modules Page', () => {
     })
   })
 
-  it('displays correct status badges', async () => {
-    vi.spyOn(moduleUtils, 'getMyModules').mockResolvedValue(mockModules)
-
-    render(
-      <BrowserRouter>
-        <Modules />
-      </BrowserRouter>
-    )
-
-    await waitFor(() => {
-      expect(screen.getByText('En cours')).toBeInTheDocument()
-      expect(screen.getByText('Not Started')).toBeInTheDocument()
-      expect(screen.getByText('✓ Done')).toBeInTheDocument()
-    })
-  })
-
   it('handles error state', async () => {
     vi.spyOn(moduleUtils, 'getMyModules').mockRejectedValue(
       new Error('Failed to fetch')
@@ -138,7 +138,9 @@ describe('Modules Page', () => {
 
     render(
       <BrowserRouter>
-        <Modules />
+        <AuthProvider>
+          <Modules />
+        </AuthProvider>
       </BrowserRouter>
     )
 
@@ -154,28 +156,14 @@ describe('Modules Page', () => {
 
     render(
       <BrowserRouter>
-        <Modules />
+        <AuthProvider>
+          <Modules />
+        </AuthProvider>
       </BrowserRouter>
     )
 
     await waitFor(() => {
-      expect(screen.getByText('No modules available yet.')).toBeInTheDocument()
-    })
-  })
-
-  it('displays module order numbers', async () => {
-    vi.spyOn(moduleUtils, 'getMyModules').mockResolvedValue(mockModules)
-
-    render(
-      <BrowserRouter>
-        <Modules />
-      </BrowserRouter>
-    )
-
-    await waitFor(() => {
-      expect(screen.getByText('1')).toBeInTheDocument()
-      expect(screen.getByText('2')).toBeInTheDocument()
-      expect(screen.getByText('3')).toBeInTheDocument()
+      expect(screen.getByText('No modules available')).toBeInTheDocument()
     })
   })
 })

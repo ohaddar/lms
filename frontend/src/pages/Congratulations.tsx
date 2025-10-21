@@ -43,7 +43,7 @@ export const Congratulations = () => {
         <div className="max-w-3xl w-full text-center animate-scale-in">
           {/* Trophy Icon */}
           <div className="mb-8 relative">
-            <div className="inline-flex items-center justify-center w-32 h-32 bg-gradient-to-br from-yellow-400 to-yellow-600 rounded-full shadow-2xl animate-bounce-slow">
+            <div className="inline-flex items-center justify-center w-32 h-32 bg-linear-to-br from-yellow-400 to-yellow-600 rounded-full shadow-2xl animate-bounce-slow">
               <svg
                 className="w-20 h-20 text-white"
                 fill="currentColor"
@@ -69,7 +69,7 @@ export const Congratulations = () => {
             <h1 className="text-5xl md:text-6xl font-bold text-gray-900 mb-4">
               Félicitations! 🎓
             </h1>
-            <div className="inline-block bg-gradient-to-r from-primary-600 to-primary-800 text-white px-8 py-4 rounded-2xl shadow-large mb-6">
+            <div className="inline-block bg-linear-to-r from-primary-600 to-primary-800 text-white px-8 py-4 rounded-2xl shadow-large mb-6">
               <p className="text-2xl md:text-3xl font-bold">
                 Bravo, tu es maintenant
               </p>
@@ -86,7 +86,7 @@ export const Congratulations = () => {
 
             {/* Stats */}
             <div className="grid grid-cols-1 md:grid-cols-3 gap-6 mb-8">
-              <div className="bg-gradient-to-br from-blue-50 to-primary-50 rounded-2xl p-6 border border-blue-200">
+              <div className="bg-linear-to-br from-blue-50 to-primary-50 rounded-2xl p-6 border border-blue-200">
                 <div className="text-4xl font-bold text-primary-700 mb-2">
                   3/3
                 </div>
@@ -94,7 +94,7 @@ export const Congratulations = () => {
                   Modules Complétés
                 </div>
               </div>
-              <div className="bg-gradient-to-br from-green-50 to-emerald-50 rounded-2xl p-6 border border-green-200">
+              <div className="bg-linear-to-br from-green-50 to-emerald-50 rounded-2xl p-6 border border-green-200">
                 <div className="text-4xl font-bold text-green-700 mb-2">
                   100%
                 </div>
@@ -102,7 +102,7 @@ export const Congratulations = () => {
                   Taux de Réussite
                 </div>
               </div>
-              <div className="bg-gradient-to-br from-yellow-50 to-amber-50 rounded-2xl p-6 border border-yellow-200">
+              <div className="bg-linear-to-br from-yellow-50 to-amber-50 rounded-2xl p-6 border border-yellow-200">
                 <div className="text-4xl font-bold text-yellow-700 mb-2">
                   3/3
                 </div>
@@ -113,7 +113,7 @@ export const Congratulations = () => {
             </div>
 
             {/* Achievement Badge */}
-            <div className="bg-gradient-to-br from-primary-100 to-blue-100 rounded-2xl p-8 mb-8 border-2 border-primary-300">
+            <div className="bg-linear-to-br from-primary-100 to-blue-100 rounded-2xl p-8 mb-8 border-2 border-primary-300">
               <div className="flex items-center justify-center gap-4 mb-4">
                 <svg
                   className="w-12 h-12 text-primary-600"
@@ -144,7 +144,7 @@ export const Congratulations = () => {
                   <button
                     onClick={handleDownloadCertificate}
                     disabled={downloading}
-                    className="px-6 py-3 bg-gradient-to-r from-green-600 to-green-700 text-white rounded-lg hover:from-green-700 hover:to-green-800 transition-all duration-200 font-semibold shadow-medium hover:shadow-large transform hover:scale-105 disabled:opacity-50 disabled:cursor-not-allowed flex items-center gap-2 mx-auto"
+                    className="px-6 py-3 bg-linear-to-r from-green-600 to-green-700 text-white rounded-lg hover:from-green-700 hover:to-green-800 transition-all duration-200 font-semibold shadow-medium hover:shadow-large transform hover:scale-105 disabled:opacity-50 disabled:cursor-not-allowed flex items-center gap-2 mx-auto"
                   >
                     <svg
                       className="w-5 h-5"
@@ -171,7 +171,7 @@ export const Congratulations = () => {
             <div className="flex flex-col sm:flex-row gap-4 justify-center">
               <button
                 onClick={() => navigate('/modules')}
-                className="px-8 py-4 bg-gradient-to-r from-primary-600 to-primary-700 text-white rounded-xl hover:from-primary-700 hover:to-primary-800 transition-all duration-200 font-semibold shadow-medium hover:shadow-large transform hover:scale-105"
+                className="px-8 py-4 bg-linear-to-r from-primary-600 to-primary-700 text-white rounded-xl hover:from-primary-700 hover:to-primary-800 transition-all duration-200 font-semibold shadow-medium hover:shadow-large transform hover:scale-105"
               >
                 Revoir les Modules
               </button>

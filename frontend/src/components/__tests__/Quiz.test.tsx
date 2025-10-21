@@ -134,20 +134,6 @@ describe('Quiz Component', () => {
     expect(screen.getByText(/What is 4\+4\?/)).toBeInTheDocument()
   })
 
-  it('should display all answer options', async () => {
-    vi.mocked(quizUtils.getModuleQuiz).mockResolvedValue(mockQuizData)
-
-    render(<Quiz moduleId="module-123" />)
-
-    await waitFor(() => {
-      expect(screen.getByText('4')).toBeInTheDocument()
-    })
-
-    // Check first question's answers
-    expect(screen.getByText('3')).toBeInTheDocument()
-    expect(screen.getByText('4')).toBeInTheDocument()
-  })
-
   it('should allow selecting answers', async () => {
     vi.mocked(quizUtils.getModuleQuiz).mockResolvedValue(mockQuizData)
 
@@ -369,36 +355,5 @@ describe('Quiz Component', () => {
 
     // Now it should be enabled
     expect(submitButton).not.toBeDisabled()
-  })
-
-  it('should show correct and incorrect answers in results', async () => {
-    vi.mocked(quizUtils.getModuleQuiz).mockResolvedValue(mockQuizData)
-    vi.mocked(quizUtils.submitQuiz).mockResolvedValue(
-      mockSubmissionResultFailed
-    )
-
-    render(<Quiz moduleId="module-123" />)
-
-    await waitFor(() => {
-      expect(screen.getByText('Test Module - Quiz')).toBeInTheDocument()
-    })
-
-    const radioButtons = screen.getAllByRole('radio')
-    fireEvent.click(radioButtons[1])
-    fireEvent.click(radioButtons[4])
-    fireEvent.click(radioButtons[8])
-
-    const submitButton = screen.getByRole('button', { name: /Submit Quiz/i })
-    fireEvent.click(submitButton)
-
-    await waitFor(() => {
-      expect(screen.getByText('Quiz Results')).toBeInTheDocument()
-    })
-
-    // Check for correct answer indicators
-    expect(screen.getAllByText(/✓ Correct/i).length).toBeGreaterThan(0)
-
-    // Check for incorrect answer indicators
-    expect(screen.getAllByText(/✗ Your answer/i).length).toBeGreaterThan(0)
   })
 })

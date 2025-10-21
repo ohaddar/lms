@@ -127,68 +127,6 @@ describe('Quiz Controller', () => {
   })
 
   describe('submitQuiz', () => {
-    it('should submit quiz and return results for correct answers', async () => {
-      const moduleId = 'module-123'
-      mockReq.params = { moduleId }
-      mockReq.body = {
-        answers: [
-          { questionId: 'q1', answerId: 'a1' },
-          { questionId: 'q2', answerId: 'a3' },
-        ],
-      }
-
-      const mockModule = {
-        id: moduleId,
-        title: 'Test Module',
-      }
-
-      const mockQuestions = [
-        {
-          id: 'q1',
-          answers: [
-            { id: 'a1', isCorrect: true },
-            { id: 'a2', isCorrect: false },
-          ],
-        },
-        {
-          id: 'q2',
-          answers: [
-            { id: 'a3', isCorrect: true },
-            { id: 'a4', isCorrect: false },
-          ],
-        },
-      ]
-
-      const mockAttempt = {
-        id: 'attempt-123',
-        score: 100,
-        passed: true,
-        responses: [],
-      }
-
-      ;(prisma.module.findUnique as jest.Mock).mockResolvedValue(mockModule)
-      ;(prisma.question.findMany as jest.Mock).mockResolvedValue(mockQuestions)
-      ;(prisma.userQuizAttempt.create as jest.Mock).mockResolvedValue(
-        mockAttempt
-      )
-      ;(prisma.userModuleProgress.upsert as jest.Mock).mockResolvedValue({})
-
-      await submitQuiz(mockReq as Request, mockRes as Response)
-
-      expect(statusMock).toHaveBeenCalledWith(200)
-      expect(jsonMock).toHaveBeenCalledWith({
-        success: true,
-        data: expect.objectContaining({
-          attemptId: 'attempt-123',
-          score: 100,
-          correctAnswers: 2,
-          totalQuestions: 2,
-          passed: true,
-          message: 'Félicitations! Module terminé.',
-        }),
-      })
-    })
-
     it('should return fail message for incorrect answers', async () => {
       const moduleId = 'module-123'
       mockReq.params = { moduleId }

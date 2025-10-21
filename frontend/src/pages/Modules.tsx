@@ -118,7 +118,7 @@ export const Modules = () => {
               <p className="text-gray-600 mb-6">{error}</p>
               <button
                 onClick={fetchModules}
-                className="px-6 py-3 bg-gradient-to-r from-primary-600 to-primary-700 text-white rounded-xl hover:from-primary-700 hover:to-primary-800 transition-all duration-200 font-semibold shadow-medium hover:shadow-large"
+                className="px-6 py-3 bg-linear-to-r from-primary-600 to-primary-700 text-white rounded-xl hover:from-primary-700 hover:to-primary-800 transition-all duration-200 font-semibold shadow-medium hover:shadow-large"
               >
                 Try Again
               </button>
@@ -143,7 +143,7 @@ export const Modules = () => {
       </div>
 
       {/* Progress Overview */}
-      <div className="bg-gradient-to-br from-primary-600 to-primary-800 rounded-3xl shadow-large p-8 mb-8 text-white animate-fade-in">
+      <div className="bg-linear-to-br from-primary-600 to-primary-800 rounded-3xl shadow-large p-8 mb-8 text-white animate-fade-in">
         <div className="flex flex-col md:flex-row md:items-center md:justify-between gap-6">
           <div>
             <h2 className="text-2xl font-bold mb-2">Course Progress</h2>
@@ -227,12 +227,12 @@ export const Modules = () => {
                 <div
                   className={`p-6 relative ${
                     isLocked
-                      ? 'bg-gradient-to-br from-gray-100 to-gray-200'
+                      ? 'bg-linear-to-br from-gray-100 to-gray-200'
                       : isCompleted
-                        ? 'bg-gradient-to-br from-green-50 to-emerald-50'
+                        ? 'bg-linear-to-br from-green-50 to-emerald-50'
                         : isInProgress
-                          ? 'bg-gradient-to-br from-blue-50 to-primary-50'
-                          : 'bg-gradient-to-br from-gray-50 to-slate-50'
+                          ? 'bg-linear-to-br from-blue-50 to-primary-50'
+                          : 'bg-linear-to-br from-gray-50 to-slate-50'
                   }`}
                 >
                   <div className="flex items-start justify-between mb-4">
@@ -240,7 +240,7 @@ export const Modules = () => {
                       className={`w-12 h-12 rounded-xl flex items-center justify-center shadow-medium ${
                         isLocked
                           ? 'bg-gray-400'
-                          : 'bg-gradient-to-br from-primary-500 to-primary-700 group-hover:scale-110'
+                          : 'bg-linear-to-br from-primary-500 to-primary-700 group-hover:scale-110'
                       } transition-transform duration-300`}
                     >
                       {isLocked ? (
@@ -301,7 +301,7 @@ export const Modules = () => {
                     <div className="space-y-3">
                       <div className="flex items-start gap-2 text-sm text-gray-600">
                         <svg
-                          className="w-5 h-5 text-gray-500 flex-shrink-0 mt-0.5"
+                          className="w-5 h-5 text-gray-500 shrink-0 mt-0.5"
                           fill="none"
                           viewBox="0 0 24 24"
                           stroke="currentColor"

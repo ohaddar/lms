@@ -2,11 +2,11 @@ import { render, screen, waitFor } from '@testing-library/react'
 import { ProgressBar } from '../ProgressBar'
 import { api } from '../../utils/api'
 
-jest.mock('../../utils/api')
+vi.mock('../../utils/api')
 
 describe('ProgressBar', () => {
   beforeEach(() => {
-    jest.clearAllMocks()
+    vi.clearAllMocks()
   })
 
   it('should render progress bar with correct data', async () => {
@@ -16,7 +16,7 @@ describe('ProgressBar', () => {
       percentage: 66.67,
     }
 
-    ;(api.get as jest.Mock).mockResolvedValue({
+    ;(api.get as vi.Mock).mockResolvedValue({
       data: {
         success: true,
         data: mockProgressData,
@@ -34,7 +34,7 @@ describe('ProgressBar', () => {
   })
 
   it('should not render when loading', () => {
-    ;(api.get as jest.Mock).mockImplementation(
+    ;(api.get as vi.Mock).mockImplementation(
       () => new Promise(() => {}) // Never resolves
     )
 
@@ -43,7 +43,7 @@ describe('ProgressBar', () => {
   })
 
   it('should handle errors gracefully', async () => {
-    ;(api.get as jest.Mock).mockRejectedValue(new Error('API Error'))
+    ;(api.get as vi.Mock).mockRejectedValue(new Error('API Error'))
 
     const { container } = render(<ProgressBar />)
 
@@ -59,7 +59,7 @@ describe('ProgressBar', () => {
       percentage: 100,
     }
 
-    ;(api.get as jest.Mock).mockResolvedValue({
+    ;(api.get as vi.Mock).mockResolvedValue({
       data: {
         success: true,
         data: mockProgressData,
@@ -82,7 +82,7 @@ describe('ProgressBar', () => {
       percentage: 0,
     }
 
-    ;(api.get as jest.Mock).mockResolvedValue({
+    ;(api.get as vi.Mock).mockResolvedValue({
       data: {
         success: true,
         data: mockProgressData,

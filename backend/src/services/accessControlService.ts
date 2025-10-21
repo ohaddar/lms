@@ -1,11 +1,19 @@
 import { PrismaClient } from '../generated/prisma'
 
-const prisma = new PrismaClient()
-
 /**
  * Access control service for managing module access and unlocking logic
  */
 export class AccessControlService {
+  constructor(private prisma: PrismaClient) {}
+
+  /**
+   * Create a default instance with a new PrismaClient
+   * This maintains backward compatibility
+   */
+  static createDefault(): AccessControlService {
+    return new AccessControlService(new PrismaClient())
+  }
+
   /**
    * Checks if a module is accessible to a user
    * Module 1 is always accessible
@@ -22,7 +30,7 @@ export class AccessControlService {
     }
 
     // Get the previous module (module order is 1-based)
-    const previousModule = await prisma.module.findFirst({
+    const previousModule = await this.prisma.module.findFirst({
       where: { order: moduleOrder - 1 },
     })
 
@@ -31,7 +39,7 @@ export class AccessControlService {
     }
 
     // Check if the user has passed the quiz for the previous module
-    const hasPassedPreviousQuiz = await prisma.userQuizAttempt.findFirst({
+    const hasPassedPreviousQuiz = await this.prisma.userQuizAttempt.findFirst({
       where: {
         userId,
         moduleId: previousModule.id,
@@ -46,7 +54,7 @@ export class AccessControlService {
    * Gets all modules with their accessibility status for a user
    */
   async getModulesWithAccessibility(userId: string) {
-    const modules = await prisma.module.findMany({
+    const modules = await this.prisma.module.findMany({
       orderBy: { order: 'asc' },
       include: {
         userProgress: {
@@ -79,7 +87,7 @@ export class AccessControlService {
    * Unlocks the next module after a quiz is passed
    */
   async unlockNextModule(userId: string, currentModuleId: string) {
-    const currentModule = await prisma.module.findUnique({
+    const currentModule = await this.prisma.module.findUnique({
       where: { id: currentModuleId },
     })
 
@@ -88,7 +96,7 @@ export class AccessControlService {
     }
 
     // Find the next module
-    const nextModule = await prisma.module.findFirst({
+    const nextModule = await this.prisma.module.findFirst({
       where: { order: currentModule.order + 1 },
     })
 
@@ -98,7 +106,7 @@ export class AccessControlService {
     }
 
     // Create or update progress for the next module to mark it as unlocked
-    const progress = await prisma.userModuleProgress.upsert({
+    const progress = await this.prisma.userModuleProgress.upsert({
       where: {
         userId_moduleId: {
           userId,
@@ -127,7 +135,7 @@ export class AccessControlService {
    */
   async initializeUserProgress(userId: string) {
     // Get Module 1
-    const module1 = await prisma.module.findFirst({
+    const module1 = await this.prisma.module.findFirst({
       where: { order: 1 },
     })
 
@@ -136,7 +144,7 @@ export class AccessControlService {
     }
 
     // Create progress for Module 1 as unlocked
-    const progress = await prisma.userModuleProgress.upsert({
+    const progress = await this.prisma.userModuleProgress.upsert({
       where: {
         userId_moduleId: {
           userId,
@@ -161,8 +169,8 @@ export class AccessControlService {
    * Check if a user has completed all modules
    */
   async hasCompletedAllModules(userId: string): Promise<boolean> {
-    const totalModules = await prisma.module.count()
-    const completedModules = await prisma.userModuleProgress.count({
+    const totalModules = await this.prisma.module.count()
+    const completedModules = await this.prisma.userModuleProgress.count({
       where: {
         userId,
         status: 'COMPLETED',
@@ -174,4 +182,4 @@ export class AccessControlService {
   }
 }
 
-export const accessControlService = new AccessControlService()
+export const accessControlService = AccessControlService.createDefault()

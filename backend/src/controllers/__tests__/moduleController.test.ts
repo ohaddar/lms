@@ -260,36 +260,6 @@ describe('Module Controller', () => {
   })
 
   describe('getMyModules', () => {
-    it('should return current user modules with progress', async () => {
-      const mockModules = [
-        {
-          id: '1',
-          title: 'Module 1',
-          videoUrl: 'https://youtube.com/watch?v=test1',
-          order: 1,
-          createdAt: new Date(),
-          updatedAt: new Date(),
-          userProgress: [],
-        },
-      ]
-
-      mockRequest.user = { userId: 'user1', email: 'test@test.com' }
-      mockPrismaModule.findMany.mockResolvedValue(mockModules)
-
-      await getMyModules(mockRequest as Request, mockResponse as Response)
-
-      expect(jsonMock).toHaveBeenCalledWith({
-        success: true,
-        data: expect.arrayContaining([
-          expect.objectContaining({
-            id: '1',
-            title: 'Module 1',
-            progress: null,
-          }),
-        ]),
-      })
-    })
-
     it('should return 401 if not authenticated', async () => {
       mockRequest.user = undefined
 

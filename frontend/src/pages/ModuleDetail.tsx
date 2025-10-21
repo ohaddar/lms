@@ -195,7 +195,7 @@ export const ModuleDetail = () => {
               </p>
               <button
                 onClick={() => navigate('/modules')}
-                className="px-6 py-3 bg-gradient-to-r from-primary-600 to-primary-700 text-white rounded-xl hover:from-primary-700 hover:to-primary-800 transition-all duration-200 font-semibold shadow-medium hover:shadow-large"
+                className="px-6 py-3 bg-linear-to-r from-primary-600 to-primary-700 text-white rounded-xl hover:from-primary-700 hover:to-primary-800 transition-all duration-200 font-semibold shadow-medium hover:shadow-large"
               >
                 Back to Modules
               </button>
@@ -234,7 +234,7 @@ export const ModuleDetail = () => {
         <div className="flex flex-col md:flex-row md:items-center justify-between gap-6">
           <div className="flex-1">
             <div className="flex items-center gap-4 mb-3">
-              <div className="w-14 h-14 bg-gradient-to-br from-primary-500 to-primary-700 rounded-xl flex items-center justify-center shadow-medium">
+              <div className="w-14 h-14 bg-linear-to-br from-primary-500 to-primary-700 rounded-xl flex items-center justify-center shadow-medium">
                 <span className="text-white font-bold text-2xl">
                   {currentModule.order}
                 </span>
@@ -244,7 +244,7 @@ export const ModuleDetail = () => {
               </h1>
             </div>
             {currentModule.progress?.completedAt && (
-              <div className="flex items-center gap-2 text-green-600 font-medium bg-green-50 rounded-xl px-4 py-2 inline-flex">
+              <div className="inline-flex items-center gap-2 text-green-600 font-medium bg-green-50 rounded-xl px-4 py-2">
                 <svg
                   className="w-5 h-5"
                   fill="currentColor"
@@ -274,7 +274,7 @@ export const ModuleDetail = () => {
       {/* Video Player */}
       <div className="bg-white rounded-3xl shadow-soft p-6 md:p-8 mb-6 animate-slide-up">
         <h2 className="text-2xl font-bold text-gray-900 mb-6 flex items-center gap-2">
-          <span className="w-1 h-8 bg-gradient-to-b from-primary-500 to-primary-700 rounded-full"></span>
+          <span className="w-1 h-8 bg-linear-to-b from-primary-500 to-primary-700 rounded-full"></span>
           Video Lecture
         </h2>
         <YouTubePlayer videoUrl={currentModule.videoUrl} />
@@ -296,8 +296,8 @@ export const ModuleDetail = () => {
       {/* Completion Card */}
       {currentModule.progress?.status === ModuleStatus.COMPLETED && (
         <>
-          <div className="bg-gradient-to-br from-green-50 to-emerald-50 border-2 border-green-200 rounded-3xl p-8 mb-6 text-center shadow-soft animate-scale-in">
-            <div className="inline-flex items-center justify-center w-20 h-20 bg-gradient-to-br from-green-500 to-emerald-600 rounded-2xl mb-4 shadow-large">
+          <div className="bg-linear-to-br from-green-50 to-emerald-50 border-2 border-green-200 rounded-3xl p-8 mb-6 text-center shadow-soft animate-scale-in">
+            <div className="inline-flex items-center justify-center w-20 h-20 bg-linear-to-br from-green-500 to-emerald-600 rounded-2xl mb-4 shadow-large">
               <svg
                 className="w-10 h-10 text-white"
                 fill="none"
@@ -356,7 +356,7 @@ export const ModuleDetail = () => {
         <button
           onClick={() => handleNavigate('next')}
           disabled={!hasNext}
-          className="w-full sm:w-auto flex items-center justify-center gap-2 px-8 py-4 bg-gradient-to-r from-primary-600 to-primary-700 text-white rounded-2xl shadow-medium hover:shadow-large hover:from-primary-700 hover:to-primary-800 transition-all duration-200 disabled:from-gray-400 disabled:to-gray-500 disabled:cursor-not-allowed disabled:hover:shadow-medium font-semibold"
+          className="w-full sm:w-auto flex items-center justify-center gap-2 px-8 py-4 bg-linear-to-r from-primary-600 to-primary-700 text-white rounded-2xl shadow-medium hover:shadow-large hover:from-primary-700 hover:to-primary-800 transition-all duration-200 disabled:from-gray-400 disabled:to-gray-500 disabled:cursor-not-allowed disabled:hover:shadow-medium font-semibold"
         >
           <span>Next Module</span>
           <svg
@@ -378,7 +378,7 @@ export const ModuleDetail = () => {
       {/* Module List */}
       <div className="bg-white rounded-3xl shadow-soft p-8 border border-gray-100">
         <h2 className="text-2xl font-bold text-gray-900 mb-6 flex items-center gap-2">
-          <span className="w-1 h-8 bg-gradient-to-b from-primary-500 to-primary-700 rounded-full"></span>
+          <span className="w-1 h-8 bg-linear-to-b from-primary-500 to-primary-700 rounded-full"></span>
           All Modules
         </h2>
         <div className="space-y-3">
@@ -396,7 +396,7 @@ export const ModuleDetail = () => {
                 disabled={isLocked}
                 className={`w-full text-left p-5 rounded-2xl transition-all duration-200 ${
                   isActive
-                    ? 'bg-gradient-to-r from-primary-50 to-blue-50 border-2 border-primary-300 shadow-soft'
+                    ? 'bg-linear-to-r from-primary-50 to-blue-50 border-2 border-primary-300 shadow-soft'
                     : isLocked
                       ? 'bg-gray-100 border border-gray-300 cursor-not-allowed opacity-60'
                       : 'bg-gray-50 hover:bg-gray-100 border border-gray-200 hover:border-gray-300'
@@ -412,7 +412,7 @@ export const ModuleDetail = () => {
                         isLocked
                           ? 'bg-gray-400 text-white'
                           : isActive
-                            ? 'bg-gradient-to-br from-primary-500 to-primary-700 text-white'
+                            ? 'bg-linear-to-br from-primary-500 to-primary-700 text-white'
                             : 'bg-white text-gray-700'
                       }`}
                     >

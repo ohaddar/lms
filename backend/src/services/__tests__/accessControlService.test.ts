@@ -1,39 +1,28 @@
 import { AccessControlService } from '../accessControlService'
 
-// Create mock functions
-const mockModuleFindFirst = jest.fn()
-const mockModuleFindMany = jest.fn()
-const mockModuleFindUnique = jest.fn()
-const mockModuleCount = jest.fn()
-const mockUserQuizAttemptFindFirst = jest.fn()
-const mockUserModuleProgressUpsert = jest.fn()
-const mockUserModuleProgressCount = jest.fn()
-
-// Mock Prisma Client
-jest.mock('../../generated/prisma', () => ({
-  PrismaClient: jest.fn().mockImplementation(() => ({
-    module: {
-      findFirst: mockModuleFindFirst,
-      findMany: mockModuleFindMany,
-      findUnique: mockModuleFindUnique,
-      count: mockModuleCount,
-    },
-    userQuizAttempt: {
-      findFirst: mockUserQuizAttemptFindFirst,
-    },
-    userModuleProgress: {
-      upsert: mockUserModuleProgressUpsert,
-      count: mockUserModuleProgressCount,
-    },
-  })),
-}))
+// Create mock Prisma client with proper Jest typing
+const mockPrisma = {
+  module: {
+    findFirst: jest.fn(),
+    findMany: jest.fn(),
+    findUnique: jest.fn(),
+    count: jest.fn(),
+  },
+  userQuizAttempt: {
+    findFirst: jest.fn(),
+  },
+  userModuleProgress: {
+    upsert: jest.fn(),
+    count: jest.fn(),
+  },
+} as any
 
 describe('AccessControlService', () => {
   let accessControlService: AccessControlService
 
   beforeEach(() => {
     jest.clearAllMocks()
-    accessControlService = new AccessControlService()
+    accessControlService = new AccessControlService(mockPrisma)
   })
 
   describe('isModuleAccessible', () => {
@@ -49,18 +38,20 @@ describe('AccessControlService', () => {
       const mockPreviousModule = { id: 'module-1', order: 1 }
       const mockQuizAttempt = { id: 'attempt-1', passed: true }
 
-      mockModuleFindFirst.mockResolvedValueOnce(mockPreviousModule)
-      mockUserQuizAttemptFindFirst.mockResolvedValueOnce(mockQuizAttempt)
+      mockPrisma.module.findFirst.mockResolvedValueOnce(mockPreviousModule)
+      mockPrisma.userQuizAttempt.findFirst.mockResolvedValueOnce(
+        mockQuizAttempt
+      )
 
       const result = await accessControlService.isModuleAccessible(
         'user-123',
         2
       )
       expect(result).toBe(true)
-      expect(mockModuleFindFirst).toHaveBeenCalledWith({
+      expect(mockPrisma.module.findFirst).toHaveBeenCalledWith({
         where: { order: 1 },
       })
-      expect(mockUserQuizAttemptFindFirst).toHaveBeenCalledWith({
+      expect(mockPrisma.userQuizAttempt.findFirst).toHaveBeenCalledWith({
         where: {
           userId: 'user-123',
           moduleId: 'module-1',
@@ -72,8 +63,8 @@ describe('AccessControlService', () => {
     it('should deny access to Module 2 if user did not pass Quiz 1', async () => {
       const mockPreviousModule = { id: 'module-1', order: 1 }
 
-      mockModuleFindFirst.mockResolvedValueOnce(mockPreviousModule)
-      mockUserQuizAttemptFindFirst.mockResolvedValueOnce(null)
+      mockPrisma.module.findFirst.mockResolvedValueOnce(mockPreviousModule)
+      mockPrisma.userQuizAttempt.findFirst.mockResolvedValueOnce(null)
 
       const result = await accessControlService.isModuleAccessible(
         'user-123',
@@ -83,7 +74,7 @@ describe('AccessControlService', () => {
     })
 
     it('should deny access if previous module does not exist', async () => {
-      mockModuleFindFirst.mockResolvedValueOnce(null)
+      mockPrisma.module.findFirst.mockResolvedValueOnce(null)
 
       const result = await accessControlService.isModuleAccessible(
         'user-123',
@@ -105,9 +96,9 @@ describe('AccessControlService', () => {
         status: 'NOT_STARTED',
       }
 
-      mockModuleFindUnique.mockResolvedValueOnce(mockCurrentModule)
-      mockModuleFindFirst.mockResolvedValueOnce(mockNextModule)
-      mockUserModuleProgressUpsert.mockResolvedValueOnce(mockProgress)
+      mockPrisma.module.findUnique.mockResolvedValueOnce(mockCurrentModule)
+      mockPrisma.module.findFirst.mockResolvedValueOnce(mockNextModule)
+      mockPrisma.userModuleProgress.upsert.mockResolvedValueOnce(mockProgress)
 
       const result = await accessControlService.unlockNextModule(
         'user-123',
@@ -118,7 +109,7 @@ describe('AccessControlService', () => {
         module: mockNextModule,
         progress: mockProgress,
       })
-      expect(mockUserModuleProgressUpsert).toHaveBeenCalledWith({
+      expect(mockPrisma.userModuleProgress.upsert).toHaveBeenCalledWith({
         where: {
           userId_moduleId: {
             userId: 'user-123',
@@ -140,8 +131,8 @@ describe('AccessControlService', () => {
     it('should return null if there is no next module', async () => {
       const mockCurrentModule = { id: 'module-3', order: 3 }
 
-      mockModuleFindUnique.mockResolvedValueOnce(mockCurrentModule)
-      mockModuleFindFirst.mockResolvedValueOnce(null)
+      mockPrisma.module.findUnique.mockResolvedValueOnce(mockCurrentModule)
+      mockPrisma.module.findFirst.mockResolvedValueOnce(null)
 
       const result = await accessControlService.unlockNextModule(
         'user-123',
@@ -152,7 +143,7 @@ describe('AccessControlService', () => {
     })
 
     it('should throw error if current module does not exist', async () => {
-      mockModuleFindUnique.mockResolvedValueOnce(null)
+      mockPrisma.module.findUnique.mockResolvedValueOnce(null)
 
       await expect(
         accessControlService.unlockNextModule('user-123', 'invalid-module')
@@ -171,14 +162,14 @@ describe('AccessControlService', () => {
         status: 'NOT_STARTED',
       }
 
-      mockModuleFindFirst.mockResolvedValueOnce(mockModule1)
-      mockUserModuleProgressUpsert.mockResolvedValueOnce(mockProgress)
+      mockPrisma.module.findFirst.mockResolvedValueOnce(mockModule1)
+      mockPrisma.userModuleProgress.upsert.mockResolvedValueOnce(mockProgress)
 
       const result =
         await accessControlService.initializeUserProgress('user-123')
 
       expect(result).toEqual(mockProgress)
-      expect(mockUserModuleProgressUpsert).toHaveBeenCalledWith({
+      expect(mockPrisma.userModuleProgress.upsert).toHaveBeenCalledWith({
         where: {
           userId_moduleId: {
             userId: 'user-123',
@@ -198,7 +189,7 @@ describe('AccessControlService', () => {
     })
 
     it('should throw error if Module 1 does not exist', async () => {
-      mockModuleFindFirst.mockResolvedValueOnce(null)
+      mockPrisma.module.findFirst.mockResolvedValueOnce(null)
 
       await expect(
         accessControlService.initializeUserProgress('user-123')
@@ -208,14 +199,14 @@ describe('AccessControlService', () => {
 
   describe('hasCompletedAllModules', () => {
     it('should return true if all modules are completed', async () => {
-      mockModuleCount.mockResolvedValueOnce(3)
-      mockUserModuleProgressCount.mockResolvedValueOnce(3)
+      mockPrisma.module.count.mockResolvedValueOnce(3)
+      mockPrisma.userModuleProgress.count.mockResolvedValueOnce(3)
 
       const result =
         await accessControlService.hasCompletedAllModules('user-123')
 
       expect(result).toBe(true)
-      expect(mockUserModuleProgressCount).toHaveBeenCalledWith({
+      expect(mockPrisma.userModuleProgress.count).toHaveBeenCalledWith({
         where: {
           userId: 'user-123',
           status: 'COMPLETED',
@@ -225,8 +216,8 @@ describe('AccessControlService', () => {
     })
 
     it('should return false if not all modules are completed', async () => {
-      mockModuleCount.mockResolvedValueOnce(3)
-      mockUserModuleProgressCount.mockResolvedValueOnce(2)
+      mockPrisma.module.count.mockResolvedValueOnce(3)
+      mockPrisma.userModuleProgress.count.mockResolvedValueOnce(2)
 
       const result =
         await accessControlService.hasCompletedAllModules('user-123')
@@ -235,8 +226,8 @@ describe('AccessControlService', () => {
     })
 
     it('should return false if there are no modules', async () => {
-      mockModuleCount.mockResolvedValueOnce(0)
-      mockUserModuleProgressCount.mockResolvedValueOnce(0)
+      mockPrisma.module.count.mockResolvedValueOnce(0)
+      mockPrisma.userModuleProgress.count.mockResolvedValueOnce(0)
 
       const result =
         await accessControlService.hasCompletedAllModules('user-123')
@@ -268,12 +259,12 @@ describe('AccessControlService', () => {
         },
       ]
 
-      mockModuleFindMany.mockResolvedValueOnce(mockModules)
-      mockModuleFindFirst.mockResolvedValueOnce({
+      mockPrisma.module.findMany.mockResolvedValueOnce(mockModules)
+      mockPrisma.module.findFirst.mockResolvedValueOnce({
         id: 'module-1',
         order: 1,
       })
-      mockUserQuizAttemptFindFirst.mockResolvedValueOnce({
+      mockPrisma.userQuizAttempt.findFirst.mockResolvedValueOnce({
         id: 'attempt-1',
         passed: true,
       })

@@ -111,7 +111,7 @@ const Home: React.FC = () => {
     <Layout>
       {/* Hero Section */}
       <div className="mb-8 animate-slide-down">
-        <div className="bg-gradient-to-r from-primary-600 to-primary-800 rounded-3xl shadow-large p-8 md:p-12 text-white overflow-hidden relative">
+        <div className="bg-linear-to-r from-primary-600 to-primary-800 rounded-3xl shadow-large p-8 md:p-12 text-white overflow-hidden relative">
           <div className="absolute top-0 right-0 w-64 h-64 bg-white/10 rounded-full -mr-32 -mt-32"></div>
           <div className="absolute bottom-0 left-0 w-48 h-48 bg-white/10 rounded-full -ml-24 -mb-24"></div>
           <div className="relative z-10">
@@ -165,7 +165,7 @@ const Home: React.FC = () => {
       {/* Quick Actions */}
       <div className="mb-8 animate-slide-up">
         <h2 className="text-2xl font-bold text-gray-900 mb-6 flex items-center gap-2">
-          <span className="w-1 h-8 bg-gradient-to-b from-primary-500 to-primary-700 rounded-full"></span>
+          <span className="w-1 h-8 bg-linear-to-b from-primary-500 to-primary-700 rounded-full"></span>
           Quick Actions
         </h2>
         <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
@@ -183,7 +183,7 @@ const Home: React.FC = () => {
               </h3>
               <p className="text-gray-600 mb-4">{action.description}</p>
               <div
-                className={`inline-flex items-center gap-2 font-semibold bg-gradient-to-r ${action.color} bg-clip-text text-transparent`}
+                className={`inline-flex items-center gap-2 font-semibold bg-linear-to-r ${action.color} bg-clip-text text-transparent`}
               >
                 <span>Get Started</span>
                 <svg
@@ -208,13 +208,13 @@ const Home: React.FC = () => {
       {/* Certificate Section - Show if user has completed all modules */}
       {!loadingCertificate && certificate && (
         <div className="mb-8 animate-fade-in">
-          <div className="bg-gradient-to-br from-amber-50 to-yellow-50 border-2 border-amber-300 rounded-3xl shadow-large p-8 overflow-hidden relative">
+          <div className="bg-linear-to-br from-amber-50 to-yellow-50 border-2 border-amber-300 rounded-3xl shadow-large p-8 overflow-hidden relative">
             <div className="absolute top-0 right-0 w-64 h-64 bg-amber-200/20 rounded-full -mr-32 -mt-32"></div>
             <div className="absolute bottom-0 left-0 w-48 h-48 bg-yellow-200/20 rounded-full -ml-24 -mb-24"></div>
             <div className="relative z-10">
               <div className="flex flex-col md:flex-row items-start md:items-center justify-between gap-6">
                 <div className="flex items-start gap-4 flex-1">
-                  <div className="w-16 h-16 bg-gradient-to-br from-amber-500 to-yellow-600 rounded-2xl flex items-center justify-center flex-shrink-0 shadow-medium">
+                  <div className="w-16 h-16 bg-linear-to-br from-amber-500 to-yellow-600 rounded-2xl flex items-center justify-center shrink-0 shadow-medium">
                     <svg
                       className="w-8 h-8 text-white"
                       fill="none"
@@ -258,7 +258,7 @@ const Home: React.FC = () => {
                 <button
                   onClick={handleDownloadCertificate}
                   disabled={downloadingCertificate}
-                  className="px-6 py-4 bg-gradient-to-r from-amber-600 to-yellow-600 text-white rounded-xl font-semibold hover:from-amber-700 hover:to-yellow-700 transition-all duration-200 shadow-medium hover:shadow-large hover:scale-105 inline-flex items-center gap-3 disabled:opacity-50 disabled:cursor-not-allowed"
+                  className="px-6 py-4 bg-linear-to-r from-amber-600 to-yellow-600 text-white rounded-xl font-semibold hover:from-amber-700 hover:to-yellow-700 transition-all duration-200 shadow-medium hover:shadow-large hover:scale-105 inline-flex items-center gap-3 disabled:opacity-50 disabled:cursor-not-allowed"
                 >
                   {downloadingCertificate ? (
                     <>
@@ -291,9 +291,9 @@ const Home: React.FC = () => {
       )}
 
       {/* Info Card */}
-      <div className="bg-gradient-to-br from-green-50 to-emerald-50 border border-green-200 rounded-2xl p-6 shadow-soft">
+      <div className="bg-linear-to-br from-green-50 to-emerald-50 border border-green-200 rounded-2xl p-6 shadow-soft">
         <div className="flex items-start gap-4">
-          <div className="w-12 h-12 bg-green-500 rounded-xl flex items-center justify-center flex-shrink-0">
+          <div className="w-12 h-12 bg-green-500 rounded-xl flex items-center justify-center shrink-0">
             <svg
               className="w-6 h-6 text-white"
               fill="none"

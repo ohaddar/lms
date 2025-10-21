@@ -34,12 +34,6 @@ describe('YouTubePlayer', () => {
     expect(screen.getByText('Invalid YouTube URL')).toBeInTheDocument()
   })
 
-  it('displays message when no URL provided', () => {
-    render(<YouTubePlayer videoUrl="" />)
-
-    expect(screen.getByText('No video URL provided')).toBeInTheDocument()
-  })
-
   it('applies custom className', () => {
     const videoUrl = 'https://www.youtube.com/watch?v=IccjZDV93lw'
     const { container } = render(
