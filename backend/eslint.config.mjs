@@ -18,7 +18,8 @@ export default [
   ...tseslint.configs.recommended,
   prettierConfig,
   {
-    files: ['**/*.ts'],
+    files: ['src/**/*.ts'],
+    ignores: ['src/**/__tests__/**', 'src/**/*.test.ts', 'src/**/*.spec.ts'],
     plugins: {
       prettier: prettierPlugin,
     },
@@ -39,7 +40,30 @@ export default [
           varsIgnorePattern: '^_',
         },
       ],
-      '@typescript-eslint/no-explicit-any': 'warn',
+      '@typescript-eslint/no-explicit-any': 'error',
+      'no-console': 'off',
+    },
+  },
+  {
+    files: ['**/*.test.ts', '**/__tests__/**/*.ts'],
+    plugins: {
+      prettier: prettierPlugin,
+    },
+    languageOptions: {
+      ecmaVersion: 'latest',
+      sourceType: 'module',
+      parser: tseslint.parser,
+    },
+    rules: {
+      'prettier/prettier': 'error',
+      '@typescript-eslint/no-unused-vars': [
+        'error',
+        {
+          argsIgnorePattern: '^_',
+          varsIgnorePattern: '^_',
+        },
+      ],
+      '@typescript-eslint/no-explicit-any': 'off',
       'no-console': 'off',
     },
   },

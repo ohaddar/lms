@@ -1,9 +1,7 @@
 import { Request, Response } from 'express'
-import { PrismaClient } from '../generated/prisma'
+import { prisma } from '@/config'
 import { comparePassword } from '../utils/password'
 import { generateToken } from '../utils/jwt'
-
-const prisma = new PrismaClient()
 
 /**
  * Login user with email and password

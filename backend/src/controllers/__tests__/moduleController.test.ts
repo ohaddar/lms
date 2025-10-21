@@ -1,37 +1,30 @@
 import { describe, it, expect, beforeEach, jest } from '@jest/globals'
 import type { Request, Response } from 'express'
 
-// Mock Prisma Client
+// Mock Prisma Client (ensure promise return types for strict Jest typings)
 const mockPrismaModule = {
-  findMany: jest.fn() as any,
-  findUnique: jest.fn() as any,
-  create: jest.fn() as any,
-  update: jest.fn() as any,
+  findMany: jest.fn<(...args: any[]) => Promise<any>>(),
+  findUnique: jest.fn<(...args: any[]) => Promise<any>>(),
+  create: jest.fn<(...args: any[]) => Promise<any>>(),
+  update: jest.fn<(...args: any[]) => Promise<any>>(),
 }
 
 const mockPrismaUser = {
-  findUnique: jest.fn() as any,
+  findUnique: jest.fn<(...args: any[]) => Promise<any>>(),
 }
 
 const mockPrismaUserModuleProgress = {
-  upsert: jest.fn() as any,
-  create: jest.fn() as any,
+  upsert: jest.fn<(...args: any[]) => Promise<any>>(),
+  create: jest.fn<(...args: any[]) => Promise<any>>(),
 }
 
-jest.mock('../../generated/prisma', () => {
-  return {
-    PrismaClient: jest.fn(() => ({
-      module: mockPrismaModule,
-      user: mockPrismaUser,
-      userModuleProgress: mockPrismaUserModuleProgress,
-    })),
-    ModuleStatus: {
-      NOT_STARTED: 'NOT_STARTED',
-      IN_PROGRESS: 'IN_PROGRESS',
-      COMPLETED: 'COMPLETED',
-    },
-  }
-})
+jest.mock('@/config', () => ({
+  prisma: {
+    module: mockPrismaModule,
+    user: mockPrismaUser,
+    userModuleProgress: mockPrismaUserModuleProgress,
+  },
+}))
 
 // Import after mock - using require to avoid top-level await
 import * as moduleController from '../moduleController'
@@ -46,10 +39,10 @@ const {
 } = moduleController
 
 describe('Module Controller', () => {
-  let mockRequest: Partial<Request>
+  let mockRequest: Partial<Request> & { user?: any }
   let mockResponse: Partial<Response>
-  let jsonMock: any
-  let statusMock: any
+  let jsonMock: jest.Mock
+  let statusMock: jest.Mock
 
   beforeEach(() => {
     jsonMock = jest.fn()
@@ -57,9 +50,9 @@ describe('Module Controller', () => {
 
     mockRequest = {}
     mockResponse = {
-      json: jsonMock,
-      status: statusMock,
-    } as any
+      json: jsonMock as unknown as Response['json'],
+      status: statusMock as unknown as Response['status'],
+    } as Partial<Response>
 
     // Clear all mocks
     jest.clearAllMocks()

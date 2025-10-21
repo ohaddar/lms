@@ -1,4 +1,5 @@
-import { PrismaClient } from '../generated/prisma'
+import type { PrismaClient } from '@prisma/client'
+import { prisma as sharedPrisma } from '@/config'
 
 /**
  * Access control service for managing module access and unlocking logic
@@ -11,7 +12,7 @@ export class AccessControlService {
    * This maintains backward compatibility
    */
   static createDefault(): AccessControlService {
-    return new AccessControlService(new PrismaClient())
+    return new AccessControlService(sharedPrisma)
   }
 
   /**

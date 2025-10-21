@@ -1,30 +1,29 @@
 import { Request, Response } from 'express'
-import { PrismaClient } from '../../generated/prisma'
+
+// Manual prisma mock with late binding for module substitution
+type MockPrisma = {
+  module: { findUnique: jest.Mock }
+  question: { findMany: jest.Mock }
+  userQuizAttempt: { create: jest.Mock; findMany: jest.Mock }
+  userModuleProgress: { upsert: jest.Mock }
+}
+let prisma: MockPrisma
+jest.mock('@/config', () => ({
+  get prisma() {
+    return prisma
+  },
+}))
+// Stub accessControlService to avoid touching real default instance during import
+const mockAccessControlService = {
+  unlockNextModule: jest.fn(),
+  isModuleAccessible: jest.fn(),
+}
+jest.mock('@/services', () => ({
+  accessControlService: mockAccessControlService,
+}))
+
+// Import controllers after mocks
 import { getModuleQuiz, submitQuiz, getQuizAttempts } from '../quizController'
-
-// Mock Prisma
-jest.mock('../../generated/prisma', () => {
-  const mockPrisma = {
-    module: {
-      findUnique: jest.fn(),
-    },
-    question: {
-      findMany: jest.fn(),
-    },
-    userQuizAttempt: {
-      create: jest.fn(),
-      findMany: jest.fn(),
-    },
-    userModuleProgress: {
-      upsert: jest.fn(),
-    },
-  }
-  return {
-    PrismaClient: jest.fn(() => mockPrisma),
-  }
-})
-
-const prisma = new PrismaClient()
 
 describe('Quiz Controller', () => {
   let mockReq: Partial<Request>
@@ -33,8 +32,15 @@ describe('Quiz Controller', () => {
   let statusMock: jest.Mock
 
   beforeEach(() => {
+    // initialize prisma mock per test
+    prisma = {
+      module: { findUnique: jest.fn() },
+      question: { findMany: jest.fn() },
+      userQuizAttempt: { create: jest.fn(), findMany: jest.fn() },
+      userModuleProgress: { upsert: jest.fn() },
+    }
     jsonMock = jest.fn()
-    statusMock = jest.fn(() => ({ json: jsonMock })) as any
+    statusMock = jest.fn(() => ({ json: jsonMock }))
 
     mockReq = {
       params: {},
@@ -43,8 +49,8 @@ describe('Quiz Controller', () => {
     }
 
     mockRes = {
-      status: statusMock,
-      json: jsonMock,
+      status: statusMock as unknown as Response['status'],
+      json: jsonMock as unknown as Response['json'],
     }
 
     jest.clearAllMocks()

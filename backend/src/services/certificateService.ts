@@ -1,7 +1,5 @@
-import { PrismaClient } from '../generated/prisma'
+import { prisma } from '@/config'
 import { hasCompletedAllModules } from './progressService'
-
-const prisma = new PrismaClient()
 
 /**
  * Generate a unique certificate number

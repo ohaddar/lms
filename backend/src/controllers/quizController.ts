@@ -1,8 +1,6 @@
 import { Request, Response } from 'express'
-import { PrismaClient } from '../generated/prisma'
+import { prisma } from '@/config'
 import { accessControlService } from '../services'
-
-const prisma = new PrismaClient()
 
 /**
  * Get quiz questions for a specific module

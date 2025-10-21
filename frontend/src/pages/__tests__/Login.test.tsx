@@ -197,6 +197,8 @@ describe('Login Page', () => {
 
     expect(screen.getByText(/alice@vibe-lms.com/i)).toBeInTheDocument()
     expect(screen.getByText(/bob@vibe-lms.com/i)).toBeInTheDocument()
-    expect(screen.getByText(/student@vibe-lms.com/i)).toBeInTheDocument()
+    expect(
+      screen.getByText(/camille\.dupont@vibe-lms\.com/i)
+    ).toBeInTheDocument()
   })
 })

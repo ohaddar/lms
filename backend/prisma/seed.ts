@@ -1,4 +1,4 @@
-import { PrismaClient } from '../src/generated/prisma'
+import { PrismaClient } from '@prisma/client'
 import bcrypt from 'bcrypt'
 
 const prisma = new PrismaClient()
@@ -199,10 +199,10 @@ async function main() {
         lastName: 'Smith',
       },
       {
-        email: 'student@vibe-lms.com',
-        password: await bcrypt.hash('student123', SALT_ROUNDS),
-        firstName: 'Jane',
-        lastName: 'Student',
+        email: 'camille.dupont@vibe-lms.com',
+        password: await bcrypt.hash('camille123', SALT_ROUNDS),
+        firstName: 'Camille',
+        lastName: 'Dupont',
       },
     ]
 
@@ -215,7 +215,7 @@ async function main() {
 
     // Create initial module progress for the student user
     const student = await prisma.user.findUnique({
-      where: { email: 'student@vibe-lms.com' },
+      where: { email: 'camille.dupont@vibe-lms.com' },
     })
     const allModules = await prisma.module.findMany({
       orderBy: { order: 'asc' },
@@ -243,7 +243,7 @@ async function main() {
     console.log('\n📝 Test credentials:')
     console.log('   Alice: alice@vibe-lms.com / alice123')
     console.log('   Bob: bob@vibe-lms.com / bob123')
-    console.log('   Student: student@vibe-lms.com / student123')
+    console.log('   Camille: camille.dupont@vibe-lms.com / camille123')
   } catch (error) {
     console.error('❌ Error during seeding:', error)
     throw error

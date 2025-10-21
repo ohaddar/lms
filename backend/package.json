@@ -3,6 +3,7 @@
   "version": "1.0.0",
   "description": "Vibe LMS Backend API",
   "main": "dist/server.js",
+  "type": "commonjs",
   "scripts": {
     "dev": "nodemon",
     "dev:api": "nodemon",

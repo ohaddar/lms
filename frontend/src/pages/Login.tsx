@@ -224,9 +224,9 @@ export default function Login() {
                 },
                 { name: 'Bob', email: 'bob@vibe-lms.com', password: 'bob123' },
                 {
-                  name: 'Student',
-                  email: 'student@vibe-lms.com',
-                  password: 'student123',
+                  name: 'Camille Dupont',
+                  email: 'camille.dupont@vibe-lms.com',
+                  password: 'camille123',
                 },
               ].map((cred, index) => (
                 <div

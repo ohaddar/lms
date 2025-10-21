@@ -1,29 +1,30 @@
 import { describe, it, expect, jest, beforeEach } from '@jest/globals'
 import { Request, Response } from 'express'
 import { login, logout, getCurrentUser } from '../authController'
-import { PrismaClient } from '../../generated/prisma'
 import * as passwordUtils from '../../utils/password'
 import * as jwtUtils from '../../utils/jwt'
 
-// Mock Prisma Client
-jest.mock('../../generated/prisma', () => {
-  const mockPrismaClient = {
-    user: {
-      findUnique: jest.fn(),
-    },
+// Mock shared prisma from config (late binding)
+type MockPrisma = {
+  user: {
+    // Explicitly type as Promise-returning to satisfy mockResolvedValue typings
+    findUnique: jest.Mock<(...args: any[]) => Promise<any>>
   }
-  return {
-    PrismaClient: jest.fn(() => mockPrismaClient),
-  }
-})
+}
+let mockPrisma: MockPrisma
+jest.mock('@/config', () => ({
+  get prisma() {
+    return mockPrisma
+  },
+}))
 
 jest.mock('../../utils/password')
 jest.mock('../../utils/jwt')
 
-const mockPrisma = new PrismaClient()
+// mockPrisma defined above
 
 describe('Auth Controller', () => {
-  let mockRequest: Partial<Request>
+  let mockRequest: Partial<Request> & { user?: any }
   let mockResponse: Partial<Response>
   let mockJson: jest.Mock
   let mockStatus: jest.Mock
@@ -31,6 +32,11 @@ describe('Auth Controller', () => {
   let mockClearCookie: jest.Mock
 
   beforeEach(() => {
+    mockPrisma = {
+      user: {
+        findUnique: jest.fn(),
+      },
+    }
     mockJson = jest.fn()
     mockStatus = jest.fn().mockReturnThis()
     mockCookie = jest.fn().mockReturnThis()
@@ -42,10 +48,10 @@ describe('Auth Controller', () => {
     }
 
     mockResponse = {
-      json: mockJson as any,
-      status: mockStatus as any,
-      cookie: mockCookie as any,
-      clearCookie: mockClearCookie as any,
+      json: mockJson as unknown as Response['json'],
+      status: mockStatus as unknown as Response['status'],
+      cookie: mockCookie as unknown as Response['cookie'],
+      clearCookie: mockClearCookie as unknown as Response['clearCookie'],
     }
 
     jest.clearAllMocks()
@@ -68,9 +74,11 @@ describe('Auth Controller', () => {
         email: 'test@example.com',
         password: 'password123',
       }
-      ;(mockPrisma.user.findUnique as any).mockResolvedValue(validUser)
-      ;(passwordUtils.comparePassword as any).mockResolvedValue(true)
-      ;(jwtUtils.generateToken as any).mockReturnValue('mock-token')
+      mockPrisma.user.findUnique.mockResolvedValue(validUser)
+      jest
+        .mocked(passwordUtils)
+        .comparePassword.mockResolvedValue(true as never)
+      jest.mocked(jwtUtils).generateToken.mockReturnValue('mock-token' as never)
 
       await login(mockRequest as Request, mockResponse as Response)
 
@@ -147,7 +155,7 @@ describe('Auth Controller', () => {
         email: 'nonexistent@example.com',
         password: 'password123',
       }
-      ;(mockPrisma.user.findUnique as any).mockResolvedValue(null)
+      mockPrisma.user.findUnique.mockResolvedValue(null)
 
       await login(mockRequest as Request, mockResponse as Response)
 
@@ -162,7 +170,7 @@ describe('Auth Controller', () => {
         email: 'test@example.com',
         password: 'password123',
       }
-      ;(mockPrisma.user.findUnique as any).mockResolvedValue({
+      mockPrisma.user.findUnique.mockResolvedValue({
         ...validUser,
         isActive: false,
       })
@@ -180,8 +188,10 @@ describe('Auth Controller', () => {
         email: 'test@example.com',
         password: 'wrongpassword',
       }
-      ;(mockPrisma.user.findUnique as any).mockResolvedValue(validUser)
-      ;(passwordUtils.comparePassword as any).mockResolvedValue(false)
+      mockPrisma.user.findUnique.mockResolvedValue(validUser)
+      jest
+        .mocked(passwordUtils)
+        .comparePassword.mockResolvedValue(false as never)
 
       await login(mockRequest as Request, mockResponse as Response)
 
@@ -217,7 +227,7 @@ describe('Auth Controller', () => {
         userId: '123',
         email: 'test@example.com',
       }
-      ;(mockPrisma.user.findUnique as any).mockResolvedValue(mockUser)
+      mockPrisma.user.findUnique.mockResolvedValue(mockUser)
 
       await getCurrentUser(mockRequest as Request, mockResponse as Response)
 
@@ -240,7 +250,7 @@ describe('Auth Controller', () => {
         userId: '123',
         email: 'test@example.com',
       }
-      ;(mockPrisma.user.findUnique as any).mockResolvedValue(null)
+      mockPrisma.user.findUnique.mockResolvedValue(null)
 
       await getCurrentUser(mockRequest as Request, mockResponse as Response)
 

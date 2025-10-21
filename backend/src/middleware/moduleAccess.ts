@@ -1,8 +1,6 @@
 import { Request, Response, NextFunction } from 'express'
-import { PrismaClient } from '../generated/prisma'
+import { prisma } from '@/config'
 import { accessControlService } from '../services'
-
-const prisma = new PrismaClient()
 
 /**
  * Middleware to check if a user has access to a module

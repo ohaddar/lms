@@ -1,8 +1,7 @@
 import { Request, Response } from 'express'
-import { PrismaClient, ModuleStatus } from '../generated/prisma'
+import type { ModuleStatus } from '@prisma/client'
+import { prisma } from '@/config'
 import { accessControlService } from '../services'
-
-const prisma = new PrismaClient()
 
 /**
  * Get all modules
