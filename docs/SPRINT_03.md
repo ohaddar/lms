@@ -42,9 +42,59 @@ Implement quiz functionality with validation logic
 ### Task 2: Quiz Data Seeding
 
 - Create seed script for quiz questions
-- Add 3 questions per module (9 total questions)
-- Add 4 answer options per question
-- Mark correct answers
+- Add 3 questions per module (9 total questions):
+
+  **Module 1: AI Foundations: Introduction**
+  - Q1: "What is Artificial Intelligence primarily concerned with?"
+    - Creating intelligent machines that can simulate human thinking (correct)
+    - Building faster computers
+    - Designing user interfaces
+    - Managing databases
+  - Q2: "Which of the following is an example of AI application?"
+    - Virtual assistants like Siri or Alexa (correct)
+    - Spreadsheet software
+    - Text editors
+    - Web browsers
+  - Q3: "What distinguishes narrow AI from general AI?"
+    - Narrow AI is designed for specific tasks while general AI can perform any intellectual task (correct)
+    - Narrow AI is faster than general AI
+    - Narrow AI uses less memory
+    - Narrow AI is cheaper to implement
+
+  **Module 2: AI Foundations: Tool Calling**
+  - Q1: "What is tool calling in the context of AI?"
+    - The ability of AI to invoke external functions or APIs to perform tasks (correct)
+    - Making phone calls through AI
+    - Training AI models
+    - Debugging AI code
+  - Q2: "What is a key benefit of tool calling for AI systems?"
+    - It extends AI capabilities beyond text generation to interact with external systems (correct)
+    - It makes AI responses faster
+    - It reduces token usage
+    - It improves grammar
+  - Q3: "What is required for effective tool calling?"
+    - Structured function definitions with clear parameters and descriptions (correct)
+    - Faster internet connection
+    - More GPU power
+    - Larger context windows
+
+  **Module 3: AI Foundations: Hallucinations**
+  - Q1: "What are AI hallucinations?"
+    - When AI generates confident but incorrect or fabricated information (correct)
+    - When AI becomes self-aware
+    - When AI refuses to answer
+    - When AI runs too slowly
+  - Q2: "What is a primary cause of hallucinations in AI models?"
+    - Pattern matching from training data leading to plausible but false outputs (correct)
+    - Too much electricity
+    - User input errors
+    - Slow internet connection
+  - Q3: "How can hallucinations be mitigated?"
+    - Use retrieval-augmented generation and fact-checking mechanisms (correct)
+    - Increase model temperature
+    - Use shorter prompts
+    - Disable safety features
+
 - Run seed script and verify data
 
 ### Task 3: Quiz API Endpoints

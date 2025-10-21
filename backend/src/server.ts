@@ -1,10 +1,16 @@
-import app from "./app";
-import { config } from "@/config/env";
+import app from './app'
+import { config, connectDatabase, disconnectDatabase } from '@/config'
 
-const PORT = config.port;
+const PORT = config.port
 
-const server = app.listen(PORT, () => {
-  console.log(`
+// Start server with database connection
+async function startServer() {
+  try {
+    // Connect to database
+    await connectDatabase()
+
+    const server = app.listen(PORT, () => {
+      console.log(`
   ╔═══════════════════════════════════════╗
   ║                                       ║
   ║   🚀 Vibe LMS API Server Running     ║
@@ -14,19 +20,29 @@ const server = app.listen(PORT, () => {
   ║   API Prefix: ${config.apiPrefix.padEnd(24)}║
   ║                                       ║
   ╚═══════════════════════════════════════╝
-  `);
-});
+      `)
+    })
 
-// Graceful shutdown
-const gracefulShutdown = () => {
-  console.log("\n🛑 Shutting down gracefully...");
-  server.close(() => {
-    console.log("✅ Server closed");
-    process.exit(0);
-  });
-};
+    // Graceful shutdown
+    const gracefulShutdown = async () => {
+      console.log('\n🛑 Shutting down gracefully...')
+      server.close(async () => {
+        await disconnectDatabase()
+        console.log('✅ Server closed')
+        process.exit(0)
+      })
+    }
 
-process.on("SIGTERM", gracefulShutdown);
-process.on("SIGINT", gracefulShutdown);
+    process.on('SIGTERM', gracefulShutdown)
+    process.on('SIGINT', gracefulShutdown)
 
-export default server;
+    return server
+  } catch (error) {
+    console.error('Failed to start server:', error)
+    process.exit(1)
+  }
+}
+
+startServer()
+
+export default startServer

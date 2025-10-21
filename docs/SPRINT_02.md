@@ -39,7 +39,10 @@ Build module data model and display system
 ### Task 2: Module Seeding
 
 - Create seed script for 3 modules
-- Define module data (titles, YouTube URLs, order)
+- Define module data:
+  - Module 1: "AI Foundations: Introduction" - https://www.youtube.com/watch?v=IccjZDV93lw
+  - Module 2: "AI Foundations: Tool Calling" - https://www.youtube.com/watch?v=byR5YVesMeg
+  - Module 3: "AI Foundations: Hallucinations" - https://www.youtube.com/watch?v=JJDAaxxhF74
 - Run seed script and verify data in database
 
 ### Task 3: Module API Endpoints

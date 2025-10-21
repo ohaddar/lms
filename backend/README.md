@@ -4,6 +4,7 @@
 
 - **Runtime**: Node.js with TypeScript
 - **Framework**: Express 5
+- **Database**: PostgreSQL with Prisma ORM
 - **Development**: Nodemon + ts-node
 - **Code Quality**: ESLint, Prettier
 
@@ -68,13 +69,29 @@ Runs the compiled production build.
    cp .env.example .env
    ```
 
-3. Start the development server:
+3. Set up the database:
+
+   ```bash
+   # Create PostgreSQL database
+   createdb vibe_lms
+
+   # Generate Prisma Client
+   npm run db:generate
+
+   # Run database migrations
+   npm run db:migrate
+
+   # Test database connection
+   npm run db:test
+   ```
+
+4. Start the development server:
 
    ```bash
    npm run dev:api
    ```
 
-4. The API will be available at http://localhost:5000
+5. The API will be available at http://localhost:5000
 
 ## API Endpoints
 
@@ -111,12 +128,30 @@ See `.env.example` for all available configuration options:
 
 - `PORT` - Server port (default: 5000)
 - `NODE_ENV` - Environment (development/production)
-- `DATABASE_URL` - Database connection string (to be configured)
-- `JWT_SECRET` - JWT signing secret (to be configured)
+- `DATABASE_URL` - PostgreSQL connection string
+- `API_PREFIX` - API route prefix (default: /api/v1)
+
+## Database
+
+This project uses PostgreSQL with Prisma ORM. For detailed database setup and management instructions, see [prisma/README.md](./prisma/README.md).
+
+### Quick Database Commands
+
+| Command               | Description                   |
+| --------------------- | ----------------------------- |
+| `npm run db:generate` | Generate Prisma Client        |
+| `npm run db:migrate`  | Run migrations (dev)          |
+| `npm run db:push`     | Push schema without migration |
+| `npm run db:studio`   | Open Prisma Studio GUI        |
+| `npm run db:seed`     | Seed database                 |
+| `npm run db:reset`    | Reset database                |
+| `npm run db:test`     | Test connection               |
 
 ## Features
 
 - ✅ Express 5 with TypeScript
+- ✅ PostgreSQL database with Prisma ORM
+- ✅ Database migrations and seeding
 - ✅ Hot reload with Nodemon
 - ✅ Path aliases configured
 - ✅ Global error handling
@@ -125,3 +160,4 @@ See `.env.example` for all available configuration options:
 - ✅ Health check endpoint
 - ✅ Modern folder structure
 - ✅ Environment configuration
+- ✅ Graceful shutdown with database cleanup

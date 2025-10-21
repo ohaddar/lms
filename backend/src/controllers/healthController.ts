@@ -1,16 +1,16 @@
-import { Request, Response } from "express";
-import { ApiResponse } from "@/types";
+import { Request, Response } from 'express'
+import { ApiResponse } from '@/types'
 
 export const getHealth = (_req: Request, res: Response) => {
   const response: ApiResponse = {
     success: true,
-    message: "API is running smoothly",
+    message: 'API is running smoothly',
     data: {
-      status: "healthy",
+      status: 'healthy',
       timestamp: new Date().toISOString(),
       uptime: process.uptime(),
     },
-  };
+  }
 
-  res.status(200).json(response);
-};
+  res.status(200).json(response)
+}

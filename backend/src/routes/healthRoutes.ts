@@ -1,8 +1,8 @@
-import { Router } from "express";
-import { getHealth } from "@/controllers/healthController";
+import { Router } from 'express'
+import { getHealth } from '@/controllers/healthController'
 
-const router = Router();
+const router = Router()
 
-router.get("/", getHealth);
+router.get('/', getHealth)
 
-export default router;
+export default router
