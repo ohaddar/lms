@@ -1,21 +1,30 @@
 import { AccessControlService } from '../accessControlService'
 
-// Create mock Prisma client with proper Jest typing
-const mockPrisma = {
-  module: {
-    findFirst: jest.fn(),
-    findMany: jest.fn(),
-    findUnique: jest.fn(),
-    count: jest.fn(),
-  },
-  userQuizAttempt: {
-    findFirst: jest.fn(),
-  },
-  userModuleProgress: {
-    upsert: jest.fn(),
-    count: jest.fn(),
-  },
-} as any
+// Mock Prisma
+jest.mock('../../generated/prisma', () => {
+  const mockPrisma = {
+    module: {
+      findFirst: jest.fn(),
+      findMany: jest.fn(),
+      findUnique: jest.fn(),
+      count: jest.fn(),
+    },
+    userQuizAttempt: {
+      findFirst: jest.fn(),
+    },
+    userModuleProgress: {
+      upsert: jest.fn(),
+      count: jest.fn(),
+    },
+  }
+  return {
+    PrismaClient: jest.fn(() => mockPrisma),
+  }
+})
+
+import { PrismaClient } from '../../generated/prisma'
+
+const mockPrisma = new PrismaClient() as any
 
 describe('AccessControlService', () => {
   let accessControlService: AccessControlService

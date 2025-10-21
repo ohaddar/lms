@@ -21,6 +21,7 @@ export function authenticate(
     req.user = decoded
     next()
   } catch (error) {
+    console.error('Authentication error:', error)
     res.status(401).json({ error: 'Invalid or expired token' })
   }
 }
