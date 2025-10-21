@@ -2,3 +2,5 @@
 export * from './ProtectedRoute'
 export * from './YouTubePlayer'
 export { default as Quiz } from './Quiz'
+export * from './Header'
+export * from './Layout'
