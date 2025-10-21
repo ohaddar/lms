@@ -1,28 +1,35 @@
 import { api } from './api'
 import type { Module, ModuleWithProgress, ModuleStatus } from '../types'
 
+interface ApiResponse<T> {
+  success: boolean
+  data: T
+}
+
 /**
  * Get all modules
  */
 export const getAllModules = async (): Promise<Module[]> => {
-  const response = await api.get('/modules')
-  return response.data.data
+  const response = await api.get<ApiResponse<Module[]>>('/modules')
+  return response.data
 }
 
 /**
  * Get a single module by ID
  */
 export const getModuleById = async (id: string): Promise<Module> => {
-  const response = await api.get(`/modules/${id}`)
-  return response.data.data
+  const response = await api.get<ApiResponse<Module>>(`/modules/${id}`)
+  return response.data
 }
 
 /**
  * Get current user's modules with progress
  */
 export const getMyModules = async (): Promise<ModuleWithProgress[]> => {
-  const response = await api.get('/modules/my/modules')
-  return response.data.data
+  const response = await api.get<ApiResponse<ModuleWithProgress[]>>(
+    '/modules/my/modules'
+  )
+  return response.data
 }
 
 /**
@@ -41,8 +48,10 @@ export const updateMyModuleProgress = async (
 export const getUserModules = async (
   userId: string
 ): Promise<ModuleWithProgress[]> => {
-  const response = await api.get(`/modules/users/${userId}/modules`)
-  return response.data.data
+  const response = await api.get<ApiResponse<ModuleWithProgress[]>>(
+    `/modules/users/${userId}/modules`
+  )
+  return response.data
 }
 
 /**

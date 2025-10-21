@@ -3,7 +3,7 @@ import { useParams, useNavigate } from 'react-router-dom'
 import type { ModuleWithProgress } from '../types'
 import { ModuleStatus } from '../types'
 import { getMyModules, updateMyModuleProgress } from '../utils'
-import { YouTubePlayer } from '../components'
+import { YouTubePlayer, Quiz } from '../components'
 
 export const ModuleDetail = () => {
   const { id } = useParams<{ id: string }>()
@@ -71,6 +71,14 @@ export const ModuleDetail = () => {
 
   const handleMarkComplete = async () => {
     await updateProgress(ModuleStatus.COMPLETED)
+  }
+
+  const handleQuizComplete = async (passed: boolean) => {
+    if (passed) {
+      // Quiz automatically updates the module status to COMPLETED
+      // We just need to refresh the data
+      await fetchModules()
+    }
   }
 
   const handleNavigate = (direction: 'prev' | 'next') => {
@@ -203,14 +211,10 @@ export const ModuleDetail = () => {
             </div>
           </div>
 
-          {currentModule.progress?.status !== ModuleStatus.COMPLETED && (
-            <button
-              onClick={handleMarkComplete}
-              disabled={updating}
-              className="mt-4 px-6 py-2 bg-green-600 text-white rounded-md hover:bg-green-700 transition-colors disabled:bg-gray-400 disabled:cursor-not-allowed"
-            >
-              {updating ? 'Updating...' : 'Mark as Complete'}
-            </button>
+          {currentModule.progress?.status === ModuleStatus.COMPLETED && (
+            <p className="mt-4 text-green-600 font-medium">
+              ✓ You completed this module on {new Date(currentModule.progress.completedAt || '').toLocaleDateString()}
+            </p>
           )}
         </div>
 
@@ -218,6 +222,39 @@ export const ModuleDetail = () => {
         <div className="bg-white rounded-lg shadow-md p-6 mb-6">
           <YouTubePlayer videoUrl={currentModule.videoUrl} />
         </div>
+
+        {/* Quiz Section */}
+        {currentModule.progress?.status !== ModuleStatus.COMPLETED && (
+          <div className="mb-6">
+            <Quiz moduleId={currentModule.id} onQuizComplete={handleQuizComplete} />
+          </div>
+        )}
+
+        {currentModule.progress?.status === ModuleStatus.COMPLETED && (
+          <div className="bg-green-50 border border-green-200 rounded-lg p-6 mb-6 text-center">
+            <div className="text-green-600 mb-2">
+              <svg
+                className="mx-auto h-12 w-12"
+                fill="none"
+                viewBox="0 0 24 24"
+                stroke="currentColor"
+              >
+                <path
+                  strokeLinecap="round"
+                  strokeLinejoin="round"
+                  strokeWidth={2}
+                  d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z"
+                />
+              </svg>
+            </div>
+            <h3 className="text-lg font-semibold text-green-800">
+              Module Completed!
+            </h3>
+            <p className="text-green-700 mt-2">
+              Congratulations! You've successfully completed this module.
+            </p>
+          </div>
+        )}
 
         {/* Navigation */}
         <div className="flex items-center justify-between">

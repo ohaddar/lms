@@ -23,6 +23,7 @@ model User {
   updatedAt DateTime @updatedAt @map("updated_at")
 
   moduleProgress UserModuleProgress[]
+  quizAttempts   UserQuizAttempt[]
 
   @@map("users")
 }
@@ -37,6 +38,7 @@ model Module {
   updatedAt DateTime @updatedAt @map("updated_at")
 
   userProgress UserModuleProgress[]
+  questions    Question[]
 
   @@map("modules")
 }
@@ -57,6 +59,70 @@ model UserModuleProgress {
 
   @@unique([userId, moduleId])
   @@map("user_module_progress")
+}
+
+// Question Model
+model Question {
+  id           String   @id @default(uuid())
+  moduleId     String   @map("module_id")
+  questionText String   @map("question_text")
+  order        Int
+  createdAt    DateTime @default(now()) @map("created_at")
+  updatedAt    DateTime @updatedAt @map("updated_at")
+
+  module  Module   @relation(fields: [moduleId], references: [id], onDelete: Cascade)
+  answers Answer[]
+
+  @@unique([moduleId, order])
+  @@map("questions")
+}
+
+// Answer Model
+model Answer {
+  id         String   @id @default(uuid())
+  questionId String   @map("question_id")
+  answerText String   @map("answer_text")
+  isCorrect  Boolean  @map("is_correct")
+  order      Int
+  createdAt  DateTime @default(now()) @map("created_at")
+  updatedAt  DateTime @updatedAt @map("updated_at")
+
+  question          Question           @relation(fields: [questionId], references: [id], onDelete: Cascade)
+  userQuizResponses UserQuizResponse[]
+
+  @@unique([questionId, order])
+  @@map("answers")
+}
+
+// User Quiz Attempt Model
+model UserQuizAttempt {
+  id          String   @id @default(uuid())
+  userId      String   @map("user_id")
+  moduleId    String   @map("module_id")
+  score       Int
+  passed      Boolean
+  attemptedAt DateTime @default(now()) @map("attempted_at")
+  createdAt   DateTime @default(now()) @map("created_at")
+  updatedAt   DateTime @updatedAt @map("updated_at")
+
+  user      User               @relation(fields: [userId], references: [id], onDelete: Cascade)
+  responses UserQuizResponse[]
+
+  @@map("user_quiz_attempts")
+}
+
+// User Quiz Response Model
+model UserQuizResponse {
+  id        String   @id @default(uuid())
+  attemptId String   @map("attempt_id")
+  answerId  String   @map("answer_id")
+  createdAt DateTime @default(now()) @map("created_at")
+  updatedAt DateTime @updatedAt @map("updated_at")
+
+  attempt UserQuizAttempt @relation(fields: [attemptId], references: [id], onDelete: Cascade)
+  answer  Answer          @relation(fields: [answerId], references: [id])
+
+  @@map("user_quiz_responses")
 }
 
 // Enums

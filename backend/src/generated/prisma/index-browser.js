@@ -151,6 +151,44 @@ exports.Prisma.UserModuleProgressScalarFieldEnum = {
   updatedAt: 'updatedAt'
 };
 
+exports.Prisma.QuestionScalarFieldEnum = {
+  id: 'id',
+  moduleId: 'moduleId',
+  questionText: 'questionText',
+  order: 'order',
+  createdAt: 'createdAt',
+  updatedAt: 'updatedAt'
+};
+
+exports.Prisma.AnswerScalarFieldEnum = {
+  id: 'id',
+  questionId: 'questionId',
+  answerText: 'answerText',
+  isCorrect: 'isCorrect',
+  order: 'order',
+  createdAt: 'createdAt',
+  updatedAt: 'updatedAt'
+};
+
+exports.Prisma.UserQuizAttemptScalarFieldEnum = {
+  id: 'id',
+  userId: 'userId',
+  moduleId: 'moduleId',
+  score: 'score',
+  passed: 'passed',
+  attemptedAt: 'attemptedAt',
+  createdAt: 'createdAt',
+  updatedAt: 'updatedAt'
+};
+
+exports.Prisma.UserQuizResponseScalarFieldEnum = {
+  id: 'id',
+  attemptId: 'attemptId',
+  answerId: 'answerId',
+  createdAt: 'createdAt',
+  updatedAt: 'updatedAt'
+};
+
 exports.Prisma.SortOrder = {
   asc: 'asc',
   desc: 'desc'
@@ -174,7 +212,11 @@ exports.ModuleStatus = exports.$Enums.ModuleStatus = {
 exports.Prisma.ModelName = {
   User: 'User',
   Module: 'Module',
-  UserModuleProgress: 'UserModuleProgress'
+  UserModuleProgress: 'UserModuleProgress',
+  Question: 'Question',
+  Answer: 'Answer',
+  UserQuizAttempt: 'UserQuizAttempt',
+  UserQuizResponse: 'UserQuizResponse'
 };
 
 /**

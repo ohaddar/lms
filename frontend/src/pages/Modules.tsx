@@ -19,7 +19,7 @@ export const Modules = () => {
       setLoading(true)
       setError(null)
       const data = await getMyModules()
-      setModules(data)
+      setModules(data || [])
     } catch (err) {
       console.error('Failed to fetch modules:', err)
       setError('Failed to load modules. Please try again.')

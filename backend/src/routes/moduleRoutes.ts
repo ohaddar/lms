@@ -7,6 +7,7 @@ import {
   getMyModules,
   updateMyModuleProgress,
 } from '../controllers'
+import { getModuleQuiz, submitQuiz, getQuizAttempts } from '../controllers/quizController'
 import { authenticate } from '../middleware'
 
 const router = Router()
@@ -26,5 +27,10 @@ router.put(
   authenticate,
   updateMyModuleProgress
 )
+
+// Quiz routes (protected)
+router.get('/:moduleId/quiz', authenticate, getModuleQuiz)
+router.post('/:moduleId/quiz/submit', authenticate, submitQuiz)
+router.get('/:moduleId/quiz/attempts', authenticate, getQuizAttempts)
 
 export default router
