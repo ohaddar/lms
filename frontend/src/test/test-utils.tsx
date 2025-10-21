@@ -1,16 +1,22 @@
 import type { ReactElement } from 'react'
 import { render, type RenderOptions } from '@testing-library/react'
-import { BrowserRouter } from 'react-router-dom'
-
-// Custom render function that includes common providers
-const AllTheProviders = ({ children }: { children: React.ReactNode }) => {
-  return <BrowserRouter>{children}</BrowserRouter>
-}
+import { AllTheProviders } from './test-providers'
 
 const customRender = (
   ui: ReactElement,
   options?: Omit<RenderOptions, 'wrapper'>
 ) => render(ui, { wrapper: AllTheProviders, ...options })
 
-export * from '@testing-library/react'
+// Re-export specific utilities from testing library (not components)
+export {
+  screen,
+  fireEvent,
+  waitFor,
+  act,
+  cleanup,
+  renderHook,
+  type RenderOptions,
+  type RenderResult,
+} from '@testing-library/react'
+// Export our custom render function
 export { customRender as render }

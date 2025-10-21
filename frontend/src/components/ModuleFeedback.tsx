@@ -1,5 +1,14 @@
 import React, { useState, useEffect } from 'react'
-import { api } from '../utils/api'
+import { api, ApiError } from '../utils/api'
+
+interface FeedbackResponse {
+  success: boolean
+  data?: {
+    helpful: boolean
+  }
+}
+
+// Using ApiError from utils/api to check HTTP status when available
 
 interface ModuleFeedbackProps {
   moduleId: string
@@ -21,9 +30,11 @@ export const ModuleFeedback: React.FC<ModuleFeedbackProps> = ({
 
   const checkExistingFeedback = async () => {
     try {
-      const response: any = await api.get(`/my/modules/${moduleId}/feedback`)
-      if (response.data.success && response.data.data) {
-        setExistingFeedback(response.data.data.helpful)
+      const response = await api.get<FeedbackResponse>(
+        `/my/modules/${moduleId}/feedback`
+      )
+      if (response.success && response.data) {
+        setExistingFeedback(response.data.helpful)
         setSubmitted(true)
       }
     } catch (error) {
@@ -36,19 +47,21 @@ export const ModuleFeedback: React.FC<ModuleFeedbackProps> = ({
     setError(null)
 
     try {
-      const response: any = await api.post(`/modules/${moduleId}/feedback`, {
-        helpful,
-      })
+      const response = await api.post<FeedbackResponse>(
+        `/modules/${moduleId}/feedback`,
+        { helpful }
+      )
 
-      if (response.data.success) {
+      if (response.success) {
         setSubmitted(true)
         setExistingFeedback(helpful)
         if (onFeedbackSubmitted) {
           onFeedbackSubmitted()
         }
       }
-    } catch (err: any) {
-      if (err.response?.status === 409) {
+    } catch (err: unknown) {
+      const error = err as ApiError
+      if (error.status === 409) {
         setSubmitted(true)
       } else {
         setError('Failed to submit feedback. Please try again.')

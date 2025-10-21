@@ -2,6 +2,7 @@ import { describe, it, expect, vi, beforeEach } from 'vitest'
 import { render, screen, waitFor } from '@testing-library/react'
 import { AuthProvider, useAuth } from '../AuthContext'
 import * as authUtils from '../../utils/auth'
+import type { MockedFunction } from 'vitest'
 
 // Mock the auth utils
 vi.mock('../../utils/auth', () => ({
@@ -50,9 +51,11 @@ describe('AuthContext', () => {
   })
 
   it('should initialize with loading state', () => {
-    ;(authUtils.getCurrentUser as any).mockImplementation(
-      () => new Promise(resolve => setTimeout(resolve, 100))
-    )
+    ;(
+      authUtils.getCurrentUser as MockedFunction<
+        typeof authUtils.getCurrentUser
+      >
+    ).mockImplementation(() => new Promise(resolve => setTimeout(resolve, 100)))
 
     render(
       <AuthProvider>
@@ -71,7 +74,11 @@ describe('AuthContext', () => {
       lastName: 'User',
     }
 
-    ;(authUtils.getCurrentUser as any).mockResolvedValue(mockUser)
+    ;(
+      authUtils.getCurrentUser as MockedFunction<
+        typeof authUtils.getCurrentUser
+      >
+    ).mockResolvedValue(mockUser)
 
     render(
       <AuthProvider>
@@ -92,9 +99,11 @@ describe('AuthContext', () => {
   })
 
   it('should set user to null when getCurrentUser fails', async () => {
-    ;(authUtils.getCurrentUser as any).mockRejectedValue(
-      new Error('Not authenticated')
-    )
+    ;(
+      authUtils.getCurrentUser as MockedFunction<
+        typeof authUtils.getCurrentUser
+      >
+    ).mockRejectedValue(new Error('Not authenticated'))
 
     render(
       <AuthProvider>
@@ -119,10 +128,14 @@ describe('AuthContext', () => {
       lastName: 'User',
     }
 
-    ;(authUtils.getCurrentUser as any).mockRejectedValue(
-      new Error('Not authenticated')
-    )
-    ;(authUtils.loginUser as any).mockResolvedValue(mockUser)
+    ;(
+      authUtils.getCurrentUser as MockedFunction<
+        typeof authUtils.getCurrentUser
+      >
+    ).mockRejectedValue(new Error('Not authenticated'))
+    ;(
+      authUtils.loginUser as MockedFunction<typeof authUtils.getCurrentUser>
+    ).mockResolvedValue(mockUser)
 
     render(
       <AuthProvider>
@@ -155,8 +168,14 @@ describe('AuthContext', () => {
       lastName: 'User',
     }
 
-    ;(authUtils.getCurrentUser as any).mockResolvedValue(mockUser)
-    ;(authUtils.logoutUser as any).mockResolvedValue(undefined)
+    ;(
+      authUtils.getCurrentUser as MockedFunction<
+        typeof authUtils.getCurrentUser
+      >
+    ).mockResolvedValue(mockUser)
+    ;(
+      authUtils.logoutUser as MockedFunction<typeof authUtils.getCurrentUser>
+    ).mockResolvedValue(undefined)
 
     render(
       <AuthProvider>

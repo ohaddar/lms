@@ -27,6 +27,26 @@ export default defineConfig([
     },
     rules: {
       'prettier/prettier': 'error',
+      // Allow exporting these non-component identifiers from files that also export components
+      // to support shared hooks and contexts without inline disables.
+      'react-refresh/only-export-components': [
+        'warn',
+        {
+          allowConstantExport: true,
+          allowExportNames: ['useAuth', 'AuthContext'],
+        },
+      ],
+    },
+  },
+  // Disable react-refresh export rule in tests and test helpers
+  {
+    files: [
+      '**/*.test.{ts,tsx}',
+      '**/__tests__/**/*.{ts,tsx}',
+      'src/test/**/*.{ts,tsx}',
+    ],
+    rules: {
+      'react-refresh/only-export-components': 'off',
     },
   },
 ])

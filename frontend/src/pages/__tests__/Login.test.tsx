@@ -4,6 +4,7 @@ import { BrowserRouter } from 'react-router-dom'
 import Login from '../Login'
 import { AuthProvider } from '../../contexts'
 import * as authUtils from '../../utils/auth'
+import type { MockedFunction } from 'vitest'
 
 // Mock the auth utils
 vi.mock('../../utils/auth', () => ({
@@ -25,9 +26,11 @@ vi.mock('react-router-dom', async () => {
 describe('Login Page', () => {
   beforeEach(() => {
     vi.clearAllMocks()
-    ;(authUtils.getCurrentUser as any).mockRejectedValue(
-      new Error('Not authenticated')
-    )
+    ;(
+      authUtils.getCurrentUser as MockedFunction<
+        typeof authUtils.getCurrentUser
+      >
+    ).mockRejectedValue(new Error('Not authenticated'))
   })
 
   const renderLogin = () => {
@@ -117,7 +120,9 @@ describe('Login Page', () => {
       lastName: 'User',
     }
 
-    ;(authUtils.loginUser as any).mockResolvedValue(mockUser)
+    ;(
+      authUtils.loginUser as MockedFunction<typeof authUtils.getCurrentUser>
+    ).mockResolvedValue(mockUser)
 
     renderLogin()
 
@@ -143,7 +148,9 @@ describe('Login Page', () => {
 
   it('should display error message on login failure', async () => {
     const errorMessage = 'Invalid credentials'
-    ;(authUtils.loginUser as any).mockRejectedValue(new Error(errorMessage))
+    ;(
+      authUtils.loginUser as MockedFunction<typeof authUtils.getCurrentUser>
+    ).mockRejectedValue(new Error(errorMessage))
 
     renderLogin()
 
@@ -161,9 +168,9 @@ describe('Login Page', () => {
   })
 
   it('should disable form inputs and show loading state during submission', async () => {
-    ;(authUtils.loginUser as any).mockImplementation(
-      () => new Promise(resolve => setTimeout(resolve, 100))
-    )
+    ;(
+      authUtils.loginUser as MockedFunction<typeof authUtils.getCurrentUser>
+    ).mockImplementation(() => new Promise(resolve => setTimeout(resolve, 100)))
 
     renderLogin()
 

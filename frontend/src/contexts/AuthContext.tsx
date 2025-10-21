@@ -1,14 +1,8 @@
-import {
-  createContext,
-  useContext,
-  useState,
-  useEffect,
-  type ReactNode,
-} from 'react'
+import { createContext, useState, useEffect, type ReactNode } from 'react'
 import type { User, LoginCredentials, AuthContextType } from '../types'
 import { loginUser, logoutUser, getCurrentUser } from '../utils'
 
-const AuthContext = createContext<AuthContextType | undefined>(undefined)
+export const AuthContext = createContext<AuthContextType | undefined>(undefined)
 
 interface AuthProviderProps {
   children: ReactNode
@@ -28,6 +22,7 @@ export function AuthProvider({ children }: AuthProviderProps) {
       const currentUser = await getCurrentUser()
       setUser(currentUser)
     } catch (error) {
+      console.error('Authentication check failed:', error)
       setUser(null)
     } finally {
       setIsLoading(false)
@@ -56,10 +51,5 @@ export function AuthProvider({ children }: AuthProviderProps) {
   return <AuthContext.Provider value={value}>{children}</AuthContext.Provider>
 }
 
-export function useAuth() {
-  const context = useContext(AuthContext)
-  if (context === undefined) {
-    throw new Error('useAuth must be used within an AuthProvider')
-  }
-  return context
-}
+// Re-export the auth hook for convenience and backwards compatibility in imports
+export { useAuth } from '../hooks/useAuth'

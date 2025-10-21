@@ -7,6 +7,11 @@ interface ProgressData {
   percentage: number
 }
 
+interface ProgressResponse {
+  success: boolean
+  data: ProgressData
+}
+
 export const ProgressBar: React.FC = () => {
   const [progress, setProgress] = useState<ProgressData | null>(null)
   const [loading, setLoading] = useState(true)
@@ -15,12 +20,21 @@ export const ProgressBar: React.FC = () => {
     fetchProgress()
   }, [])
 
+  const hasData = <T,>(value: unknown): value is { data: T } => {
+    return (
+      typeof value === 'object' &&
+      value !== null &&
+      'data' in (value as Record<string, unknown>)
+    )
+  }
+
   const fetchProgress = async () => {
     try {
-      const response: any = await api.get('/my/progress')
-      if (response.data.success) {
-        setProgress(response.data.data)
-      }
+      const response = await api.get<ProgressResponse>('/my/progress')
+      const payload: ProgressResponse = hasData<ProgressResponse>(response)
+        ? response.data
+        : response
+      if (payload?.success && payload.data) setProgress(payload.data)
     } catch (error) {
       console.error('Error fetching progress:', error)
     } finally {
