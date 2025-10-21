@@ -2,6 +2,7 @@
 export * from './auth'
 export * from './module'
 export * from './quiz'
+export * from './certificate'
 
 // Re-export specific types to ensure they're available
 export type { Module, ModuleWithProgress, UserModuleProgress } from './module'
@@ -16,3 +17,4 @@ export type {
   QuizAttempt,
   AnswerDetail,
 } from './quiz'
+export type { Certificate, CertificateResponse } from './certificate'

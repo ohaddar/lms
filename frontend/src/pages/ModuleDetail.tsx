@@ -3,7 +3,7 @@ import { useParams, useNavigate } from 'react-router-dom'
 import type { ModuleWithProgress } from '../types'
 import { ModuleStatus } from '../types'
 import { getMyModules, updateMyModuleProgress } from '../utils'
-import { Layout, YouTubePlayer, Quiz } from '../components'
+import { Layout, YouTubePlayer, Quiz, ModuleFeedback } from '../components'
 
 export const ModuleDetail = () => {
   const { id } = useParams<{ id: string }>()
@@ -295,29 +295,39 @@ export const ModuleDetail = () => {
 
       {/* Completion Card */}
       {currentModule.progress?.status === ModuleStatus.COMPLETED && (
-        <div className="bg-gradient-to-br from-green-50 to-emerald-50 border-2 border-green-200 rounded-3xl p-8 mb-6 text-center shadow-soft animate-scale-in">
-          <div className="inline-flex items-center justify-center w-20 h-20 bg-gradient-to-br from-green-500 to-emerald-600 rounded-2xl mb-4 shadow-large">
-            <svg
-              className="w-10 h-10 text-white"
-              fill="none"
-              viewBox="0 0 24 24"
-              stroke="currentColor"
-            >
-              <path
-                strokeLinecap="round"
-                strokeLinejoin="round"
-                strokeWidth={2}
-                d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z"
-              />
-            </svg>
+        <>
+          <div className="bg-gradient-to-br from-green-50 to-emerald-50 border-2 border-green-200 rounded-3xl p-8 mb-6 text-center shadow-soft animate-scale-in">
+            <div className="inline-flex items-center justify-center w-20 h-20 bg-gradient-to-br from-green-500 to-emerald-600 rounded-2xl mb-4 shadow-large">
+              <svg
+                className="w-10 h-10 text-white"
+                fill="none"
+                viewBox="0 0 24 24"
+                stroke="currentColor"
+              >
+                <path
+                  strokeLinecap="round"
+                  strokeLinejoin="round"
+                  strokeWidth={2}
+                  d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z"
+                />
+              </svg>
+            </div>
+            <h3 className="text-2xl font-bold text-green-900 mb-2">
+              Module Completed! 🎉
+            </h3>
+            <p className="text-lg text-green-700">
+              Congratulations! You've successfully completed this module.
+            </p>
           </div>
-          <h3 className="text-2xl font-bold text-green-900 mb-2">
-            Module Completed! 🎉
-          </h3>
-          <p className="text-lg text-green-700">
-            Congratulations! You've successfully completed this module.
-          </p>
-        </div>
+
+          {/* Feedback Section */}
+          <div
+            className="mb-6 animate-slide-up"
+            style={{ animationDelay: '200ms' }}
+          >
+            <ModuleFeedback moduleId={currentModule.id} />
+          </div>
+        </>
       )}
 
       {/* Navigation */}

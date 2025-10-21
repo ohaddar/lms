@@ -2,14 +2,18 @@ import React, { useEffect, useState } from 'react'
 import { useNavigate } from 'react-router-dom'
 import { useAuth } from '../contexts'
 import { Layout } from '../components'
-import { getUserStats } from '../utils'
+import { getUserStats, getMyCertificate, downloadMyCertificate } from '../utils'
 import type { UserStats } from '../utils'
+import type { Certificate } from '../types'
 
 const Home: React.FC = () => {
   const { user } = useAuth()
   const navigate = useNavigate()
   const [stats, setStats] = useState<UserStats | null>(null)
   const [loadingStats, setLoadingStats] = useState(true)
+  const [certificate, setCertificate] = useState<Certificate | null>(null)
+  const [loadingCertificate, setLoadingCertificate] = useState(true)
+  const [downloadingCertificate, setDownloadingCertificate] = useState(false)
 
   useEffect(() => {
     const fetchStats = async () => {
@@ -24,7 +28,20 @@ const Home: React.FC = () => {
       }
     }
 
+    const fetchCertificate = async () => {
+      try {
+        setLoadingCertificate(true)
+        const cert = await getMyCertificate()
+        setCertificate(cert)
+      } catch (error) {
+        console.error('Error fetching certificate:', error)
+      } finally {
+        setLoadingCertificate(false)
+      }
+    }
+
     fetchStats()
+    fetchCertificate()
   }, [])
 
   const quickActions = [
@@ -56,6 +73,18 @@ const Home: React.FC = () => {
       onClick: () => {},
     },
   ]
+
+  const handleDownloadCertificate = async () => {
+    try {
+      setDownloadingCertificate(true)
+      await downloadMyCertificate()
+    } catch (error) {
+      console.error('Error downloading certificate:', error)
+      alert('Failed to download certificate. Please try again.')
+    } finally {
+      setDownloadingCertificate(false)
+    }
+  }
 
   const statsCards = [
     {
@@ -175,6 +204,91 @@ const Home: React.FC = () => {
           ))}
         </div>
       </div>
+
+      {/* Certificate Section - Show if user has completed all modules */}
+      {!loadingCertificate && certificate && (
+        <div className="mb-8 animate-fade-in">
+          <div className="bg-gradient-to-br from-amber-50 to-yellow-50 border-2 border-amber-300 rounded-3xl shadow-large p-8 overflow-hidden relative">
+            <div className="absolute top-0 right-0 w-64 h-64 bg-amber-200/20 rounded-full -mr-32 -mt-32"></div>
+            <div className="absolute bottom-0 left-0 w-48 h-48 bg-yellow-200/20 rounded-full -ml-24 -mb-24"></div>
+            <div className="relative z-10">
+              <div className="flex flex-col md:flex-row items-start md:items-center justify-between gap-6">
+                <div className="flex items-start gap-4 flex-1">
+                  <div className="w-16 h-16 bg-gradient-to-br from-amber-500 to-yellow-600 rounded-2xl flex items-center justify-center flex-shrink-0 shadow-medium">
+                    <svg
+                      className="w-8 h-8 text-white"
+                      fill="none"
+                      viewBox="0 0 24 24"
+                      stroke="currentColor"
+                    >
+                      <path
+                        strokeLinecap="round"
+                        strokeLinejoin="round"
+                        strokeWidth={2}
+                        d="M9 12l2 2 4-4M7.835 4.697a3.42 3.42 0 001.946-.806 3.42 3.42 0 014.438 0 3.42 3.42 0 001.946.806 3.42 3.42 0 013.138 3.138 3.42 3.42 0 00.806 1.946 3.42 3.42 0 010 4.438 3.42 3.42 0 00-.806 1.946 3.42 3.42 0 01-3.138 3.138 3.42 3.42 0 00-1.946.806 3.42 3.42 0 01-4.438 0 3.42 3.42 0 00-1.946-.806 3.42 3.42 0 01-3.138-3.138 3.42 3.42 0 00-.806-1.946 3.42 3.42 0 010-4.438 3.42 3.42 0 00.806-1.946 3.42 3.42 0 013.138-3.138z"
+                      />
+                    </svg>
+                  </div>
+                  <div className="flex-1">
+                    <h2 className="text-2xl font-bold text-amber-900 mb-2 flex items-center gap-2">
+                      🎉 Congratulations!
+                    </h2>
+                    <p className="text-amber-800 text-lg mb-2">
+                      You've completed all modules and earned your certificate!
+                    </p>
+                    <p className="text-sm text-amber-700">
+                      Certificate No:{' '}
+                      <span className="font-mono font-semibold">
+                        {certificate.certificateNumber}
+                      </span>
+                    </p>
+                    <p className="text-sm text-amber-700">
+                      Issued on:{' '}
+                      {new Date(certificate.issuedAt).toLocaleDateString(
+                        'en-US',
+                        {
+                          year: 'numeric',
+                          month: 'long',
+                          day: 'numeric',
+                        }
+                      )}
+                    </p>
+                  </div>
+                </div>
+                <button
+                  onClick={handleDownloadCertificate}
+                  disabled={downloadingCertificate}
+                  className="px-6 py-4 bg-gradient-to-r from-amber-600 to-yellow-600 text-white rounded-xl font-semibold hover:from-amber-700 hover:to-yellow-700 transition-all duration-200 shadow-medium hover:shadow-large hover:scale-105 inline-flex items-center gap-3 disabled:opacity-50 disabled:cursor-not-allowed"
+                >
+                  {downloadingCertificate ? (
+                    <>
+                      <div className="animate-spin rounded-full h-5 w-5 border-b-2 border-white"></div>
+                      <span>Downloading...</span>
+                    </>
+                  ) : (
+                    <>
+                      <svg
+                        className="w-5 h-5"
+                        fill="none"
+                        viewBox="0 0 24 24"
+                        stroke="currentColor"
+                      >
+                        <path
+                          strokeLinecap="round"
+                          strokeLinejoin="round"
+                          strokeWidth={2}
+                          d="M12 10v6m0 0l-3-3m3 3l3-3m2 8H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z"
+                        />
+                      </svg>
+                      <span>Download Certificate</span>
+                    </>
+                  )}
+                </button>
+              </div>
+            </div>
+          </div>
+        </div>
+      )}
 
       {/* Info Card */}
       <div className="bg-gradient-to-br from-green-50 to-emerald-50 border border-green-200 rounded-2xl p-6 shadow-soft">

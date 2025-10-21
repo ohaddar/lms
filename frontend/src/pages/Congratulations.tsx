@@ -1,8 +1,41 @@
+import { useEffect, useState } from 'react'
 import { useNavigate } from 'react-router-dom'
 import { Layout } from '../components'
+import { getMyCertificate, downloadMyCertificate } from '../utils'
+import type { Certificate } from '../types'
 
 export const Congratulations = () => {
   const navigate = useNavigate()
+  const [certificate, setCertificate] = useState<Certificate | null>(null)
+  const [loading, setLoading] = useState(true)
+  const [downloading, setDownloading] = useState(false)
+
+  useEffect(() => {
+    fetchCertificate()
+  }, [])
+
+  const fetchCertificate = async () => {
+    try {
+      const cert = await getMyCertificate()
+      setCertificate(cert)
+    } catch (error) {
+      console.error('Error fetching certificate:', error)
+    } finally {
+      setLoading(false)
+    }
+  }
+
+  const handleDownloadCertificate = async () => {
+    setDownloading(true)
+    try {
+      await downloadMyCertificate()
+    } catch (error) {
+      console.error('Error downloading certificate:', error)
+      alert('Failed to download certificate. Please try again.')
+    } finally {
+      setDownloading(false)
+    }
+  }
 
   return (
     <Layout>
@@ -97,9 +130,41 @@ export const Congratulations = () => {
                   Certification Obtenue
                 </h3>
               </div>
-              <p className="text-primary-800 font-medium">
+              <p className="text-primary-800 font-medium mb-4">
                 Vous êtes désormais certifié dans les fondamentaux de l'IA
               </p>
+              {!loading && certificate && (
+                <div className="mt-4">
+                  <p className="text-sm text-primary-700 mb-3">
+                    Certificate No:{' '}
+                    <span className="font-mono font-semibold">
+                      {certificate.certificateNumber}
+                    </span>
+                  </p>
+                  <button
+                    onClick={handleDownloadCertificate}
+                    disabled={downloading}
+                    className="px-6 py-3 bg-gradient-to-r from-green-600 to-green-700 text-white rounded-lg hover:from-green-700 hover:to-green-800 transition-all duration-200 font-semibold shadow-medium hover:shadow-large transform hover:scale-105 disabled:opacity-50 disabled:cursor-not-allowed flex items-center gap-2 mx-auto"
+                  >
+                    <svg
+                      className="w-5 h-5"
+                      fill="none"
+                      stroke="currentColor"
+                      viewBox="0 0 24 24"
+                    >
+                      <path
+                        strokeLinecap="round"
+                        strokeLinejoin="round"
+                        strokeWidth={2}
+                        d="M12 10v6m0 0l-3-3m3 3l3-3m2 8H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z"
+                      />
+                    </svg>
+                    {downloading
+                      ? 'Downloading...'
+                      : 'Download Certificate PDF'}
+                  </button>
+                </div>
+              )}
             </div>
 
             {/* Actions */}

@@ -15,7 +15,6 @@ import {
 import {
   submitModuleFeedback,
   getModuleFeedback,
-  getMyModuleFeedback,
 } from '../controllers/feedbackController'
 import { authenticate, checkModuleAccess } from '../middleware'
 
@@ -55,6 +54,5 @@ router.get(
 // Feedback routes
 router.post('/:moduleId/feedback', authenticate, submitModuleFeedback)
 router.get('/:moduleId/feedback', getModuleFeedback)
-router.get('/my/modules/:moduleId/feedback', authenticate, getMyModuleFeedback)
 
 export default router
