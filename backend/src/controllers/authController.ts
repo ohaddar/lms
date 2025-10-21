@@ -77,7 +77,6 @@ export async function login(req: Request, res: Response): Promise<void> {
         email: user.email,
         firstName: user.firstName,
         lastName: user.lastName,
-        role: user.role,
       },
     })
   } catch (error) {
@@ -117,7 +116,6 @@ export async function getCurrentUser(
         email: true,
         firstName: true,
         lastName: true,
-        role: true,
         isActive: true,
       },
     })

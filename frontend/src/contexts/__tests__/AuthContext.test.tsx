@@ -69,7 +69,6 @@ describe('AuthContext', () => {
       email: 'test@example.com',
       firstName: 'Test',
       lastName: 'User',
-      role: 'STUDENT' as const,
     }
 
     ;(authUtils.getCurrentUser as any).mockResolvedValue(mockUser)
@@ -118,7 +117,6 @@ describe('AuthContext', () => {
       email: 'test@example.com',
       firstName: 'Test',
       lastName: 'User',
-      role: 'STUDENT' as const,
     }
 
     ;(authUtils.getCurrentUser as any).mockRejectedValue(
@@ -155,7 +153,6 @@ describe('AuthContext', () => {
       email: 'test@example.com',
       firstName: 'Test',
       lastName: 'User',
-      role: 'STUDENT' as const,
     }
 
     ;(authUtils.getCurrentUser as any).mockResolvedValue(mockUser)

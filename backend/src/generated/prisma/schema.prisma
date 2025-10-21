@@ -18,17 +18,50 @@ model User {
   password  String
   firstName String   @map("first_name")
   lastName  String   @map("last_name")
-  role      UserRole @default(STUDENT)
   isActive  Boolean  @default(true) @map("is_active")
   createdAt DateTime @default(now()) @map("created_at")
   updatedAt DateTime @updatedAt @map("updated_at")
 
+  moduleProgress UserModuleProgress[]
+
   @@map("users")
 }
 
+// Module Model
+model Module {
+  id        String   @id @default(uuid())
+  title     String
+  videoUrl  String   @map("video_url")
+  order     Int      @unique
+  createdAt DateTime @default(now()) @map("created_at")
+  updatedAt DateTime @updatedAt @map("updated_at")
+
+  userProgress UserModuleProgress[]
+
+  @@map("modules")
+}
+
+// User Module Progress Model
+model UserModuleProgress {
+  id          String       @id @default(uuid())
+  userId      String       @map("user_id")
+  moduleId    String       @map("module_id")
+  status      ModuleStatus @default(NOT_STARTED)
+  startedAt   DateTime?    @map("started_at")
+  completedAt DateTime?    @map("completed_at")
+  createdAt   DateTime     @default(now()) @map("created_at")
+  updatedAt   DateTime     @updatedAt @map("updated_at")
+
+  user   User   @relation(fields: [userId], references: [id], onDelete: Cascade)
+  module Module @relation(fields: [moduleId], references: [id], onDelete: Cascade)
+
+  @@unique([userId, moduleId])
+  @@map("user_module_progress")
+}
+
 // Enums
-enum UserRole {
-  ADMIN
-  INSTRUCTOR
-  STUDENT
+enum ModuleStatus {
+  NOT_STARTED
+  IN_PROGRESS
+  COMPLETED
 }

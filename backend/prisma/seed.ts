@@ -1,4 +1,4 @@
-import { PrismaClient, UserRole } from '../src/generated/prisma'
+import { PrismaClient } from '../src/generated/prisma'
 import bcrypt from 'bcrypt'
 
 const prisma = new PrismaClient()
@@ -9,32 +9,57 @@ async function main() {
   console.log('🌱 Starting database seeding...\n')
 
   try {
-    // Clear existing users (optional - for development)
+    // Clear existing data (optional - for development)
+    await prisma.userModuleProgress.deleteMany({})
     await prisma.user.deleteMany({})
-    console.log('📦 Cleared existing users')
+    await prisma.module.deleteMany({})
+    console.log('📦 Cleared existing data')
 
-    // Create 3 users with different roles
-    const users = [
+    // Create 3 modules
+    const modules = [
       {
-        email: 'admin@vibe-lms.com',
-        password: await bcrypt.hash('admin123', SALT_ROUNDS),
-        firstName: 'Admin',
-        lastName: 'User',
-        role: UserRole.ADMIN,
+        title: 'AI Foundations: Introduction',
+        videoUrl: 'https://www.youtube.com/watch?v=IccjZDV93lw',
+        order: 1,
       },
       {
-        email: 'instructor@vibe-lms.com',
-        password: await bcrypt.hash('instructor123', SALT_ROUNDS),
-        firstName: 'John',
-        lastName: 'Instructor',
-        role: UserRole.INSTRUCTOR,
+        title: 'AI Foundations: Tool Calling',
+        videoUrl: 'https://www.youtube.com/watch?v=byR5YVesMeg',
+        order: 2,
+      },
+      {
+        title: 'AI Foundations: Hallucinations',
+        videoUrl: 'https://www.youtube.com/watch?v=JJDAaxxhF74',
+        order: 3,
+      },
+    ]
+
+    for (const moduleData of modules) {
+      const module = await prisma.module.create({
+        data: moduleData,
+      })
+      console.log(`✅ Created module: ${module.title} (Order: ${module.order})`)
+    }
+
+    // Create 3 student users
+    const users = [
+      {
+        email: 'alice@vibe-lms.com',
+        password: await bcrypt.hash('alice123', SALT_ROUNDS),
+        firstName: 'Alice',
+        lastName: 'Johnson',
+      },
+      {
+        email: 'bob@vibe-lms.com',
+        password: await bcrypt.hash('bob123', SALT_ROUNDS),
+        firstName: 'Bob',
+        lastName: 'Smith',
       },
       {
         email: 'student@vibe-lms.com',
         password: await bcrypt.hash('student123', SALT_ROUNDS),
         firstName: 'Jane',
         lastName: 'Student',
-        role: UserRole.STUDENT,
       },
     ]
 
@@ -42,13 +67,37 @@ async function main() {
       const user = await prisma.user.create({
         data: userData,
       })
-      console.log(`✅ Created user: ${user.email} (${user.role})`)
+      console.log(`✅ Created user: ${user.email}`)
+    }
+
+    // Create initial module progress for the student user
+    const student = await prisma.user.findUnique({
+      where: { email: 'student@vibe-lms.com' },
+    })
+    const allModules = await prisma.module.findMany({
+      orderBy: { order: 'asc' },
+    })
+
+    if (student && allModules.length > 0) {
+      // Student is currently on module 1
+      await prisma.userModuleProgress.create({
+        data: {
+          userId: student.id,
+          moduleId: allModules[0].id,
+          status: 'IN_PROGRESS',
+          startedAt: new Date(),
+        },
+      })
+      console.log(`✅ Created progress for student: Module 1 (In Progress)`)
     }
 
     console.log('\n✅ Database seeding completed successfully!')
+    console.log('\n📊 Seeded data:')
+    console.log(`   - ${allModules.length} modules`)
+    console.log('   - 3 student users')
     console.log('\n📝 Test credentials:')
-    console.log('   Admin: admin@vibe-lms.com / admin123')
-    console.log('   Instructor: instructor@vibe-lms.com / instructor123')
+    console.log('   Alice: alice@vibe-lms.com / alice123')
+    console.log('   Bob: bob@vibe-lms.com / bob123')
     console.log('   Student: student@vibe-lms.com / student123')
   } catch (error) {
     console.error('❌ Error during seeding:', error)

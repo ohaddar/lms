@@ -115,7 +115,6 @@ describe('Login Page', () => {
       email: 'test@example.com',
       firstName: 'Test',
       lastName: 'User',
-      role: 'STUDENT' as const,
     }
 
     ;(authUtils.loginUser as any).mockResolvedValue(mockUser)
@@ -189,8 +188,8 @@ describe('Login Page', () => {
   it('should display test credentials information', () => {
     renderLogin()
 
-    expect(screen.getByText(/admin@vibe-lms.com/i)).toBeInTheDocument()
-    expect(screen.getByText(/instructor@vibe-lms.com/i)).toBeInTheDocument()
+    expect(screen.getByText(/alice@vibe-lms.com/i)).toBeInTheDocument()
+    expect(screen.getByText(/bob@vibe-lms.com/i)).toBeInTheDocument()
     expect(screen.getByText(/student@vibe-lms.com/i)).toBeInTheDocument()
   })
 })

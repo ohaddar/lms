@@ -173,12 +173,12 @@ export default function Login() {
           </p>
           <div className="space-y-1 text-xs text-gray-600">
             <p>
-              <span className="font-medium">Admin:</span> admin@vibe-lms.com /
-              admin123
+              <span className="font-medium">Alice:</span> alice@vibe-lms.com /
+              alice123
             </p>
             <p>
-              <span className="font-medium">Instructor:</span>{' '}
-              instructor@vibe-lms.com / instructor123
+              <span className="font-medium">Bob:</span>{' '}
+              bob@vibe-lms.com / bob123
             </p>
             <p>
               <span className="font-medium">Student:</span> student@vibe-lms.com
