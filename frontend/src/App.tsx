@@ -2,7 +2,7 @@ import React from 'react'
 import { BrowserRouter as Router, Routes, Route } from 'react-router-dom'
 import { AuthProvider } from '@/contexts'
 import { ProtectedRoute } from '@/components'
-import { Home, Login, NotFound } from '@/pages'
+import { Home, Login, NotFound, Modules, ModuleDetail } from '@/pages'
 
 const App: React.FC = () => {
   return (
@@ -15,6 +15,22 @@ const App: React.FC = () => {
             element={
               <ProtectedRoute>
                 <Home />
+              </ProtectedRoute>
+            }
+          />
+          <Route
+            path="/modules"
+            element={
+              <ProtectedRoute>
+                <Modules />
+              </ProtectedRoute>
+            }
+          />
+          <Route
+            path="/modules/:id"
+            element={
+              <ProtectedRoute>
+                <ModuleDetail />
               </ProtectedRoute>
             }
           />

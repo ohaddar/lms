@@ -44,3 +44,19 @@ export async function fetchApi<T>(
     throw new ApiError('Network error occurred')
   }
 }
+
+// Axios-like API object
+export const api = {
+  get: <T>(endpoint: string) => fetchApi<T>(endpoint, { method: 'GET' }),
+  post: <T>(endpoint: string, data?: unknown) =>
+    fetchApi<T>(endpoint, {
+      method: 'POST',
+      body: data ? JSON.stringify(data) : undefined,
+    }),
+  put: <T>(endpoint: string, data?: unknown) =>
+    fetchApi<T>(endpoint, {
+      method: 'PUT',
+      body: data ? JSON.stringify(data) : undefined,
+    }),
+  delete: <T>(endpoint: string) => fetchApi<T>(endpoint, { method: 'DELETE' }),
+}

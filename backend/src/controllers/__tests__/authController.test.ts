@@ -1,7 +1,7 @@
 import { describe, it, expect, jest, beforeEach } from '@jest/globals'
 import { Request, Response } from 'express'
 import { login, logout, getCurrentUser } from '../authController'
-import { PrismaClient, UserRole } from '../../generated/prisma'
+import { PrismaClient } from '../../generated/prisma'
 import * as passwordUtils from '../../utils/password'
 import * as jwtUtils from '../../utils/jwt'
 
@@ -14,11 +14,6 @@ jest.mock('../../generated/prisma', () => {
   }
   return {
     PrismaClient: jest.fn(() => mockPrismaClient),
-    UserRole: {
-      ADMIN: 'ADMIN',
-      INSTRUCTOR: 'INSTRUCTOR',
-      STUDENT: 'STUDENT',
-    },
   }
 })
 
@@ -63,7 +58,6 @@ describe('Auth Controller', () => {
       password: 'hashedPassword',
       firstName: 'Test',
       lastName: 'User',
-      role: UserRole.STUDENT,
       isActive: true,
       createdAt: new Date(),
       updatedAt: new Date(),
@@ -94,7 +88,6 @@ describe('Auth Controller', () => {
           email: validUser.email,
           firstName: validUser.firstName,
           lastName: validUser.lastName,
-          role: validUser.role,
         },
       })
     })
@@ -217,14 +210,12 @@ describe('Auth Controller', () => {
         email: 'test@example.com',
         firstName: 'Test',
         lastName: 'User',
-        role: UserRole.STUDENT,
         isActive: true,
       }
 
       mockRequest.user = {
         userId: '123',
         email: 'test@example.com',
-        role: 'STUDENT',
       }
       ;(mockPrisma.user.findUnique as any).mockResolvedValue(mockUser)
 
@@ -248,7 +239,6 @@ describe('Auth Controller', () => {
       mockRequest.user = {
         userId: '123',
         email: 'test@example.com',
-        role: 'STUDENT',
       }
       ;(mockPrisma.user.findUnique as any).mockResolvedValue(null)
 

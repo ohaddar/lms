@@ -1,6 +1,7 @@
 import { useEffect, useState } from 'react'
 import { useNavigate } from 'react-router-dom'
-import { ModuleWithProgress, ModuleStatus } from '../types'
+import type { ModuleWithProgress } from '../types'
+import { ModuleStatus } from '../types'
 import { getMyModules } from '../utils'
 
 export const Modules = () => {
@@ -72,8 +73,18 @@ export const Modules = () => {
       <div className="min-h-screen bg-gray-50 flex items-center justify-center">
         <div className="bg-white rounded-lg shadow-md p-8 max-w-md w-full">
           <div className="text-red-600 text-center">
-            <svg className="mx-auto h-12 w-12" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-              <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M12 8v4m0 4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z" />
+            <svg
+              className="mx-auto h-12 w-12"
+              fill="none"
+              viewBox="0 0 24 24"
+              stroke="currentColor"
+            >
+              <path
+                strokeLinecap="round"
+                strokeLinejoin="round"
+                strokeWidth={2}
+                d="M12 8v4m0 4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z"
+              />
             </svg>
             <h3 className="mt-4 text-lg font-medium">Error</h3>
             <p className="mt-2 text-sm">{error}</p>
@@ -94,7 +105,9 @@ export const Modules = () => {
       <div className="max-w-7xl mx-auto py-8 px-4 sm:px-6 lg:px-8">
         <div className="mb-8">
           <h1 className="text-3xl font-bold text-gray-900">Learning Modules</h1>
-          <p className="mt-2 text-gray-600">Track your progress through the AI Foundations course</p>
+          <p className="mt-2 text-gray-600">
+            Track your progress through the AI Foundations course
+          </p>
         </div>
 
         {modules.length === 0 ? (
@@ -103,7 +116,7 @@ export const Modules = () => {
           </div>
         ) : (
           <div className="grid gap-6 md:grid-cols-2 lg:grid-cols-3">
-            {modules.map((module) => (
+            {modules.map(module => (
               <div
                 key={module.id}
                 onClick={() => handleModuleClick(module.id)}
@@ -116,31 +129,49 @@ export const Modules = () => {
                         <span className="inline-flex items-center justify-center w-8 h-8 rounded-full bg-blue-100 text-blue-600 font-semibold text-sm">
                           {module.order}
                         </span>
-                        <h3 className="text-lg font-semibold text-gray-900">{module.title}</h3>
+                        <h3 className="text-lg font-semibold text-gray-900">
+                          {module.title}
+                        </h3>
                       </div>
                     </div>
                   </div>
 
                   <div className="mt-4">
-                    {getStatusBadge(module.progress?.status || ModuleStatus.NOT_STARTED)}
+                    {getStatusBadge(
+                      module.progress?.status || ModuleStatus.NOT_STARTED
+                    )}
                   </div>
 
                   {module.progress?.startedAt && (
                     <div className="mt-3 text-xs text-gray-500">
-                      Started: {new Date(module.progress.startedAt).toLocaleDateString()}
+                      Started:{' '}
+                      {new Date(module.progress.startedAt).toLocaleDateString()}
                     </div>
                   )}
 
                   {module.progress?.completedAt && (
                     <div className="mt-1 text-xs text-gray-500">
-                      Completed: {new Date(module.progress.completedAt).toLocaleDateString()}
+                      Completed:{' '}
+                      {new Date(
+                        module.progress.completedAt
+                      ).toLocaleDateString()}
                     </div>
                   )}
 
                   <div className="mt-4 flex items-center text-blue-600 text-sm font-medium">
                     <span>View Module</span>
-                    <svg className="ml-2 w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                      <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 5l7 7-7 7" />
+                    <svg
+                      className="ml-2 w-4 h-4"
+                      fill="none"
+                      viewBox="0 0 24 24"
+                      stroke="currentColor"
+                    >
+                      <path
+                        strokeLinecap="round"
+                        strokeLinejoin="round"
+                        strokeWidth={2}
+                        d="M9 5l7 7-7 7"
+                      />
                     </svg>
                   </div>
                 </div>
@@ -152,4 +183,3 @@ export const Modules = () => {
     </div>
   )
 }
-

@@ -1,5 +1,5 @@
 import { api } from './api'
-import { Module, ModuleWithProgress, ModuleStatus } from '../types'
+import type { Module, ModuleWithProgress, ModuleStatus } from '../types'
 
 /**
  * Get all modules
@@ -38,7 +38,9 @@ export const updateMyModuleProgress = async (
 /**
  * Get user's modules with progress (admin/instructor)
  */
-export const getUserModules = async (userId: string): Promise<ModuleWithProgress[]> => {
+export const getUserModules = async (
+  userId: string
+): Promise<ModuleWithProgress[]> => {
   const response = await api.get(`/modules/users/${userId}/modules`)
   return response.data.data
 }
@@ -51,6 +53,7 @@ export const updateUserModuleProgress = async (
   moduleId: string,
   status: ModuleStatus
 ): Promise<void> => {
-  await api.put(`/modules/users/${userId}/modules/${moduleId}/progress`, { status })
+  await api.put(`/modules/users/${userId}/modules/${moduleId}/progress`, {
+    status,
+  })
 }
-

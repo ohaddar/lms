@@ -18,7 +18,10 @@ const getYouTubeVideoId = (url: string): string | null => {
  * YouTube Player Component
  * Embeds a YouTube video using iframe with responsive design
  */
-export const YouTubePlayer = ({ videoUrl, className = '' }: YouTubePlayerProps) => {
+export const YouTubePlayer = ({
+  videoUrl,
+  className = '',
+}: YouTubePlayerProps) => {
   const [isLoading, setIsLoading] = useState(true)
   const [error, setError] = useState<string | null>(null)
   const iframeRef = useRef<HTMLIFrameElement>(null)
@@ -43,7 +46,9 @@ export const YouTubePlayer = ({ videoUrl, className = '' }: YouTubePlayerProps) 
 
   if (error) {
     return (
-      <div className={`bg-red-50 border border-red-200 rounded-lg p-8 text-center ${className}`}>
+      <div
+        className={`bg-red-50 border border-red-200 rounded-lg p-8 text-center ${className}`}
+      >
         <p className="text-red-600 font-medium">{error}</p>
       </div>
     )
@@ -51,7 +56,9 @@ export const YouTubePlayer = ({ videoUrl, className = '' }: YouTubePlayerProps) 
 
   if (!videoId) {
     return (
-      <div className={`bg-gray-50 border border-gray-200 rounded-lg p-8 text-center ${className}`}>
+      <div
+        className={`bg-gray-50 border border-gray-200 rounded-lg p-8 text-center ${className}`}
+      >
         <p className="text-gray-600">No video URL provided</p>
       </div>
     )
@@ -81,4 +88,3 @@ export const YouTubePlayer = ({ videoUrl, className = '' }: YouTubePlayerProps) 
     </div>
   )
 }
-

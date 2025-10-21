@@ -1,4 +1,4 @@
-import { useState, FormEvent } from 'react'
+import { useState, type FormEvent } from 'react'
 import { useNavigate } from 'react-router-dom'
 import { useAuth } from '../contexts'
 import { ApiError } from '../utils'
@@ -177,8 +177,8 @@ export default function Login() {
               alice123
             </p>
             <p>
-              <span className="font-medium">Bob:</span>{' '}
-              bob@vibe-lms.com / bob123
+              <span className="font-medium">Bob:</span> bob@vibe-lms.com /
+              bob123
             </p>
             <p>
               <span className="font-medium">Student:</span> student@vibe-lms.com

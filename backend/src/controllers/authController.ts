@@ -59,7 +59,6 @@ export async function login(req: Request, res: Response): Promise<void> {
     const token = generateToken({
       userId: user.id,
       email: user.email,
-      role: user.role,
     })
 
     // Set token in HTTP-only cookie

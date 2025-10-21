@@ -126,11 +126,16 @@ export const updateModuleProgress = async (req: Request, res: Response) => {
     const { status } = req.body
 
     // Validate status
-    const validStatuses: ModuleStatus[] = ['NOT_STARTED', 'IN_PROGRESS', 'COMPLETED']
+    const validStatuses: ModuleStatus[] = [
+      'NOT_STARTED',
+      'IN_PROGRESS',
+      'COMPLETED',
+    ]
     if (!status || !validStatuses.includes(status)) {
       res.status(400).json({
         success: false,
-        message: 'Invalid status. Must be one of: NOT_STARTED, IN_PROGRESS, COMPLETED',
+        message:
+          'Invalid status. Must be one of: NOT_STARTED, IN_PROGRESS, COMPLETED',
       })
       return
     }
@@ -264,11 +269,16 @@ export const updateMyModuleProgress = async (req: Request, res: Response) => {
     }
 
     // Validate status
-    const validStatuses: ModuleStatus[] = ['NOT_STARTED', 'IN_PROGRESS', 'COMPLETED']
+    const validStatuses: ModuleStatus[] = [
+      'NOT_STARTED',
+      'IN_PROGRESS',
+      'COMPLETED',
+    ]
     if (!status || !validStatuses.includes(status)) {
       res.status(400).json({
         success: false,
-        message: 'Invalid status. Must be one of: NOT_STARTED, IN_PROGRESS, COMPLETED',
+        message:
+          'Invalid status. Must be one of: NOT_STARTED, IN_PROGRESS, COMPLETED',
       })
       return
     }
@@ -319,4 +329,3 @@ export const updateMyModuleProgress = async (req: Request, res: Response) => {
     })
   }
 }
-

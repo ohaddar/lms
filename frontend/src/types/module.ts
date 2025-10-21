@@ -1,8 +1,10 @@
-export enum ModuleStatus {
-  NOT_STARTED = 'NOT_STARTED',
-  IN_PROGRESS = 'IN_PROGRESS',
-  COMPLETED = 'COMPLETED',
-}
+export const ModuleStatus = {
+  NOT_STARTED: 'NOT_STARTED',
+  IN_PROGRESS: 'IN_PROGRESS',
+  COMPLETED: 'COMPLETED',
+} as const
+
+export type ModuleStatus = (typeof ModuleStatus)[keyof typeof ModuleStatus]
 
 export interface Module {
   id: string
@@ -27,4 +29,3 @@ export interface UserModuleProgress {
 export interface ModuleWithProgress extends Module {
   progress: UserModuleProgress | null
 }
-

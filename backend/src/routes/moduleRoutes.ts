@@ -21,7 +21,10 @@ router.put('/users/:userId/modules/:moduleId/progress', updateModuleProgress)
 
 // Protected routes (current user's modules)
 router.get('/my/modules', authenticate, getMyModules)
-router.put('/my/modules/:moduleId/progress', authenticate, updateMyModuleProgress)
+router.put(
+  '/my/modules/:moduleId/progress',
+  authenticate,
+  updateMyModuleProgress
+)
 
 export default router
-

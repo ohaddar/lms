@@ -49,13 +49,16 @@ const Home: React.FC = () => {
                 Quick Actions
               </h3>
               <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
-                <button className="p-6 bg-indigo-50 rounded-lg hover:bg-indigo-100 transition-colors text-left">
+                <button
+                  onClick={() => navigate('/modules')}
+                  className="p-6 bg-indigo-50 rounded-lg hover:bg-indigo-100 transition-colors text-left"
+                >
                   <div className="text-2xl mb-2">📚</div>
                   <h4 className="font-semibold text-gray-900 mb-1">
-                    My Courses
+                    Learning Modules
                   </h4>
                   <p className="text-sm text-gray-600">
-                    Access your enrolled courses
+                    Continue your AI Foundations course
                   </p>
                 </button>
                 <button className="p-6 bg-indigo-50 rounded-lg hover:bg-indigo-100 transition-colors text-left">
