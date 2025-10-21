@@ -17,18 +17,6 @@ vi.mock('react-router-dom', async () => {
 })
 
 describe('ModuleDetail Page', () => {
-  // Helper function to render with router
-  // eslint-disable-next-line @typescript-eslint/no-unused-vars
-  const renderModuleDetail = (moduleId: string) => {
-    return render(
-      <BrowserRouter>
-        <Routes>
-          <Route path="/modules/:id" element={<ModuleDetail />} />
-        </Routes>
-      </BrowserRouter>
-    )
-  }
-
   const mockModules = [
     {
       id: 'module-1',
@@ -37,11 +25,15 @@ describe('ModuleDetail Page', () => {
       order: 1,
       createdAt: '2024-01-01T00:00:00.000Z',
       updatedAt: '2024-01-01T00:00:00.000Z',
+      isAccessible: true,
+      isLocked: false,
       progress: {
         id: 'progress1',
         userId: 'user1',
         moduleId: 'module-1',
         status: ModuleStatus.IN_PROGRESS,
+        isUnlocked: true,
+        quizPassed: false,
         startedAt: '2024-01-01T00:00:00.000Z',
         completedAt: null,
         createdAt: '2024-01-01T00:00:00.000Z',
@@ -55,6 +47,8 @@ describe('ModuleDetail Page', () => {
       order: 2,
       createdAt: '2024-01-01T00:00:00.000Z',
       updatedAt: '2024-01-01T00:00:00.000Z',
+      isAccessible: false,
+      isLocked: true,
       progress: null,
     },
   ]
@@ -143,6 +137,8 @@ describe('ModuleDetail Page', () => {
           userId: 'user1',
           moduleId: 'module-2',
           status: ModuleStatus.NOT_STARTED,
+          isUnlocked: false,
+          quizPassed: false,
           startedAt: null,
           completedAt: null,
           createdAt: '2024-01-01T00:00:00.000Z',

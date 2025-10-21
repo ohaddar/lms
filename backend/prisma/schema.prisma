@@ -45,14 +45,16 @@ model Module {
 
 // User Module Progress Model
 model UserModuleProgress {
-  id         String       @id @default(uuid())
-  userId     String       @map("user_id")
-  moduleId   String       @map("module_id")
-  status     ModuleStatus @default(NOT_STARTED)
-  startedAt  DateTime?    @map("started_at")
-  completedAt DateTime?   @map("completed_at")
-  createdAt  DateTime     @default(now()) @map("created_at")
-  updatedAt  DateTime     @updatedAt @map("updated_at")
+  id          String       @id @default(uuid())
+  userId      String       @map("user_id")
+  moduleId    String       @map("module_id")
+  status      ModuleStatus @default(NOT_STARTED)
+  isUnlocked  Boolean      @default(false) @map("is_unlocked")
+  quizPassed  Boolean      @default(false) @map("quiz_passed")
+  startedAt   DateTime?    @map("started_at")
+  completedAt DateTime?    @map("completed_at")
+  createdAt   DateTime     @default(now()) @map("created_at")
+  updatedAt   DateTime     @updatedAt @map("updated_at")
 
   user   User   @relation(fields: [userId], references: [id], onDelete: Cascade)
   module Module @relation(fields: [moduleId], references: [id], onDelete: Cascade)

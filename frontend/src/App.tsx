@@ -2,7 +2,14 @@ import React from 'react'
 import { BrowserRouter as Router, Routes, Route } from 'react-router-dom'
 import { AuthProvider } from '@/contexts'
 import { ProtectedRoute } from '@/components'
-import { Home, Login, NotFound, Modules, ModuleDetail } from '@/pages'
+import {
+  Home,
+  Login,
+  NotFound,
+  Modules,
+  ModuleDetail,
+  Congratulations,
+} from '@/pages'
 
 const App: React.FC = () => {
   return (
@@ -31,6 +38,14 @@ const App: React.FC = () => {
             element={
               <ProtectedRoute>
                 <ModuleDetail />
+              </ProtectedRoute>
+            }
+          />
+          <Route
+            path="/congratulations"
+            element={
+              <ProtectedRoute>
+                <Congratulations />
               </ProtectedRoute>
             }
           />

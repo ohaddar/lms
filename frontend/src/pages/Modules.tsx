@@ -69,8 +69,11 @@ export const Modules = () => {
     return Math.round((completed / modules.length) * 100)
   }
 
-  const handleModuleClick = (moduleId: string) => {
-    navigate(`/modules/${moduleId}`)
+  const handleModuleClick = (module: ModuleWithProgress) => {
+    if (module.isLocked) {
+      return // Don't navigate to locked modules
+    }
+    navigate(`/modules/${module.id}`)
   }
 
   if (loading) {
@@ -205,93 +208,194 @@ export const Modules = () => {
               module.progress?.status === ModuleStatus.COMPLETED
             const isInProgress =
               module.progress?.status === ModuleStatus.IN_PROGRESS
+            const isLocked = module.isLocked
 
             return (
               <div
                 key={module.id}
-                onClick={() => handleModuleClick(module.id)}
-                className="group bg-white rounded-2xl shadow-soft hover:shadow-large transition-all duration-300 cursor-pointer overflow-hidden border border-gray-100 hover:border-primary-200 hover:scale-[1.02]"
+                onClick={() => handleModuleClick(module)}
+                className={`group bg-white rounded-2xl shadow-soft transition-all duration-300 overflow-hidden border ${
+                  isLocked
+                    ? 'cursor-not-allowed opacity-60 border-gray-300'
+                    : 'cursor-pointer hover:shadow-large border-gray-100 hover:border-primary-200 hover:scale-[1.02]'
+                }`}
                 style={{
                   animationDelay: `${index * 100}ms`,
                 }}
               >
                 {/* Card Header */}
                 <div
-                  className={`p-6 ${isCompleted ? 'bg-gradient-to-br from-green-50 to-emerald-50' : isInProgress ? 'bg-gradient-to-br from-blue-50 to-primary-50' : 'bg-gradient-to-br from-gray-50 to-slate-50'}`}
+                  className={`p-6 relative ${
+                    isLocked
+                      ? 'bg-gradient-to-br from-gray-100 to-gray-200'
+                      : isCompleted
+                        ? 'bg-gradient-to-br from-green-50 to-emerald-50'
+                        : isInProgress
+                          ? 'bg-gradient-to-br from-blue-50 to-primary-50'
+                          : 'bg-gradient-to-br from-gray-50 to-slate-50'
+                  }`}
                 >
                   <div className="flex items-start justify-between mb-4">
-                    <div className="w-12 h-12 bg-gradient-to-br from-primary-500 to-primary-700 rounded-xl flex items-center justify-center shadow-medium group-hover:scale-110 transition-transform duration-300">
-                      <span className="text-white font-bold text-lg">
-                        {module.order}
-                      </span>
+                    <div
+                      className={`w-12 h-12 rounded-xl flex items-center justify-center shadow-medium ${
+                        isLocked
+                          ? 'bg-gray-400'
+                          : 'bg-gradient-to-br from-primary-500 to-primary-700 group-hover:scale-110'
+                      } transition-transform duration-300`}
+                    >
+                      {isLocked ? (
+                        <svg
+                          className="w-6 h-6 text-white"
+                          fill="none"
+                          viewBox="0 0 24 24"
+                          stroke="currentColor"
+                        >
+                          <path
+                            strokeLinecap="round"
+                            strokeLinejoin="round"
+                            strokeWidth={2}
+                            d="M12 15v2m-6 4h12a2 2 0 002-2v-6a2 2 0 00-2-2H6a2 2 0 00-2 2v6a2 2 0 002 2zm10-10V7a4 4 0 00-8 0v4h8z"
+                          />
+                        </svg>
+                      ) : (
+                        <span className="text-white font-bold text-lg">
+                          {module.order}
+                        </span>
+                      )}
                     </div>
-                    {getStatusBadge(
-                      module.progress?.status || ModuleStatus.NOT_STARTED
+                    {isLocked ? (
+                      <span className="inline-flex items-center gap-1.5 px-3 py-1.5 rounded-full text-xs font-semibold bg-gray-300 text-gray-700 border border-gray-400">
+                        <svg
+                          className="w-3 h-3"
+                          fill="currentColor"
+                          viewBox="0 0 20 20"
+                        >
+                          <path
+                            fillRule="evenodd"
+                            d="M5 9V7a5 5 0 0110 0v2a2 2 0 012 2v5a2 2 0 01-2 2H5a2 2 0 01-2-2v-5a2 2 0 012-2zm8-2v2H7V7a3 3 0 016 0z"
+                            clipRule="evenodd"
+                          />
+                        </svg>
+                        Locked
+                      </span>
+                    ) : (
+                      getStatusBadge(
+                        module.progress?.status || ModuleStatus.NOT_STARTED
+                      )
                     )}
                   </div>
-                  <h3 className="text-xl font-bold text-gray-900 mb-2 group-hover:text-primary-700 transition-colors">
+                  <h3
+                    className={`text-xl font-bold mb-2 transition-colors ${
+                      isLocked
+                        ? 'text-gray-600'
+                        : 'text-gray-900 group-hover:text-primary-700'
+                    }`}
+                  >
                     {module.title}
                   </h3>
                 </div>
 
                 {/* Card Body */}
                 <div className="p-6 pt-4">
-                  {module.progress?.startedAt && (
-                    <div className="flex items-center gap-2 text-sm text-gray-500 mb-2">
-                      <svg
-                        className="w-4 h-4"
-                        fill="none"
-                        viewBox="0 0 24 24"
-                        stroke="currentColor"
-                      >
-                        <path
-                          strokeLinecap="round"
-                          strokeLinejoin="round"
-                          strokeWidth={2}
-                          d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z"
-                        />
-                      </svg>
-                      Started:{' '}
-                      {new Date(module.progress.startedAt).toLocaleDateString()}
+                  {isLocked ? (
+                    <div className="space-y-3">
+                      <div className="flex items-start gap-2 text-sm text-gray-600">
+                        <svg
+                          className="w-5 h-5 text-gray-500 flex-shrink-0 mt-0.5"
+                          fill="none"
+                          viewBox="0 0 24 24"
+                          stroke="currentColor"
+                        >
+                          <path
+                            strokeLinecap="round"
+                            strokeLinejoin="round"
+                            strokeWidth={2}
+                            d="M13 16h-1v-4h-1m1-4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z"
+                          />
+                        </svg>
+                        <span>
+                          Complete Module {module.order - 1} quiz to unlock
+                        </span>
+                      </div>
+                      <div className="mt-4 flex items-center text-gray-500 font-semibold gap-2">
+                        <svg
+                          className="w-5 h-5"
+                          fill="none"
+                          viewBox="0 0 24 24"
+                          stroke="currentColor"
+                        >
+                          <path
+                            strokeLinecap="round"
+                            strokeLinejoin="round"
+                            strokeWidth={2}
+                            d="M12 15v2m-6 4h12a2 2 0 002-2v-6a2 2 0 00-2-2H6a2 2 0 00-2 2v6a2 2 0 002 2zm10-10V7a4 4 0 00-8 0v4h8z"
+                          />
+                        </svg>
+                        <span>Locked</span>
+                      </div>
                     </div>
-                  )}
+                  ) : (
+                    <>
+                      {module.progress?.startedAt && (
+                        <div className="flex items-center gap-2 text-sm text-gray-500 mb-2">
+                          <svg
+                            className="w-4 h-4"
+                            fill="none"
+                            viewBox="0 0 24 24"
+                            stroke="currentColor"
+                          >
+                            <path
+                              strokeLinecap="round"
+                              strokeLinejoin="round"
+                              strokeWidth={2}
+                              d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z"
+                            />
+                          </svg>
+                          Started:{' '}
+                          {new Date(
+                            module.progress.startedAt
+                          ).toLocaleDateString()}
+                        </div>
+                      )}
 
-                  {module.progress?.completedAt && (
-                    <div className="flex items-center gap-2 text-sm text-green-600 font-medium mb-2">
-                      <svg
-                        className="w-4 h-4"
-                        fill="currentColor"
-                        viewBox="0 0 20 20"
-                      >
-                        <path
-                          fillRule="evenodd"
-                          d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z"
-                          clipRule="evenodd"
-                        />
-                      </svg>
-                      Completed:{' '}
-                      {new Date(
-                        module.progress.completedAt
-                      ).toLocaleDateString()}
-                    </div>
-                  )}
+                      {module.progress?.completedAt && (
+                        <div className="flex items-center gap-2 text-sm text-green-600 font-medium mb-2">
+                          <svg
+                            className="w-4 h-4"
+                            fill="currentColor"
+                            viewBox="0 0 20 20"
+                          >
+                            <path
+                              fillRule="evenodd"
+                              d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z"
+                              clipRule="evenodd"
+                            />
+                          </svg>
+                          Completed:{' '}
+                          {new Date(
+                            module.progress.completedAt
+                          ).toLocaleDateString()}
+                        </div>
+                      )}
 
-                  <div className="mt-4 flex items-center text-primary-600 font-semibold group-hover:gap-3 gap-2 transition-all">
-                    <span>View Module</span>
-                    <svg
-                      className="w-5 h-5 transform group-hover:translate-x-1 transition-transform"
-                      fill="none"
-                      viewBox="0 0 24 24"
-                      stroke="currentColor"
-                    >
-                      <path
-                        strokeLinecap="round"
-                        strokeLinejoin="round"
-                        strokeWidth={2}
-                        d="M13 7l5 5m0 0l-5 5m5-5H6"
-                      />
-                    </svg>
-                  </div>
+                      <div className="mt-4 flex items-center text-primary-600 font-semibold group-hover:gap-3 gap-2 transition-all">
+                        <span>View Module</span>
+                        <svg
+                          className="w-5 h-5 transform group-hover:translate-x-1 transition-transform"
+                          fill="none"
+                          viewBox="0 0 24 24"
+                          stroke="currentColor"
+                        >
+                          <path
+                            strokeLinecap="round"
+                            strokeLinejoin="round"
+                            strokeWidth={2}
+                            d="M13 7l5 5m0 0l-5 5m5-5H6"
+                          />
+                        </svg>
+                      </div>
+                    </>
+                  )}
                 </div>
               </div>
             )

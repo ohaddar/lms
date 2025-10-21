@@ -7,8 +7,12 @@ import {
   getMyModules,
   updateMyModuleProgress,
 } from '../controllers'
-import { getModuleQuiz, submitQuiz, getQuizAttempts } from '../controllers/quizController'
-import { authenticate } from '../middleware'
+import {
+  getModuleQuiz,
+  submitQuiz,
+  getQuizAttempts,
+} from '../controllers/quizController'
+import { authenticate, checkModuleAccess } from '../middleware'
 
 const router = Router()
 
@@ -28,9 +32,19 @@ router.put(
   updateMyModuleProgress
 )
 
-// Quiz routes (protected)
-router.get('/:moduleId/quiz', authenticate, getModuleQuiz)
-router.post('/:moduleId/quiz/submit', authenticate, submitQuiz)
-router.get('/:moduleId/quiz/attempts', authenticate, getQuizAttempts)
+// Quiz routes (protected with access control)
+router.get('/:moduleId/quiz', authenticate, checkModuleAccess, getModuleQuiz)
+router.post(
+  '/:moduleId/quiz/submit',
+  authenticate,
+  checkModuleAccess,
+  submitQuiz
+)
+router.get(
+  '/:moduleId/quiz/attempts',
+  authenticate,
+  checkModuleAccess,
+  getQuizAttempts
+)
 
 export default router

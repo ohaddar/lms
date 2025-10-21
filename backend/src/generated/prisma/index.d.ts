@@ -3893,6 +3893,8 @@ export namespace Prisma {
     userId: string | null
     moduleId: string | null
     status: $Enums.ModuleStatus | null
+    isUnlocked: boolean | null
+    quizPassed: boolean | null
     startedAt: Date | null
     completedAt: Date | null
     createdAt: Date | null
@@ -3904,6 +3906,8 @@ export namespace Prisma {
     userId: string | null
     moduleId: string | null
     status: $Enums.ModuleStatus | null
+    isUnlocked: boolean | null
+    quizPassed: boolean | null
     startedAt: Date | null
     completedAt: Date | null
     createdAt: Date | null
@@ -3915,6 +3919,8 @@ export namespace Prisma {
     userId: number
     moduleId: number
     status: number
+    isUnlocked: number
+    quizPassed: number
     startedAt: number
     completedAt: number
     createdAt: number
@@ -3928,6 +3934,8 @@ export namespace Prisma {
     userId?: true
     moduleId?: true
     status?: true
+    isUnlocked?: true
+    quizPassed?: true
     startedAt?: true
     completedAt?: true
     createdAt?: true
@@ -3939,6 +3947,8 @@ export namespace Prisma {
     userId?: true
     moduleId?: true
     status?: true
+    isUnlocked?: true
+    quizPassed?: true
     startedAt?: true
     completedAt?: true
     createdAt?: true
@@ -3950,6 +3960,8 @@ export namespace Prisma {
     userId?: true
     moduleId?: true
     status?: true
+    isUnlocked?: true
+    quizPassed?: true
     startedAt?: true
     completedAt?: true
     createdAt?: true
@@ -4034,6 +4046,8 @@ export namespace Prisma {
     userId: string
     moduleId: string
     status: $Enums.ModuleStatus
+    isUnlocked: boolean
+    quizPassed: boolean
     startedAt: Date | null
     completedAt: Date | null
     createdAt: Date
@@ -4062,6 +4076,8 @@ export namespace Prisma {
     userId?: boolean
     moduleId?: boolean
     status?: boolean
+    isUnlocked?: boolean
+    quizPassed?: boolean
     startedAt?: boolean
     completedAt?: boolean
     createdAt?: boolean
@@ -4075,6 +4091,8 @@ export namespace Prisma {
     userId?: boolean
     moduleId?: boolean
     status?: boolean
+    isUnlocked?: boolean
+    quizPassed?: boolean
     startedAt?: boolean
     completedAt?: boolean
     createdAt?: boolean
@@ -4088,6 +4106,8 @@ export namespace Prisma {
     userId?: boolean
     moduleId?: boolean
     status?: boolean
+    isUnlocked?: boolean
+    quizPassed?: boolean
     startedAt?: boolean
     completedAt?: boolean
     createdAt?: boolean
@@ -4101,13 +4121,15 @@ export namespace Prisma {
     userId?: boolean
     moduleId?: boolean
     status?: boolean
+    isUnlocked?: boolean
+    quizPassed?: boolean
     startedAt?: boolean
     completedAt?: boolean
     createdAt?: boolean
     updatedAt?: boolean
   }
 
-  export type UserModuleProgressOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"id" | "userId" | "moduleId" | "status" | "startedAt" | "completedAt" | "createdAt" | "updatedAt", ExtArgs["result"]["userModuleProgress"]>
+  export type UserModuleProgressOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"id" | "userId" | "moduleId" | "status" | "isUnlocked" | "quizPassed" | "startedAt" | "completedAt" | "createdAt" | "updatedAt", ExtArgs["result"]["userModuleProgress"]>
   export type UserModuleProgressInclude<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     user?: boolean | UserDefaultArgs<ExtArgs>
     module?: boolean | ModuleDefaultArgs<ExtArgs>
@@ -4132,6 +4154,8 @@ export namespace Prisma {
       userId: string
       moduleId: string
       status: $Enums.ModuleStatus
+      isUnlocked: boolean
+      quizPassed: boolean
       startedAt: Date | null
       completedAt: Date | null
       createdAt: Date
@@ -4565,6 +4589,8 @@ export namespace Prisma {
     readonly userId: FieldRef<"UserModuleProgress", 'String'>
     readonly moduleId: FieldRef<"UserModuleProgress", 'String'>
     readonly status: FieldRef<"UserModuleProgress", 'ModuleStatus'>
+    readonly isUnlocked: FieldRef<"UserModuleProgress", 'Boolean'>
+    readonly quizPassed: FieldRef<"UserModuleProgress", 'Boolean'>
     readonly startedAt: FieldRef<"UserModuleProgress", 'DateTime'>
     readonly completedAt: FieldRef<"UserModuleProgress", 'DateTime'>
     readonly createdAt: FieldRef<"UserModuleProgress", 'DateTime'>
@@ -9538,6 +9564,8 @@ export namespace Prisma {
     userId: 'userId',
     moduleId: 'moduleId',
     status: 'status',
+    isUnlocked: 'isUnlocked',
+    quizPassed: 'quizPassed',
     startedAt: 'startedAt',
     completedAt: 'completedAt',
     createdAt: 'createdAt',
@@ -9852,6 +9880,8 @@ export namespace Prisma {
     userId?: StringFilter<"UserModuleProgress"> | string
     moduleId?: StringFilter<"UserModuleProgress"> | string
     status?: EnumModuleStatusFilter<"UserModuleProgress"> | $Enums.ModuleStatus
+    isUnlocked?: BoolFilter<"UserModuleProgress"> | boolean
+    quizPassed?: BoolFilter<"UserModuleProgress"> | boolean
     startedAt?: DateTimeNullableFilter<"UserModuleProgress"> | Date | string | null
     completedAt?: DateTimeNullableFilter<"UserModuleProgress"> | Date | string | null
     createdAt?: DateTimeFilter<"UserModuleProgress"> | Date | string
@@ -9865,6 +9895,8 @@ export namespace Prisma {
     userId?: SortOrder
     moduleId?: SortOrder
     status?: SortOrder
+    isUnlocked?: SortOrder
+    quizPassed?: SortOrder
     startedAt?: SortOrderInput | SortOrder
     completedAt?: SortOrderInput | SortOrder
     createdAt?: SortOrder
@@ -9882,6 +9914,8 @@ export namespace Prisma {
     userId?: StringFilter<"UserModuleProgress"> | string
     moduleId?: StringFilter<"UserModuleProgress"> | string
     status?: EnumModuleStatusFilter<"UserModuleProgress"> | $Enums.ModuleStatus
+    isUnlocked?: BoolFilter<"UserModuleProgress"> | boolean
+    quizPassed?: BoolFilter<"UserModuleProgress"> | boolean
     startedAt?: DateTimeNullableFilter<"UserModuleProgress"> | Date | string | null
     completedAt?: DateTimeNullableFilter<"UserModuleProgress"> | Date | string | null
     createdAt?: DateTimeFilter<"UserModuleProgress"> | Date | string
@@ -9895,6 +9929,8 @@ export namespace Prisma {
     userId?: SortOrder
     moduleId?: SortOrder
     status?: SortOrder
+    isUnlocked?: SortOrder
+    quizPassed?: SortOrder
     startedAt?: SortOrderInput | SortOrder
     completedAt?: SortOrderInput | SortOrder
     createdAt?: SortOrder
@@ -9912,6 +9948,8 @@ export namespace Prisma {
     userId?: StringWithAggregatesFilter<"UserModuleProgress"> | string
     moduleId?: StringWithAggregatesFilter<"UserModuleProgress"> | string
     status?: EnumModuleStatusWithAggregatesFilter<"UserModuleProgress"> | $Enums.ModuleStatus
+    isUnlocked?: BoolWithAggregatesFilter<"UserModuleProgress"> | boolean
+    quizPassed?: BoolWithAggregatesFilter<"UserModuleProgress"> | boolean
     startedAt?: DateTimeNullableWithAggregatesFilter<"UserModuleProgress"> | Date | string | null
     completedAt?: DateTimeNullableWithAggregatesFilter<"UserModuleProgress"> | Date | string | null
     createdAt?: DateTimeWithAggregatesFilter<"UserModuleProgress"> | Date | string
@@ -10347,6 +10385,8 @@ export namespace Prisma {
   export type UserModuleProgressCreateInput = {
     id?: string
     status?: $Enums.ModuleStatus
+    isUnlocked?: boolean
+    quizPassed?: boolean
     startedAt?: Date | string | null
     completedAt?: Date | string | null
     createdAt?: Date | string
@@ -10360,6 +10400,8 @@ export namespace Prisma {
     userId: string
     moduleId: string
     status?: $Enums.ModuleStatus
+    isUnlocked?: boolean
+    quizPassed?: boolean
     startedAt?: Date | string | null
     completedAt?: Date | string | null
     createdAt?: Date | string
@@ -10369,6 +10411,8 @@ export namespace Prisma {
   export type UserModuleProgressUpdateInput = {
     id?: StringFieldUpdateOperationsInput | string
     status?: EnumModuleStatusFieldUpdateOperationsInput | $Enums.ModuleStatus
+    isUnlocked?: BoolFieldUpdateOperationsInput | boolean
+    quizPassed?: BoolFieldUpdateOperationsInput | boolean
     startedAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     completedAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
@@ -10382,6 +10426,8 @@ export namespace Prisma {
     userId?: StringFieldUpdateOperationsInput | string
     moduleId?: StringFieldUpdateOperationsInput | string
     status?: EnumModuleStatusFieldUpdateOperationsInput | $Enums.ModuleStatus
+    isUnlocked?: BoolFieldUpdateOperationsInput | boolean
+    quizPassed?: BoolFieldUpdateOperationsInput | boolean
     startedAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     completedAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
@@ -10393,6 +10439,8 @@ export namespace Prisma {
     userId: string
     moduleId: string
     status?: $Enums.ModuleStatus
+    isUnlocked?: boolean
+    quizPassed?: boolean
     startedAt?: Date | string | null
     completedAt?: Date | string | null
     createdAt?: Date | string
@@ -10402,6 +10450,8 @@ export namespace Prisma {
   export type UserModuleProgressUpdateManyMutationInput = {
     id?: StringFieldUpdateOperationsInput | string
     status?: EnumModuleStatusFieldUpdateOperationsInput | $Enums.ModuleStatus
+    isUnlocked?: BoolFieldUpdateOperationsInput | boolean
+    quizPassed?: BoolFieldUpdateOperationsInput | boolean
     startedAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     completedAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
@@ -10413,6 +10463,8 @@ export namespace Prisma {
     userId?: StringFieldUpdateOperationsInput | string
     moduleId?: StringFieldUpdateOperationsInput | string
     status?: EnumModuleStatusFieldUpdateOperationsInput | $Enums.ModuleStatus
+    isUnlocked?: BoolFieldUpdateOperationsInput | boolean
+    quizPassed?: BoolFieldUpdateOperationsInput | boolean
     startedAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     completedAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
@@ -10931,6 +10983,8 @@ export namespace Prisma {
     userId?: SortOrder
     moduleId?: SortOrder
     status?: SortOrder
+    isUnlocked?: SortOrder
+    quizPassed?: SortOrder
     startedAt?: SortOrder
     completedAt?: SortOrder
     createdAt?: SortOrder
@@ -10942,6 +10996,8 @@ export namespace Prisma {
     userId?: SortOrder
     moduleId?: SortOrder
     status?: SortOrder
+    isUnlocked?: SortOrder
+    quizPassed?: SortOrder
     startedAt?: SortOrder
     completedAt?: SortOrder
     createdAt?: SortOrder
@@ -10953,6 +11009,8 @@ export namespace Prisma {
     userId?: SortOrder
     moduleId?: SortOrder
     status?: SortOrder
+    isUnlocked?: SortOrder
+    quizPassed?: SortOrder
     startedAt?: SortOrder
     completedAt?: SortOrder
     createdAt?: SortOrder
@@ -11749,6 +11807,8 @@ export namespace Prisma {
   export type UserModuleProgressCreateWithoutUserInput = {
     id?: string
     status?: $Enums.ModuleStatus
+    isUnlocked?: boolean
+    quizPassed?: boolean
     startedAt?: Date | string | null
     completedAt?: Date | string | null
     createdAt?: Date | string
@@ -11760,6 +11820,8 @@ export namespace Prisma {
     id?: string
     moduleId: string
     status?: $Enums.ModuleStatus
+    isUnlocked?: boolean
+    quizPassed?: boolean
     startedAt?: Date | string | null
     completedAt?: Date | string | null
     createdAt?: Date | string
@@ -11832,6 +11894,8 @@ export namespace Prisma {
     userId?: StringFilter<"UserModuleProgress"> | string
     moduleId?: StringFilter<"UserModuleProgress"> | string
     status?: EnumModuleStatusFilter<"UserModuleProgress"> | $Enums.ModuleStatus
+    isUnlocked?: BoolFilter<"UserModuleProgress"> | boolean
+    quizPassed?: BoolFilter<"UserModuleProgress"> | boolean
     startedAt?: DateTimeNullableFilter<"UserModuleProgress"> | Date | string | null
     completedAt?: DateTimeNullableFilter<"UserModuleProgress"> | Date | string | null
     createdAt?: DateTimeFilter<"UserModuleProgress"> | Date | string
@@ -11871,6 +11935,8 @@ export namespace Prisma {
   export type UserModuleProgressCreateWithoutModuleInput = {
     id?: string
     status?: $Enums.ModuleStatus
+    isUnlocked?: boolean
+    quizPassed?: boolean
     startedAt?: Date | string | null
     completedAt?: Date | string | null
     createdAt?: Date | string
@@ -11882,6 +11948,8 @@ export namespace Prisma {
     id?: string
     userId: string
     status?: $Enums.ModuleStatus
+    isUnlocked?: boolean
+    quizPassed?: boolean
     startedAt?: Date | string | null
     completedAt?: Date | string | null
     createdAt?: Date | string
@@ -12532,6 +12600,8 @@ export namespace Prisma {
     id?: string
     moduleId: string
     status?: $Enums.ModuleStatus
+    isUnlocked?: boolean
+    quizPassed?: boolean
     startedAt?: Date | string | null
     completedAt?: Date | string | null
     createdAt?: Date | string
@@ -12551,6 +12621,8 @@ export namespace Prisma {
   export type UserModuleProgressUpdateWithoutUserInput = {
     id?: StringFieldUpdateOperationsInput | string
     status?: EnumModuleStatusFieldUpdateOperationsInput | $Enums.ModuleStatus
+    isUnlocked?: BoolFieldUpdateOperationsInput | boolean
+    quizPassed?: BoolFieldUpdateOperationsInput | boolean
     startedAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     completedAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
@@ -12562,6 +12634,8 @@ export namespace Prisma {
     id?: StringFieldUpdateOperationsInput | string
     moduleId?: StringFieldUpdateOperationsInput | string
     status?: EnumModuleStatusFieldUpdateOperationsInput | $Enums.ModuleStatus
+    isUnlocked?: BoolFieldUpdateOperationsInput | boolean
+    quizPassed?: BoolFieldUpdateOperationsInput | boolean
     startedAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     completedAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
@@ -12572,6 +12646,8 @@ export namespace Prisma {
     id?: StringFieldUpdateOperationsInput | string
     moduleId?: StringFieldUpdateOperationsInput | string
     status?: EnumModuleStatusFieldUpdateOperationsInput | $Enums.ModuleStatus
+    isUnlocked?: BoolFieldUpdateOperationsInput | boolean
+    quizPassed?: BoolFieldUpdateOperationsInput | boolean
     startedAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     completedAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
@@ -12614,6 +12690,8 @@ export namespace Prisma {
     id?: string
     userId: string
     status?: $Enums.ModuleStatus
+    isUnlocked?: boolean
+    quizPassed?: boolean
     startedAt?: Date | string | null
     completedAt?: Date | string | null
     createdAt?: Date | string
@@ -12631,6 +12709,8 @@ export namespace Prisma {
   export type UserModuleProgressUpdateWithoutModuleInput = {
     id?: StringFieldUpdateOperationsInput | string
     status?: EnumModuleStatusFieldUpdateOperationsInput | $Enums.ModuleStatus
+    isUnlocked?: BoolFieldUpdateOperationsInput | boolean
+    quizPassed?: BoolFieldUpdateOperationsInput | boolean
     startedAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     completedAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
@@ -12642,6 +12722,8 @@ export namespace Prisma {
     id?: StringFieldUpdateOperationsInput | string
     userId?: StringFieldUpdateOperationsInput | string
     status?: EnumModuleStatusFieldUpdateOperationsInput | $Enums.ModuleStatus
+    isUnlocked?: BoolFieldUpdateOperationsInput | boolean
+    quizPassed?: BoolFieldUpdateOperationsInput | boolean
     startedAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     completedAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
@@ -12652,6 +12734,8 @@ export namespace Prisma {
     id?: StringFieldUpdateOperationsInput | string
     userId?: StringFieldUpdateOperationsInput | string
     status?: EnumModuleStatusFieldUpdateOperationsInput | $Enums.ModuleStatus
+    isUnlocked?: BoolFieldUpdateOperationsInput | boolean
+    quizPassed?: BoolFieldUpdateOperationsInput | boolean
     startedAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     completedAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string

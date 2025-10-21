@@ -1,5 +1,10 @@
 import { Router } from 'express'
-import { login, logout, getCurrentUser } from '../controllers/authController'
+import {
+  login,
+  logout,
+  getCurrentUser,
+  getUserStats,
+} from '../controllers/authController'
 import { authenticate } from '../middleware/auth'
 
 const router = Router()
@@ -10,5 +15,6 @@ router.post('/logout', logout)
 
 // Protected routes
 router.get('/me', authenticate, getCurrentUser)
+router.get('/stats', authenticate, getUserStats)
 
 export { router as authRoutes }

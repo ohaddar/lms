@@ -1,11 +1,31 @@
-import React from 'react'
+import React, { useEffect, useState } from 'react'
 import { useNavigate } from 'react-router-dom'
 import { useAuth } from '../contexts'
 import { Layout } from '../components'
+import { getUserStats } from '../utils'
+import type { UserStats } from '../utils'
 
 const Home: React.FC = () => {
   const { user } = useAuth()
   const navigate = useNavigate()
+  const [stats, setStats] = useState<UserStats | null>(null)
+  const [loadingStats, setLoadingStats] = useState(true)
+
+  useEffect(() => {
+    const fetchStats = async () => {
+      try {
+        setLoadingStats(true)
+        const data = await getUserStats()
+        setStats(data)
+      } catch (error) {
+        console.error('Error fetching stats:', error)
+      } finally {
+        setLoadingStats(false)
+      }
+    }
+
+    fetchStats()
+  }, [])
 
   const quickActions = [
     {
@@ -37,17 +57,22 @@ const Home: React.FC = () => {
     },
   ]
 
-  const stats = [
+  const statsCards = [
     {
       label: 'Modules Completed',
-      value: '0',
+      value: loadingStats ? '...' : stats?.modulesCompleted.toString() || '0',
       icon: '✓',
       color: 'text-green-600',
     },
-    { label: 'Hours Learned', value: '0', icon: '⏱️', color: 'text-blue-600' },
+    {
+      label: 'Hours Learned',
+      value: loadingStats ? '...' : stats?.hoursLearned || '0min',
+      icon: '⏱️',
+      color: 'text-blue-600',
+    },
     {
       label: 'Quizzes Passed',
-      value: '0',
+      value: loadingStats ? '...' : stats?.quizzesPassed.toString() || '0',
       icon: '🎯',
       color: 'text-purple-600',
     },
@@ -92,7 +117,7 @@ const Home: React.FC = () => {
 
       {/* Stats Grid */}
       <div className="grid grid-cols-1 md:grid-cols-3 gap-6 mb-8 animate-fade-in">
-        {stats.map((stat, index) => (
+        {statsCards.map((stat, index) => (
           <div
             key={index}
             className="bg-white rounded-2xl shadow-soft p-6 hover:shadow-medium transition-all duration-200 hover:scale-105"

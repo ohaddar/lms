@@ -20,6 +20,8 @@ export interface UserModuleProgress {
   userId: string
   moduleId: string
   status: ModuleStatus
+  isUnlocked: boolean
+  quizPassed: boolean
   startedAt: string | null
   completedAt: string | null
   createdAt: string
@@ -28,4 +30,6 @@ export interface UserModuleProgress {
 
 export interface ModuleWithProgress extends Module {
   progress: UserModuleProgress | null
+  isAccessible: boolean
+  isLocked: boolean
 }

@@ -53,9 +53,24 @@ const mockSubmissionResultPassed = {
   totalQuestions: 3,
   passed: true,
   answerDetails: [
-    { questionId: 'q1', answerId: 'a2', isCorrect: true, correctAnswerId: 'a2' },
-    { questionId: 'q2', answerId: 'a6', isCorrect: true, correctAnswerId: 'a6' },
-    { questionId: 'q3', answerId: 'a11', isCorrect: true, correctAnswerId: 'a11' },
+    {
+      questionId: 'q1',
+      answerId: 'a2',
+      isCorrect: true,
+      correctAnswerId: 'a2',
+    },
+    {
+      questionId: 'q2',
+      answerId: 'a6',
+      isCorrect: true,
+      correctAnswerId: 'a6',
+    },
+    {
+      questionId: 'q3',
+      answerId: 'a11',
+      isCorrect: true,
+      correctAnswerId: 'a11',
+    },
   ],
   message: 'Félicitations! Module terminé.',
 }
@@ -67,9 +82,24 @@ const mockSubmissionResultFailed = {
   totalQuestions: 3,
   passed: false,
   answerDetails: [
-    { questionId: 'q1', answerId: 'a2', isCorrect: true, correctAnswerId: 'a2' },
-    { questionId: 'q2', answerId: 'a5', isCorrect: false, correctAnswerId: 'a6' },
-    { questionId: 'q3', answerId: 'a9', isCorrect: false, correctAnswerId: 'a11' },
+    {
+      questionId: 'q1',
+      answerId: 'a2',
+      isCorrect: true,
+      correctAnswerId: 'a2',
+    },
+    {
+      questionId: 'q2',
+      answerId: 'a5',
+      isCorrect: false,
+      correctAnswerId: 'a6',
+    },
+    {
+      questionId: 'q3',
+      answerId: 'a9',
+      isCorrect: false,
+      correctAnswerId: 'a11',
+    },
   ],
   message: 'Veuillez réessayer',
 }
@@ -128,10 +158,10 @@ describe('Quiz Component', () => {
     })
 
     const radioButtons = screen.getAllByRole('radio')
-    
+
     // Select an answer for the first question
     fireEvent.click(radioButtons[1]) // Select '4' for first question
-    
+
     expect(radioButtons[1]).toBeChecked()
   })
 
@@ -145,25 +175,27 @@ describe('Quiz Component', () => {
     })
 
     const radioButtons = screen.getAllByRole('radio')
-    
+
     // Select only one answer (out of 3 questions)
     fireEvent.click(radioButtons[1])
 
     const submitButton = screen.getByRole('button', { name: /Submit Quiz/i })
-    
+
     // Button should remain disabled since not all questions are answered
     expect(submitButton).toBeDisabled()
-    
+
     // Select second question
     fireEvent.click(radioButtons[5])
-    
+
     // Still disabled
     expect(submitButton).toBeDisabled()
   })
 
   it('should submit quiz and show success results', async () => {
     vi.mocked(quizUtils.getModuleQuiz).mockResolvedValue(mockQuizData)
-    vi.mocked(quizUtils.submitQuiz).mockResolvedValue(mockSubmissionResultPassed)
+    vi.mocked(quizUtils.submitQuiz).mockResolvedValue(
+      mockSubmissionResultPassed
+    )
 
     const onQuizComplete = vi.fn()
 
@@ -174,7 +206,7 @@ describe('Quiz Component', () => {
     })
 
     const radioButtons = screen.getAllByRole('radio')
-    
+
     // Answer all questions
     fireEvent.click(radioButtons[1]) // Q1: Answer '4'
     fireEvent.click(radioButtons[5]) // Q2: Answer '6'
@@ -188,14 +220,18 @@ describe('Quiz Component', () => {
     })
 
     expect(screen.getByText('100%')).toBeInTheDocument()
-    expect(screen.getByText('Félicitations! Module terminé.')).toBeInTheDocument()
+    expect(
+      screen.getByText('Félicitations! Module terminé.')
+    ).toBeInTheDocument()
     expect(screen.getByText('3 out of 3 questions correct')).toBeInTheDocument()
     expect(onQuizComplete).toHaveBeenCalledWith(true)
   })
 
   it('should submit quiz and show failure results with retry button', async () => {
     vi.mocked(quizUtils.getModuleQuiz).mockResolvedValue(mockQuizData)
-    vi.mocked(quizUtils.submitQuiz).mockResolvedValue(mockSubmissionResultFailed)
+    vi.mocked(quizUtils.submitQuiz).mockResolvedValue(
+      mockSubmissionResultFailed
+    )
 
     const onQuizComplete = vi.fn()
 
@@ -206,7 +242,7 @@ describe('Quiz Component', () => {
     })
 
     const radioButtons = screen.getAllByRole('radio')
-    
+
     // Answer all questions (some incorrectly)
     fireEvent.click(radioButtons[1]) // Q1: Answer '4' (correct)
     fireEvent.click(radioButtons[4]) // Q2: Answer '5' (incorrect)
@@ -222,13 +258,17 @@ describe('Quiz Component', () => {
     expect(screen.getByText('33%')).toBeInTheDocument()
     expect(screen.getByText('Veuillez réessayer')).toBeInTheDocument()
     expect(screen.getByText('1 out of 3 questions correct')).toBeInTheDocument()
-    expect(screen.getByRole('button', { name: /Retry Quiz/i })).toBeInTheDocument()
+    expect(
+      screen.getByRole('button', { name: /Retry Quiz/i })
+    ).toBeInTheDocument()
     expect(onQuizComplete).toHaveBeenCalledWith(false)
   })
 
   it('should reset quiz when retry button is clicked', async () => {
     vi.mocked(quizUtils.getModuleQuiz).mockResolvedValue(mockQuizData)
-    vi.mocked(quizUtils.submitQuiz).mockResolvedValue(mockSubmissionResultFailed)
+    vi.mocked(quizUtils.submitQuiz).mockResolvedValue(
+      mockSubmissionResultFailed
+    )
 
     render(<Quiz moduleId="module-123" />)
 
@@ -237,7 +277,7 @@ describe('Quiz Component', () => {
     })
 
     const radioButtons = screen.getAllByRole('radio')
-    
+
     // Answer all questions
     fireEvent.click(radioButtons[1])
     fireEvent.click(radioButtons[4])
@@ -261,7 +301,9 @@ describe('Quiz Component', () => {
   })
 
   it('should handle quiz loading error', async () => {
-    vi.mocked(quizUtils.getModuleQuiz).mockRejectedValue(new Error('Network error'))
+    vi.mocked(quizUtils.getModuleQuiz).mockRejectedValue(
+      new Error('Network error')
+    )
 
     render(<Quiz moduleId="module-123" />)
 
@@ -274,7 +316,9 @@ describe('Quiz Component', () => {
 
   it('should handle quiz submission error', async () => {
     vi.mocked(quizUtils.getModuleQuiz).mockResolvedValue(mockQuizData)
-    vi.mocked(quizUtils.submitQuiz).mockRejectedValue(new Error('Submission error'))
+    vi.mocked(quizUtils.submitQuiz).mockRejectedValue(
+      new Error('Submission error')
+    )
 
     render(<Quiz moduleId="module-123" />)
 
@@ -283,7 +327,7 @@ describe('Quiz Component', () => {
     })
 
     const radioButtons = screen.getAllByRole('radio')
-    
+
     // Answer all questions
     fireEvent.click(radioButtons[1])
     fireEvent.click(radioButtons[5])
@@ -307,12 +351,12 @@ describe('Quiz Component', () => {
     })
 
     const submitButton = screen.getByRole('button', { name: /Submit Quiz/i })
-    
+
     // Button should be disabled initially
     expect(submitButton).toBeDisabled()
 
     const radioButtons = screen.getAllByRole('radio')
-    
+
     // Answer only 2 out of 3 questions
     fireEvent.click(radioButtons[1])
     fireEvent.click(radioButtons[5])
@@ -329,7 +373,9 @@ describe('Quiz Component', () => {
 
   it('should show correct and incorrect answers in results', async () => {
     vi.mocked(quizUtils.getModuleQuiz).mockResolvedValue(mockQuizData)
-    vi.mocked(quizUtils.submitQuiz).mockResolvedValue(mockSubmissionResultFailed)
+    vi.mocked(quizUtils.submitQuiz).mockResolvedValue(
+      mockSubmissionResultFailed
+    )
 
     render(<Quiz moduleId="module-123" />)
 
@@ -351,9 +397,8 @@ describe('Quiz Component', () => {
 
     // Check for correct answer indicators
     expect(screen.getAllByText(/✓ Correct/i).length).toBeGreaterThan(0)
-    
+
     // Check for incorrect answer indicators
     expect(screen.getAllByText(/✗ Your answer/i).length).toBeGreaterThan(0)
   })
 })
-

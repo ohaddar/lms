@@ -23,7 +23,9 @@
     "db:studio": "prisma studio",
     "db:seed": "ts-node prisma/seed.ts",
     "db:reset": "prisma migrate reset",
-    "db:test": "ts-node scripts/test-db-connection.ts"
+    "db:test": "ts-node scripts/test-db-connection.ts",
+    "db:fix-stats": "tsx scripts/fix-quiz-passed.ts",
+    "db:verify-stats": "tsx scripts/verify-stats.ts"
   },
   "keywords": [
     "lms",

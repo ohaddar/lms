@@ -45,4 +45,3 @@ export interface QuizAttempt {
   passed: boolean
   attemptedAt: string
 }
-

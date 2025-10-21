@@ -98,7 +98,6 @@ describe('Quiz Controller', () => {
     it('should return 404 if module not found', async () => {
       const moduleId = 'invalid-module'
       mockReq.params = { moduleId }
-
       ;(prisma.module.findUnique as jest.Mock).mockResolvedValue(null)
 
       await getModuleQuiz(mockReq as Request, mockRes as Response)
@@ -113,7 +112,6 @@ describe('Quiz Controller', () => {
     it('should handle errors gracefully', async () => {
       const moduleId = 'module-123'
       mockReq.params = { moduleId }
-
       ;(prisma.module.findUnique as jest.Mock).mockRejectedValue(
         new Error('Database error')
       )
@@ -170,7 +168,9 @@ describe('Quiz Controller', () => {
 
       ;(prisma.module.findUnique as jest.Mock).mockResolvedValue(mockModule)
       ;(prisma.question.findMany as jest.Mock).mockResolvedValue(mockQuestions)
-      ;(prisma.userQuizAttempt.create as jest.Mock).mockResolvedValue(mockAttempt)
+      ;(prisma.userQuizAttempt.create as jest.Mock).mockResolvedValue(
+        mockAttempt
+      )
       ;(prisma.userModuleProgress.upsert as jest.Mock).mockResolvedValue({})
 
       await submitQuiz(mockReq as Request, mockRes as Response)
@@ -230,7 +230,9 @@ describe('Quiz Controller', () => {
 
       ;(prisma.module.findUnique as jest.Mock).mockResolvedValue(mockModule)
       ;(prisma.question.findMany as jest.Mock).mockResolvedValue(mockQuestions)
-      ;(prisma.userQuizAttempt.create as jest.Mock).mockResolvedValue(mockAttempt)
+      ;(prisma.userQuizAttempt.create as jest.Mock).mockResolvedValue(
+        mockAttempt
+      )
 
       await submitQuiz(mockReq as Request, mockRes as Response)
 
@@ -317,7 +319,9 @@ describe('Quiz Controller', () => {
         },
       ]
 
-      ;(prisma.userQuizAttempt.findMany as jest.Mock).mockResolvedValue(mockAttempts)
+      ;(prisma.userQuizAttempt.findMany as jest.Mock).mockResolvedValue(
+        mockAttempts
+      )
 
       await getQuizAttempts(mockReq as Request, mockRes as Response)
 
@@ -341,4 +345,3 @@ describe('Quiz Controller', () => {
     })
   })
 })
-

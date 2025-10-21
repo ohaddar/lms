@@ -145,6 +145,8 @@ exports.Prisma.UserModuleProgressScalarFieldEnum = {
   userId: 'userId',
   moduleId: 'moduleId',
   status: 'status',
+  isUnlocked: 'isUnlocked',
+  quizPassed: 'quizPassed',
   startedAt: 'startedAt',
   completedAt: 'completedAt',
   createdAt: 'createdAt',

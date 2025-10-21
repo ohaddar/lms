@@ -1,5 +1,6 @@
 import { Request, Response } from 'express'
 import { PrismaClient } from '../generated/prisma'
+import { accessControlService } from '../services'
 
 const prisma = new PrismaClient()
 
@@ -7,7 +8,10 @@ const prisma = new PrismaClient()
  * Get quiz questions for a specific module
  * GET /api/modules/:moduleId/quiz
  */
-export const getModuleQuiz = async (req: Request, res: Response): Promise<void> => {
+export const getModuleQuiz = async (
+  req: Request,
+  res: Response
+): Promise<void> => {
   try {
     const { moduleId } = req.params
 
@@ -68,7 +72,10 @@ export const getModuleQuiz = async (req: Request, res: Response): Promise<void> 
  * POST /api/modules/:moduleId/quiz/submit
  * Body: { answers: { questionId: string, answerId: string }[] }
  */
-export const submitQuiz = async (req: Request, res: Response): Promise<void> => {
+export const submitQuiz = async (
+  req: Request,
+  res: Response
+): Promise<void> => {
   try {
     const { moduleId } = req.params
     const { answers } = req.body
@@ -140,7 +147,7 @@ export const submitQuiz = async (req: Request, res: Response): Promise<void> => 
 
     for (const userAnswer of answers) {
       const question = questions.find(q => q.id === userAnswer.questionId)
-      
+
       if (!question) {
         res.status(400).json({
           success: false,
@@ -149,7 +156,9 @@ export const submitQuiz = async (req: Request, res: Response): Promise<void> => 
         return
       }
 
-      const selectedAnswer = question.answers.find(a => a.id === userAnswer.answerId)
+      const selectedAnswer = question.answers.find(
+        a => a.id === userAnswer.answerId
+      )
       const correctAnswer = question.answers.find(a => a.isCorrect)
 
       if (!selectedAnswer) {
@@ -195,7 +204,7 @@ export const submitQuiz = async (req: Request, res: Response): Promise<void> => 
       },
     })
 
-    // If passed, update module progress to COMPLETED
+    // If passed, update module progress to COMPLETED and unlock next module
     if (passed) {
       await prisma.userModuleProgress.upsert({
         where: {
@@ -206,16 +215,22 @@ export const submitQuiz = async (req: Request, res: Response): Promise<void> => 
         },
         update: {
           status: 'COMPLETED',
+          quizPassed: true,
           completedAt: new Date(),
         },
         create: {
           userId,
           moduleId,
           status: 'COMPLETED',
+          quizPassed: true,
+          isUnlocked: true,
           startedAt: new Date(),
           completedAt: new Date(),
         },
       })
+
+      // Unlock the next module
+      await accessControlService.unlockNextModule(userId, moduleId)
     }
 
     res.status(200).json({
@@ -227,8 +242,8 @@ export const submitQuiz = async (req: Request, res: Response): Promise<void> => 
         totalQuestions: questions.length,
         passed,
         answerDetails,
-        message: passed 
-          ? 'Félicitations! Module terminé.' 
+        message: passed
+          ? 'Félicitations! Module terminé.'
           : 'Veuillez réessayer',
       },
     })
@@ -245,7 +260,10 @@ export const submitQuiz = async (req: Request, res: Response): Promise<void> => 
  * Get user's quiz attempts for a module
  * GET /api/modules/:moduleId/quiz/attempts
  */
-export const getQuizAttempts = async (req: Request, res: Response): Promise<void> => {
+export const getQuizAttempts = async (
+  req: Request,
+  res: Response
+): Promise<void> => {
   try {
     const { moduleId } = req.params
     const userId = req.user?.userId
@@ -286,4 +304,3 @@ export const getQuizAttempts = async (req: Request, res: Response): Promise<void
     })
   }
 }
-

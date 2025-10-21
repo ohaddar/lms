@@ -7,4 +7,12 @@ export * from './quiz'
 export type { Module, ModuleWithProgress, UserModuleProgress } from './module'
 export { ModuleStatus } from './module'
 export type { User, LoginCredentials, AuthContextType } from './auth'
-export type { Quiz, QuizQuestion, QuizAnswer, UserAnswer, QuizSubmissionResult, QuizAttempt, AnswerDetail } from './quiz'
+export type {
+  Quiz,
+  QuizQuestion,
+  QuizAnswer,
+  UserAnswer,
+  QuizSubmissionResult,
+  QuizAttempt,
+  AnswerDetail,
+} from './quiz'

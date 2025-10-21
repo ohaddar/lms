@@ -130,3 +130,61 @@ export async function getCurrentUser(
     res.status(500).json({ error: 'Internal server error' })
   }
 }
+
+/**
+ * Get current authenticated user statistics
+ * GET /api/auth/stats
+ */
+export async function getUserStats(req: Request, res: Response): Promise<void> {
+  try {
+    if (!req.user) {
+      res.status(401).json({ error: 'Not authenticated' })
+      return
+    }
+
+    const userId = req.user.userId
+
+    // Get modules completed count (status = COMPLETED AND quizPassed = true)
+    const modulesCompleted = await prisma.userModuleProgress.count({
+      where: {
+        userId,
+        status: 'COMPLETED',
+        quizPassed: true,
+      },
+    })
+
+    // Get quizzes passed count (distinct modules where quiz is passed)
+    const passedQuizAttempts = await prisma.userQuizAttempt.findMany({
+      where: {
+        userId,
+        passed: true,
+      },
+      select: {
+        moduleId: true,
+      },
+      distinct: ['moduleId'],
+    })
+    const quizzesPassed = passedQuizAttempts.length
+
+    // Calculate hours learned (1h40min = 100 minutes per completed module)
+    const totalMinutes = modulesCompleted * 100
+    const hours = Math.floor(totalMinutes / 60)
+    const minutes = totalMinutes % 60
+    const hoursLearned =
+      hours > 0
+        ? `${hours}h${minutes > 0 ? minutes + 'min' : ''}`
+        : `${minutes}min`
+
+    res.json({
+      success: true,
+      data: {
+        modulesCompleted,
+        quizzesPassed,
+        hoursLearned,
+      },
+    })
+  } catch (error) {
+    console.error('Get user stats error:', error)
+    res.status(500).json({ error: 'Internal server error' })
+  }
+}

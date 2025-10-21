@@ -1,5 +1,6 @@
 import { Request, Response } from 'express'
 import { PrismaClient, ModuleStatus } from '../generated/prisma'
+import { accessControlService } from '../services'
 
 const prisma = new PrismaClient()
 
@@ -214,32 +215,16 @@ export const getMyModules = async (req: Request, res: Response) => {
       return
     }
 
-    // Get all modules with user's progress
-    const modules = await prisma.module.findMany({
-      orderBy: { order: 'asc' },
-      include: {
-        userProgress: {
-          where: {
-            userId,
-          },
-        },
-      },
-    })
+    // Initialize user progress (unlock Module 1) if first time
+    await accessControlService.initializeUserProgress(userId)
 
-    // Transform the response to include progress status
-    const modulesWithProgress = modules.map(module => ({
-      id: module.id,
-      title: module.title,
-      videoUrl: module.videoUrl,
-      order: module.order,
-      createdAt: module.createdAt,
-      updatedAt: module.updatedAt,
-      progress: module.userProgress[0] || null,
-    }))
+    // Get all modules with accessibility status
+    const modulesWithAccess =
+      await accessControlService.getModulesWithAccessibility(userId)
 
     res.json({
       success: true,
-      data: modulesWithProgress,
+      data: modulesWithAccess,
     })
   } catch (error) {
     console.error('Error fetching my modules:', error)
