@@ -1,34 +1,8 @@
-# Dependencies
-node_modules/
-
-# Environment variables
+node_modules
+dist
 .env
 .env.local
-
-# Build output
-dist/
-build/
-
-# Logs
-logs/
+.env.test.local
+coverage
 *.log
-npm-debug.log*
-
-# OS files
 .DS_Store
-Thumbs.db
-
-# IDE
-.vscode/
-.idea/
-*.swp
-*.swo
-
-# Testing
-coverage/
-
-# Misc
-.cache/
-
-
-/src/generated/prisma
